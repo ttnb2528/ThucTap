@@ -6,11 +6,11 @@ const Slider = () => {
   const items = [
     {
       key: "1",
-      label: <p className="font-bold text-base">Quản lý tuyển sinh</p>,
+      label: <Link to='/dangkychitieutuyensinh' className="font-bold text-base">Quản lý tuyển sinh</Link>,
       children: (
         <div className="ml-4 mt-2">
           <ul className="space-y-2 [&>li]:cursor-pointer">
-            <li>Đăng ký chỉ tiêu</li>
+            <li><Link to='/dangkychitieutuyensinh'>Đăng ký chỉ tiêu</Link></li>
             <li>Quản lý thông tin tuyển sinh</li>
             <li>Xác nhận nhập học</li>
           </ul>
@@ -117,7 +117,7 @@ const Slider = () => {
     console.log(key);
   };
   return (
-    <div className="slider flex flex-col pt-8 w-full max-w-[300px] h-auto min-h-[100vh] bg-neutral-200">
+    <div className="slider basis-2/6 flex flex-col pt-8 w-full max-w-[300px] h-auto min-h-[100vh] bg-neutral-100">
       {/* <div className="flex flex-col justify-center mx-4 py-1.5 px-2.5 text-base rounded cursor-pointer">
         <p className="font-bold text-base">Quản lý tuyển sinh</p>
         <div className="ml-4 mt-2 hidden">
