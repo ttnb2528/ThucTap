@@ -1,7 +1,77 @@
 import React from "react";
-import Button from "@mui/material/Button";
-
+import { Table } from "antd";
 const RegForTarget = () => {
+  const columns = [
+    {
+      title: "STT",
+      dataIndex: "stt",
+      key: "stt",
+    },
+    {
+      title: "Trình độ đào tạo",
+      dataIndex: "level",
+      key: "level",
+    },
+    {
+      title: "Thông tư",
+      dataIndex: "circulars",
+      key: "circulars",
+    },
+    {
+      title: "Ngành nghề đào tạo",
+      dataIndex: "career",
+      key: "career",
+    },
+    {
+      title: "CTĐKHĐ(người)",
+      dataIndex: "ctdkhd",
+      key: "ctdkhd",
+    },
+    {
+      title: "TXĐCT(người)",
+      dataIndex: "txdct",
+      key: "txdct",
+    },
+    {
+      title: "Năm đăng ký",
+      dataIndex: "regYear",
+      key: "regYear",
+    },
+    {
+      title: "Thao tác",
+      dataIndex: "operation",
+      key: "operation",
+    },
+  ];
+  const data = [
+    {
+      stt: "1",
+      level: "Cao đẳng",
+      circulars: 10,
+      career: "Tin học văn phòng",
+      ctdkhd: 20,
+      txdct: 20,
+      regYear: 2024,
+    },
+    {
+      stt: "2",
+      level: "Cao đẳng",
+      circulars: 10,
+      career: "Tài chính",
+      ctdkhd: 20,
+      txdct: 20,
+      regYear: 2024,
+    },
+    {
+      stt: "3",
+      level: "Cao đẳng",
+      circulars: 10,
+      career: "Du lịch",
+      ctdkhd: 20,
+      txdct: 20,
+      regYear: 2024,
+    },
+  ];
   return (
     <div className="flex-1">
       <div>
@@ -44,11 +114,27 @@ const RegForTarget = () => {
 
         <div className="flex flex-col basis-2/12 justify-end items-center">
           <div></div>
-          <Button variant="contained" className="w-32">Tìm Kiếm</Button>
+          <button className="w-32 bg-blue-500 text-white px-3 py-2 rounded hover:bg-blue-600">
+            Tìm Kiếm
+          </button>
         </div>
       </div>
       <div className="dash"></div>
-      <div className="table"></div>
+      <div className="result-table m-4">
+        <div className="flex justify-between items-center">
+          <div>
+            <h1 className="font-bold">Kết quả tìm kiếm 0/0 bản ghi</h1>
+          </div>
+
+          <div>
+            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+              Lưu tất cả
+            </button>
+          </div>
+        </div>
+
+        <Table columns={columns} dataSource={data} />
+      </div>
     </div>
   );
 };
