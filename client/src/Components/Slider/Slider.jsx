@@ -11,7 +11,7 @@ const Slider = () => {
         <div className="ml-4 mt-2">
           <ul className="space-y-2 [&>li]:cursor-pointer">
             <li><Link to='/dangkychitieutuyensinh'>Đăng ký chỉ tiêu</Link></li>
-            <li>Quản lý thông tin tuyển sinh</li>
+            <li><Link to='/quanlythontintuyensinh'>Quản lý thông tin tuyển sinh</Link></li>
             <li>Xác nhận nhập học</li>
           </ul>
         </div>

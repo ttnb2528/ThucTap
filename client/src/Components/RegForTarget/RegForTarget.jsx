@@ -100,15 +100,15 @@ const RegForTarget = () => {
             <label htmlFor="career">Ngành nghề</label>
             <select name="career" id="career">
               <option selected>Chọn ngành nghề</option>
-              <option value="du lịch">Sơ cấp</option>
-              <option value="kế toán">Trung cấp</option>
-              <option value="tin học">Trung cấp</option>
+              <option value="du lịch">Du lịch</option>
+              <option value="kế toán">Kế toán</option>
+              <option value="tin học">Tin học</option>
             </select>
           </div>
 
           <div className="flex flex-col justify-center">
             <label htmlFor="dateCreated">Ngày tạo</label>
-            <input id="dateCreated" type="text" placeholder="Năm đăng ký" />
+            <input id="dateCreated" type="text" placeholder="Chọn ngày tạo" />
           </div>
         </div>
 
@@ -133,7 +133,9 @@ const RegForTarget = () => {
           </div>
         </div>
 
-        <Table columns={columns} dataSource={data} />
+        <div className="mt-3">
+          <Table columns={columns} dataSource={data} />
+        </div>
       </div>
     </div>
   );
