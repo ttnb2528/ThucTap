@@ -1,15 +1,14 @@
 import React from "react";
-import Home from "./Page/Home/Home";
-import { Route, Routes } from "react-router-dom";
-import DetailPage from "./Page/DetailPage/DetailPage";
+import HomePage from "./Page/HomePage/HomePage";
+import Navbar from "./Components/Navbar/Navbar";
 
 const App = () => {
   return (
     <div>
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/detail-page" element={<DetailPage />}></Route>
-      </Routes>
+      <div className="bg-primary">
+        <Navbar />
+      </div>
+      <HomePage />
     </div>
   );
 };

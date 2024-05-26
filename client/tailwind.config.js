@@ -2,8 +2,19 @@
 export default {
   content: ["./src/**/*.{html,js,jsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: "var(--color-primary)",
+      },
+    },
   },
-  plugins: [],
-}
-
+  plugins: [
+    function ({ addBase }) {
+      addBase({
+        ":root": {
+          "--color-primary": "#1967b2",
+        },
+      });
+    },
+  ],
+};
