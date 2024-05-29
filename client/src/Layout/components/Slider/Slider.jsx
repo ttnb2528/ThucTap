@@ -362,7 +362,7 @@ const Slider = () => {
           <ul className="space-y-2 [&>li]:cursor-pointer">
             <li>
               <Link to="/nhaptruong" className="flex items-center">
-                <IconWrapper icon={HiUseFaChevronCircleRightrGroup} />
+                <IconWrapper icon={FaChevronCircleRight} />
                 <span className="ml-2">Báo cáo tài chính</span>
               </Link>
             </li>
