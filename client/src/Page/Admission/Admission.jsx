@@ -5,12 +5,9 @@ import { Table } from "antd";
 import IconWrapper from "~/utils/IconWrapper/IconWrapper";
 
 // icons
-import { PiWarningCircleFill } from "react-icons/pi";
-import { FiUpload, FiDownload } from "react-icons/fi";
-import { RiFileExcel2Fill } from "react-icons/ri";
-import { BsFileEarmarkPlusFill } from "react-icons/bs";
+import { FaAddressBook } from "react-icons/fa";
 
-const ManageEnrollInfo = () => {
+const Admission = () => {
   const columns = [
     {
       title: "STT",
@@ -28,11 +25,6 @@ const ManageEnrollInfo = () => {
       key: "name",
     },
     {
-      title: "Thời gian TS",
-      dataIndex: "timeEnroll",
-      key: "timeEnroll",
-    },
-    {
       title: "Trình độ đào tạo",
       dataIndex: "level",
       key: "level",
@@ -43,14 +35,14 @@ const ManageEnrollInfo = () => {
       key: "career",
     },
     {
-      title: "Trình độ văn hóa",
-      dataIndex: "levelEdu",
-      key: "levelEdu",
+      title: "Khóa",
+      dataIndex: "schoolYear",
+      key: "schoolYear",
     },
     {
-      title: "Kết quả TS",
-      dataIndex: "resultEnroll",
-      key: "resultEnroll",
+      title: "Lớp",
+      dataIndex: "class",
+      key: "class",
     },
     {
       title: "Trạng thái",
@@ -71,8 +63,8 @@ const ManageEnrollInfo = () => {
       timeEnroll: "26/05/2024",
       level: "Cao đẳng",
       career: "Tin học văn phòng",
-      levelEdu: "12/12",
-      resultEnroll: 28.5,
+      schoolYear: 45,
+      class: "201",
       status: "Pass",
     },
     {
@@ -82,8 +74,8 @@ const ManageEnrollInfo = () => {
       timeEnroll: "26/05/2024",
       level: "Cao đẳng",
       career: "Tài chính",
-      levelEdu: "12/12",
-      resultEnroll: 28.5,
+      schoolYear: 45,
+      class: "201",
       status: "Pass",
     },
     {
@@ -93,17 +85,17 @@ const ManageEnrollInfo = () => {
       timeEnroll: "26/05/2024",
       level: "Cao đẳng",
       career: "Du lịch",
-      levelEdu: "12/12",
-      resultEnroll: 28.5,
+      schoolYear: 45,
+      class: "201",
       status: "Pass",
     },
   ];
   return (
     <div className="flex-1">
       <div className="flex items-center ml-2">
-        <IconWrapper icon={PiWarningCircleFill} />
+        <IconWrapper icon={FaAddressBook} />
         <h1 className="p-2 uppercase text-xl font-semibold">
-          Thông tin tuyển sinh
+          Thônng tin học sinh, sinh viên nhập trường
         </h1>
       </div>
       <div className="dash"></div>
@@ -147,20 +139,20 @@ const ManageEnrollInfo = () => {
           </div>
 
           <div className="flex flex-col justify-center">
-            <label htmlFor="levelEdu">Trình độ văn hóa</label>
-            <select name="levelEdu" id="levelEdu">
-              <option selected>Chọn trình độ văn hóa</option>
-              <option value="9/12">9/12</option>
-              <option value="12/12">12/12</option>
+            <label htmlFor="schoolYear">Khóa học</label>
+            <select name="schoolYear" id="schoolYear">
+              <option selected>Chọn khóa học</option>
+              <option value="2023-2024">2023-2024</option>
+              <option value="2024-2025">2024-2025</option>
             </select>
           </div>
 
           <div className="flex flex-col justify-center">
-            <label htmlFor="resultEnroll">Kết quả tuyển sinh</label>
-            <select name="resultEnroll" id="resultEnroll">
-              <option selected>Chọn kết quả tuyển sinh</option>
-              <option value="9/12">9/12</option>
-              <option value="12/12">12/12</option>
+            <label htmlFor="classSchoolYear">Lớp khóa học</label>
+            <select name="classSchoolYear" id="classSchoolYear">
+              <option selected>Chọn lớp khóa học</option>
+              <option value="a">a</option>
+              <option value="b">b</option>
             </select>
           </div>
 
@@ -204,11 +196,10 @@ const ManageEnrollInfo = () => {
             <h1 className="font-bold">Kết quả tìm kiếm 0/0 bản ghi</h1>
           </div>
 
-          <div className="flex items-center gap-4 mr-10">
-            <IconWrapper icon={BsFileEarmarkPlusFill} />
-            <IconWrapper icon={FiUpload} />
-            <IconWrapper icon={FiDownload} />
-            <IconWrapper icon={RiFileExcel2Fill} />
+          <div>
+            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+              Lưu tất cả
+            </button>
           </div>
         </div>
 
@@ -220,4 +211,4 @@ const ManageEnrollInfo = () => {
   );
 };
 
-export default ManageEnrollInfo;
+export default Admission;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const IconWrapper = ({ icon: Icon, size = 24, ...props }) => {
+const IconWrapper = ({ icon: Icon, size = 20, ...props }) => {
   return <Icon size={size} {...props} />;
 };
 

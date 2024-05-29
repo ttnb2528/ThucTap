@@ -6,9 +6,30 @@ import { Collapse } from "antd";
 import IconWrapper from "~/utils/IconWrapper/IconWrapper";
 
 // icons
-import { FaGraduationCap, FaSquareCheck } from "react-icons/fa6";
+import { FaGraduationCap, FaSquareCheck, FaGears } from "react-icons/fa6";
 import { HiUserGroup } from "react-icons/hi2";
-import { PiWarningCircleFill } from "react-icons/pi";
+import {
+  PiWarningCircleFill,
+  PiNotepadFill,
+  PiArrowCircleUpLight,
+  PiNotebookFill,
+  PiHouseSimple,
+} from "react-icons/pi";
+import { BiSolidChevronRightSquare } from "react-icons/bi";
+import {
+  FaAddressBook,
+  FaSuitcase,
+  FaExchangeAlt,
+  FaChevronCircleRight,
+} from "react-icons/fa";
+import {
+  RiSettings5Fill,
+  RiBarChartBoxFill,
+  RiGraduationCapFill,
+  RiGraduationCapLine,
+  RiFolderSettingsFill,
+} from "react-icons/ri";
+import { LiaHandPointRight } from "react-icons/lia";
 
 const Slider = () => {
   const items = [
@@ -39,7 +60,7 @@ const Slider = () => {
               </Link>
             </li>
             <li>
-              <Link to='/xacnhannhaphoc' className="flex items-center">
+              <Link to="/xacnhannhaphoc" className="flex items-center">
                 <IconWrapper icon={FaSquareCheck} />
                 <span className="ml-2">Xác nhận nhập học</span>
               </Link>
@@ -50,94 +71,301 @@ const Slider = () => {
     },
     {
       key: "2",
-      label: <p className="font-bold text-base">Quản lý HSSV</p>,
+      label: (
+        <Link
+          to="/nhaptruong"
+          className="font-bold text-base flex items-center"
+        >
+          <IconWrapper icon={FaAddressBook} />
+          <span className="ml-2">Quản lý HSSV</span>
+        </Link>
+      ),
       children: (
         <div className="ml-4 mt-2">
           <ul className="space-y-2 [&>li]:cursor-pointer">
-            <li>Nhập trường</li>
-            <li>Phân lớp</li>
-            <li>Chuyển ngành</li>
-            <li>Chuyển lớp</li>
-            <li>Cập nhật lý lịch sinh viên</li>
-            <li>Nghiên cứu khoa học</li>
-            <li>Khen thưởng</li>
-            <li>Kỷ luật</li>
-            <li>Kỳ thi kỹ năng nghề</li>
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={FaSuitcase} />
+                <span className="ml-2">Nhập trường</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={LiaHandPointRight} />
+                <span className="ml-2">Phân lớp</span>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={FaExchangeAlt} />
+                <span className="ml-2">Chuyển ngành</span>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={BiSolidChevronRightSquare} />
+                <span className="ml-2">Chuyển lớp</span>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={PiArrowCircleUpLight} />
+                <span className="ml-2">Cập nhật lý lịch sinh viên</span>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={PiArrowCircleUpLight} />
+                <span className="ml-2">Nghiên cứu khoa học</span>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={FaChevronCircleRight} />
+                <span className="ml-2">Khen thưởng</span>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={FaChevronCircleRight} />
+                <span className="ml-2">Kỷ luật</span>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={FaChevronCircleRight} />
+                <span className="ml-2">Kỳ thi kỹ năng nghề</span>
+              </Link>
+            </li>
           </ul>
         </div>
       ),
     },
     {
       key: "3",
-      label: <p className="font-bold text-base">Quản lý đào tạo</p>,
+      label: (
+        <Link
+          to="/quanlyhocvu"
+          className="font-bold text-base flex items-center"
+        >
+          <IconWrapper icon={FaAddressBook} />
+          <span className="ml-2">Quản lý đào tạo</span>
+        </Link>
+      ),
       children: (
         <div className="ml-4 mt-2">
           <ul className="space-y-2 [&>li]:cursor-pointer">
-            <li>Quản lý học vụ</li>
-            <li>Quản lý HSSV tốt nghiệp</li>
-            <li>Quản lý HSSV sau tốt nghiệp</li>
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={PiNotebookFill} />
+                <span className="ml-2">Quản lý học vụ</span>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={RiGraduationCapFill} />
+                <span className="ml-2">Quản lý HSSV tốt nghiệp</span>
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={RiGraduationCapLine} />
+                <span className="ml-2">Quản lý HSSV sau tốt nghiệp</span>
+              </Link>
+            </li>
           </ul>
         </div>
       ),
     },
     {
       key: "4",
-      label: <p className="font-bold text-base">Quản lý cán bộ nhà giáo</p>,
+      label: (
+        <Link to="/hosocanbo" className="font-bold text-base flex items-center">
+          <IconWrapper icon={FaAddressBook} />
+          <span className="ml-2">Quản lý cán bộ nhà giáo</span>
+        </Link>
+      ),
       children: (
         <div className="ml-4 mt-2">
           <ul className="space-y-2 [&>li]:cursor-pointer">
-            <li>Hồ sơ cán bộ quản lý</li>
-            <li>Hồ sơ nhà giáo</li>
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={FaAddressBook} />
+                <span className="ml-2">Hồ sơ cán bộ quản lý</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={FaAddressBook} />
+                <span className="ml-2">Hồ sơ nhà giáo</span>
+              </Link>
+            </li>
           </ul>
         </div>
       ),
     },
     {
       key: "5",
-      label: <p className="font-bold text-base">Quản lý cơ sở vật chất</p>,
+      label: (
+        <Link
+          to="/qlcsvc_phonghoc"
+          className="font-bold text-base flex items-center"
+        >
+          <IconWrapper icon={RiSettings5Fill} />
+          <span className="ml-2">Quản lý cơ sở vật chất</span>
+        </Link>
+      ),
       children: (
         <div className="ml-4 mt-2">
           <ul className="space-y-2 [&>li]:cursor-pointer">
-            <li>Phòng học</li>
-            <li>Trang thiết bị</li>
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={PiHouseSimple} />
+                <span className="ml-2">Phòng học</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={RiFolderSettingsFill} />
+                <span className="ml-2">Trang thiết bị</span>
+              </Link>
+            </li>
           </ul>
         </div>
       ),
     },
     {
       key: "6",
-      label: <p className="font-bold text-base">Thiết lập chung</p>,
+      label: (
+        <Link
+          to="/thongtinchung"
+          className="font-bold text-base flex items-center"
+        >
+          <IconWrapper icon={FaGears} />
+          <span className="ml-2">Thiết lập chung</span>
+        </Link>
+      ),
       children: (
         <div className="ml-4 mt-2">
           <ul className="space-y-2 [&>li]:cursor-pointer">
-            <li>Thông tin chung CSGDNN</li>
-            <li>Quy định đánh mã</li>
-            <li>Ngành nghề đào tạo</li>
-            <li>Khoa, Phòng ban</li>
-            <li>Khóa học</li>
-            <li>Lớp Khóa học</li>
-            <li>hình thức kỷ thuật</li>
-            <li>Hình thức khen thưởng</li>
-            <li>Đề tài nghiên cứu khoa học</li>
-            <li>Đơn vị trực thuộc</li>
-            <li>Thông tin kỳ thi kỹ năng nghề</li>
-            <li>Lý do học vụ</li>
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={PiWarningCircleFill} />
+                <span className="ml-2">Thông tin chung CSGDNN</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={FaChevronCircleRight} />
+                <span className="ml-2">Quy định đánh mã</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={FaChevronCircleRight} />
+                <span className="ml-2">Ngành nghề đào tạo</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={FaChevronCircleRight} />
+                <span className="ml-2">Khoa, Phòng ban</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={FaChevronCircleRight} />
+                <span className="ml-2">Khóa học</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={FaChevronCircleRight} />
+                <span className="ml-2">Lớp Khóa học</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={FaChevronCircleRight} />
+                <span className="ml-2">hình thức kỷ thuật</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={FaChevronCircleRight} />
+                <span className="ml-2">Hình thức khen thưởng</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={FaChevronCircleRight} />
+                <span className="ml-2">Đề tài nghiên cứu khoa học</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={FaChevronCircleRight} />
+                <span className="ml-2">Đơn vị trực thuộc</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={FaChevronCircleRight} />
+                <span className="ml-2">Thông tin kỳ thi kỹ năng nghề</span>
+              </Link>
+            </li>
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={FaChevronCircleRight} />
+                <span className="ml-2">Lý do học vụ</span>
+              </Link>
+            </li>
           </ul>
         </div>
       ),
     },
     {
       key: "7",
-      label: <p className="font-bold text-base">Báo cáo thống kê</p>,
+      label: (
+        <Link
+          to="/baocaothongke"
+          className="font-bold text-base flex items-center"
+        >
+          <IconWrapper icon={PiNotepadFill} />
+          <span className="ml-2">Báo cáo thống kê</span>
+        </Link>
+      ),
       children: "",
     },
     {
       key: "8",
-      label: <p className="font-bold text-base">Quản lý báo cáo tài chính</p>,
+      label: (
+        <Link
+          to="/baocaotaichinh"
+          className="font-bold text-base flex items-center"
+        >
+          <IconWrapper icon={RiBarChartBoxFill} />
+          <span className="ml-2">Quản lý báo cáo tài chính</span>
+        </Link>
+      ),
       children: (
         <div className="ml-4 mt-2">
           <ul className="space-y-2 [&>li]:cursor-pointer">
-            <li>Báo cáo tài chính</li>
+            <li>
+              <Link to="/nhaptruong" className="flex items-center">
+                <IconWrapper icon={HiUseFaChevronCircleRightrGroup} />
+                <span className="ml-2">Báo cáo tài chính</span>
+              </Link>
+            </li>
           </ul>
         </div>
       ),

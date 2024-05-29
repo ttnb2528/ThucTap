@@ -6,6 +6,8 @@ import IconWrapper from "~/utils/IconWrapper/IconWrapper";
 
 // icons
 import { HiUserGroup } from "react-icons/hi2";
+import { FiUpload, FiDownload } from "react-icons/fi";
+import { RiFileExcel2Fill } from "react-icons/ri";
 
 const RegForTarget = () => {
   const columns = [
@@ -134,10 +136,13 @@ const RegForTarget = () => {
             <h1 className="font-bold">Kết quả tìm kiếm 0/0 bản ghi</h1>
           </div>
 
-          <div>
+          <div className="flex items-center gap-4 mr-10">
             <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
               Lưu tất cả
             </button>
+            <IconWrapper icon={FiUpload} />
+            <IconWrapper icon={FiDownload} />
+            <IconWrapper icon={RiFileExcel2Fill} />
           </div>
         </div>
 
