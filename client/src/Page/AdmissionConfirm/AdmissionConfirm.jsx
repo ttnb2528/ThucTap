@@ -5,9 +5,9 @@ import { Table } from "antd";
 import IconWrapper from "~/utils/IconWrapper/IconWrapper";
 
 // icons
-import { PiWarningCircleFill } from "react-icons/pi";
+import { FaSquareCheck } from "react-icons/fa6";
 
-const ManageEnrollInfo = () => {
+const AdmissionConfirm = () => {
   const columns = [
     {
       title: "STT",
@@ -45,16 +45,6 @@ const ManageEnrollInfo = () => {
       key: "levelEdu",
     },
     {
-      title: "Kết quả TS",
-      dataIndex: "resultEnroll",
-      key: "resultEnroll",
-    },
-    {
-      title: "Trạng thái",
-      dataIndex: "status",
-      key: "status",
-    },
-    {
       title: "Thao tác",
       dataIndex: "operation",
       key: "operation",
@@ -69,8 +59,6 @@ const ManageEnrollInfo = () => {
       level: "Cao đẳng",
       career: "Tin học văn phòng",
       levelEdu: "12/12",
-      resultEnroll: 28.5,
-      status: "Pass",
     },
     {
       stt: "2",
@@ -80,8 +68,6 @@ const ManageEnrollInfo = () => {
       level: "Cao đẳng",
       career: "Tài chính",
       levelEdu: "12/12",
-      resultEnroll: 28.5,
-      status: "Pass",
     },
     {
       stt: "3",
@@ -91,16 +77,14 @@ const ManageEnrollInfo = () => {
       level: "Cao đẳng",
       career: "Du lịch",
       levelEdu: "12/12",
-      resultEnroll: 28.5,
-      status: "Pass",
     },
   ];
   return (
     <div className="flex-1">
       <div className="flex items-center ml-2">
-        <IconWrapper icon={PiWarningCircleFill} />
+        <IconWrapper icon={FaSquareCheck} />
         <h1 className="p-2 uppercase text-xl font-semibold">
-          Thông tin tuyển sinh
+          Xác nhận nhâp học
         </h1>
       </div>
       <div className="dash"></div>
@@ -153,37 +137,13 @@ const ManageEnrollInfo = () => {
           </div>
 
           <div className="flex flex-col justify-center">
-            <label htmlFor="resultEnroll">Kết quả tuyển sinh</label>
-            <select name="resultEnroll" id="resultEnroll">
-              <option selected>Chọn kết quả tuyển sinh</option>
-              <option value="9/12">9/12</option>
-              <option value="12/12">12/12</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col justify-center">
-            <label htmlFor="status">Trạng thái</label>
-            <select name="status" id="status">
-              <option selected>Tất cả</option>
-              <option value="9/12">9/12</option>
-              <option value="12/12">12/12</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col justify-center">
-            <label htmlFor="peoples">Dân tộc</label>
-            <select name="peoples" id="peoples">
-              <option selected>Chọn dân tộc</option>
-              <option value="kinh">Kinh</option>
-              <option value="...">...</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col justify-center">
             <label htmlFor="dateCreated">Ngày tạo</label>
             <input id="dateCreated" type="text" placeholder="Chọn ngày tạo" />
           </div>
 
+          <div></div>
+          <div></div>
+          <div></div>
           <div></div>
           <div></div>
 
@@ -198,12 +158,12 @@ const ManageEnrollInfo = () => {
       <div className="result-table m-4">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="font-bold">Kết quả tìm kiếm 0/0 bản ghi</h1>
+            <h1 className="font-bold">Danh sách học sinh, sinh viên 0/0</h1>
           </div>
 
           <div>
             <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-              Lưu tất cả
+              Nhập học
             </button>
           </div>
         </div>
@@ -216,4 +176,4 @@ const ManageEnrollInfo = () => {
   );
 };
 
-export default ManageEnrollInfo;
+export default AdmissionConfirm;
