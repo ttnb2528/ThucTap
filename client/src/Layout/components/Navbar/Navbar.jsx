@@ -1,17 +1,22 @@
 import React from "react";
-import logo from "../../assets/logo.png";
+import { Link } from "react-router-dom";
+import logo from "~/assets/logo.png";
 
 const Navbar = () => {
   return (
     <nav className="container flex justify-between items-center mx-auto text-white">
       <div className="flex items-center">
-        <img src={logo} alt="" className="w-28" />
+        <Link to="/">
+          <img src={logo} alt="" className="w-28" />
+        </Link>
         <span className="uppercase font-semibold text-1xl ml-5">
           Trường Bách nghệ Cần Thơ <br /> Quản lý đào tạo
         </span>
       </div>
       <div className="flex items-center">
-        <button className="outline-none border-none p-2">Đăng nhập </button>
+        <button className="outline-none border-none p-2">
+          <Link to="/dangnhap">Đăng nhập</Link>
+        </button>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           x="0px"
