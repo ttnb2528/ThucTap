@@ -111,7 +111,7 @@ const Slider = () => {
             </li>
 
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/capnhatlylichsinhvien" className="flex items-center">
                 <IconWrapper icon={PiArrowCircleUpLight} />
                 <span className="ml-2">Cập nhật lý lịch sinh viên</span>
               </Link>

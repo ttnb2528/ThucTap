@@ -5,9 +5,9 @@ import { Table } from "antd";
 import IconWrapper from "~/utils/IconWrapper/IconWrapper";
 
 // icons
-import { BiSolidChevronRightSquare } from "react-icons/bi";
+import { PiArrowCircleUpLight } from "react-icons/pi";
 
-const ChangeClass = () => {
+const UpdateInfoStudent = () => {
   const columns = [
     {
       title: "STT",
@@ -24,45 +24,49 @@ const ChangeClass = () => {
       dataIndex: "name",
       key: "name",
     },
+
     {
-      title: "Khóa học",
-      dataIndex: "schoolYear",
-      key: "schoolYear",
+      title: "Ngày sinh",
+      dataIndex: "date",
+      key: "date",
+    },
+
+    {
+      title: "Giới tính",
+      dataIndex: "gender",
+      key: "gender",
+    },
+
+    {
+      title: "CMTND/CCCCD/Hộ chiếu",
+      dataIndex: "idCard",
+      key: "idCard",
     },
     {
-      title: "Lớp khóa học",
-      dataIndex: "class",
-      key: "class",
+      title: "Dân tộc",
+      dataIndex: "peoples",
+      key: "peoples",
     },
     {
-      title: "Loại hình đào tạo",
-      dataIndex: "typeTraining",
-      key: "typeTraining",
+      title: "Địa chỉ liên hệ",
+      dataIndex: "address",
+      key: "address",
     },
     {
-      title: "Trình độ đào tạo",
-      dataIndex: "level",
-      key: "level",
+      title: "Phường/Xã",
+      dataIndex: "wards",
+      key: "wards",
     },
     {
-      title: "Ngành nghề",
-      dataIndex: "career",
-      key: "career",
+      title: "Quận/Huyện",
+      dataIndex: "district",
+      key: "district",
     },
+
     {
-      title: "Cấp quyết định",
-      dataIndex: "grantDecision",
-      key: "grantDecision",
-    },
-    {
-      title: "Số quyết định",
-      dataIndex: "numberDecision",
-      key: "numberDecision",
-    },
-    {
-      title: "Ngày quyết định",
-      dataIndex: "dateDecision",
-      key: "dateDecision",
+      title: "Tỉnh/TP",
+      dataIndex: "province",
+      key: "province",
     },
     {
       title: "Trạng thái",
@@ -80,51 +84,51 @@ const ChangeClass = () => {
       stt: "1",
       idEnroll: "B2111898",
       name: "Dương Thiên Tấn",
-      schoolYear: 45,
-      class: "201",
-      typeTraining: "a",
-      level: "Cao đẳng",
-      career: "Tin học văn phòng",
-      grantDecision: "1",
-      numberDecision: "1",
-      dateDecision: "26/05/2024",
+      date: "25/11/2003",
+      gender: "Nam",
+      idCard: "086203002299",
+      peoples: "Kinh",
+      address: "300b, Nguyễn Huệ",
+      wards: "Thị trấn Chợ Mới",
+      district:"Chợ Mới",
+      province: "An Giang",
       status: "Pass",
     },
     {
       stt: "2",
       idEnroll: "B2111898",
       name: "Dương Thiên Tấn",
-      schoolYear: 45,
-      class: "201",
-      typeTraining: "a",
-      level: "Cao đẳng",
-      career: "Tài chính",
-      grantDecision: "1",
-      numberDecision: "1",
-      dateDecision: "26/05/2024",
+      date: "25/11/2003",
+      gender: "Nam",
+      idCard: "086203002299",
+      peoples: "Kinh",
+      address: "300b, Nguyễn Huệ",
+      wards: "Thị trấn Chợ Mới",
+      district:"Chợ Mới",
+      province: "An Giang",
       status: "Pass",
     },
     {
       stt: "3",
       idEnroll: "B2111898",
       name: "Dương Thiên Tấn",
-      schoolYear: 45,
-      class: "201",
-      typeTraining: "a",
-      level: "Cao đẳng",
-      career: "Du lịch",
-      grantDecision: "1",
-      numberDecision: "1",
-      dateDecision: "26/05/2024",
+      date: "25/11/2003",
+      gender: "Nam",
+      idCard: "086203002299",
+      peoples: "Kinh",
+      address: "300b, Nguyễn Huệ",
+      wards: "Thị trấn Chợ Mới",
+      district:"Chợ Mới",
+      province: "An Giang",
       status: "Pass",
     },
   ];
   return (
     <div className="flex-1">
       <div className="flex items-center ml-2">
-        <IconWrapper icon={BiSolidChevronRightSquare} />
+        <IconWrapper icon={PiArrowCircleUpLight} />
         <h1 className="p-2 uppercase text-xl font-semibold">
-          Danh sách học sinh, sinh viên chuyển lớp
+          Lý lịch học sinh, sinh viên
         </h1>
       </div>
       <div className="dash"></div>
@@ -140,31 +144,44 @@ const ChangeClass = () => {
           </div>
 
           <div className="flex flex-col justify-center">
-            <label htmlFor="typeTraining">Loại hình đào tạo</label>
-            <select name="typeTraining" id="typeTraining">
-              <option selected>Chọn loại hình đào tạo</option>
-              <option value="a">a</option>
-              <option value="b">b</option>
+            <label htmlFor="idCard">CMTND/CCCD/Hộ chiếu</label>
+            <input
+              id="idCard"
+              type="text"
+              placeholder="Nhập CMTND/CCCD/Hộ chiếu"
+            />
+          </div>
+
+          <div className="flex flex-col justify-center">
+            <label htmlFor="gender">Giới tính</label>
+            <select name="gender" id="gender">
+              <option selected>Chọn giới tính</option>
+              <option value="nam">Nam</option>
+              <option value="nữ">Nữ</option>
             </select>
           </div>
 
           <div className="flex flex-col justify-center">
-            <label htmlFor="level">Trình độ đào tạo</label>
-            <select name="level" id="level">
-              <option selected>Chọn trình độ đào tạo</option>
-              <option value="sơ cấp">Sơ cấp</option>
-              <option value="trung cấp">Trung cấp</option>
+            <label htmlFor="peoples">Dân tộc</label>
+            <select name="peoples" id="peoples">
+              <option selected>Chọn dân tộc</option>
+              <option value="kinh">Kinh</option>
+              <option value="...">...</option>
             </select>
           </div>
 
           <div className="flex flex-col justify-center">
-            <label htmlFor="career">Ngành nghề</label>
-            <select name="career" id="career">
-              <option selected>Chọn ngành nghề</option>
-              <option value="du lịch">Du lịch</option>
-              <option value="kế toán">Kế toán</option>
-              <option value="tin học">Tin học</option>
+            <label htmlFor="status">Trạng thái</label>
+            <select name="status" id="status">
+              <option selected>Tất cả</option>
+              <option value="9/12">9/12</option>
+              <option value="12/12">12/12</option>
             </select>
+          </div>
+
+          <div className="flex flex-col justify-center">
+            <label htmlFor="dateCreated">Ngày tạo</label>
+            <input id="dateCreated" type="text" placeholder="Chọn ngày tạo" />
           </div>
 
           <div className="flex flex-col justify-center">
@@ -185,29 +202,7 @@ const ChangeClass = () => {
             </select>
           </div>
 
-          <div className="flex flex-col justify-center">
-            <label htmlFor="grantDecision">Cấp quyết định</label>
-            <select name="grantDecision" id="grantDecision">
-              <option selected>Chọn cấp quyết định</option>
-              <option value="a">a</option>
-              <option value="b">b</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col justify-center">
-            <label htmlFor="status">Trạng thái</label>
-            <select name="status" id="status">
-              <option selected>Tất cả</option>
-              <option value="9/12">9/12</option>
-              <option value="12/12">12/12</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col justify-center">
-            <label htmlFor="dateCreated">Ngày tạo</label>
-            <input id="dateCreated" type="text" placeholder="Chọn ngày tạo" />
-          </div>
-
+          <div></div>
           <div></div>
           <div></div>
 
@@ -240,4 +235,4 @@ const ChangeClass = () => {
   );
 };
 
-export default ChangeClass;
+export default UpdateInfoStudent;
