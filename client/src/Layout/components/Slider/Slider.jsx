@@ -118,28 +118,28 @@ const Slider = () => {
             </li>
 
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/nghiencuukhoahoc" className="flex items-center">
                 <IconWrapper icon={PiArrowCircleUpLight} />
                 <span className="ml-2">Nghiên cứu khoa học</span>
               </Link>
             </li>
 
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/khenthuong" className="flex items-center">
                 <IconWrapper icon={FaChevronCircleRight} />
                 <span className="ml-2">Khen thưởng</span>
               </Link>
             </li>
 
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/kyluat" className="flex items-center">
                 <IconWrapper icon={FaChevronCircleRight} />
                 <span className="ml-2">Kỷ luật</span>
               </Link>
             </li>
 
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/kythikynangnghe" className="flex items-center">
                 <IconWrapper icon={FaChevronCircleRight} />
                 <span className="ml-2">Kỳ thi kỹ năng nghề</span>
               </Link>
@@ -163,21 +163,24 @@ const Slider = () => {
         <div className="ml-4 mt-2">
           <ul className="space-y-2 [&>li]:cursor-pointer">
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/quanlyhocvu" className="flex items-center">
                 <IconWrapper icon={PiNotebookFill} />
                 <span className="ml-2">Quản lý học vụ</span>
               </Link>
             </li>
 
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/quanlyhocsinhtotnghiep" className="flex items-center">
                 <IconWrapper icon={RiGraduationCapFill} />
                 <span className="ml-2">Quản lý HSSV tốt nghiệp</span>
               </Link>
             </li>
 
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link
+                to="/quanlyhocsinhsautotnghiep"
+                className="flex items-center"
+              >
                 <IconWrapper icon={RiGraduationCapLine} />
                 <span className="ml-2">Quản lý HSSV sau tốt nghiệp</span>
               </Link>
@@ -198,13 +201,13 @@ const Slider = () => {
         <div className="ml-4 mt-2">
           <ul className="space-y-2 [&>li]:cursor-pointer">
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/hosocanbo" className="flex items-center">
                 <IconWrapper icon={FaAddressBook} />
                 <span className="ml-2">Hồ sơ cán bộ quản lý</span>
               </Link>
             </li>
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/hosonhagiao" className="flex items-center">
                 <IconWrapper icon={FaAddressBook} />
                 <span className="ml-2">Hồ sơ nhà giáo</span>
               </Link>
@@ -228,13 +231,13 @@ const Slider = () => {
         <div className="ml-4 mt-2">
           <ul className="space-y-2 [&>li]:cursor-pointer">
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/qlcsvc_phonghoc" className="flex items-center">
                 <IconWrapper icon={PiHouseSimple} />
                 <span className="ml-2">Phòng học</span>
               </Link>
             </li>
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/qlcsvc_thietbi" className="flex items-center">
                 <IconWrapper icon={RiFolderSettingsFill} />
                 <span className="ml-2">Trang thiết bị</span>
               </Link>
@@ -258,73 +261,73 @@ const Slider = () => {
         <div className="ml-4 mt-2">
           <ul className="space-y-2 [&>li]:cursor-pointer">
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/thongtinchung" className="flex items-center">
                 <IconWrapper icon={PiWarningCircleFill} />
                 <span className="ml-2">Thông tin chung CSGDNN</span>
               </Link>
             </li>
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/quydinhdanhma" className="flex items-center">
                 <IconWrapper icon={FaChevronCircleRight} />
                 <span className="ml-2">Quy định đánh mã</span>
               </Link>
             </li>
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/nganhnghedaotao" className="flex items-center">
                 <IconWrapper icon={FaChevronCircleRight} />
                 <span className="ml-2">Ngành nghề đào tạo</span>
               </Link>
             </li>
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/khoa" className="flex items-center">
                 <IconWrapper icon={FaChevronCircleRight} />
                 <span className="ml-2">Khoa, Phòng ban</span>
               </Link>
             </li>
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/khoahoc" className="flex items-center">
                 <IconWrapper icon={FaChevronCircleRight} />
                 <span className="ml-2">Khóa học</span>
               </Link>
             </li>
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/lopkhoahoc" className="flex items-center">
                 <IconWrapper icon={FaChevronCircleRight} />
                 <span className="ml-2">Lớp Khóa học</span>
               </Link>
             </li>
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/hinhthuckyluat" className="flex items-center">
                 <IconWrapper icon={FaChevronCircleRight} />
-                <span className="ml-2">hình thức kỷ thuật</span>
+                <span className="ml-2">hình thức kỷ luật</span>
               </Link>
             </li>
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/hinhthuckhenthuong" className="flex items-center">
                 <IconWrapper icon={FaChevronCircleRight} />
                 <span className="ml-2">Hình thức khen thưởng</span>
               </Link>
             </li>
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/detainghiencuukhoahoc" className="flex items-center">
                 <IconWrapper icon={FaChevronCircleRight} />
                 <span className="ml-2">Đề tài nghiên cứu khoa học</span>
               </Link>
             </li>
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/donvitructhuoc" className="flex items-center">
                 <IconWrapper icon={FaChevronCircleRight} />
                 <span className="ml-2">Đơn vị trực thuộc</span>
               </Link>
             </li>
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/kythikynangnghe" className="flex items-center">
                 <IconWrapper icon={FaChevronCircleRight} />
                 <span className="ml-2">Thông tin kỳ thi kỹ năng nghề</span>
               </Link>
             </li>
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/lophocvu" className="flex items-center">
                 <IconWrapper icon={FaChevronCircleRight} />
                 <span className="ml-2">Lý do học vụ</span>
               </Link>
@@ -361,7 +364,7 @@ const Slider = () => {
         <div className="ml-4 mt-2">
           <ul className="space-y-2 [&>li]:cursor-pointer">
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/baocaotaichinh" className="flex items-center">
                 <IconWrapper icon={FaChevronCircleRight} />
                 <span className="ml-2">Báo cáo tài chính</span>
               </Link>
