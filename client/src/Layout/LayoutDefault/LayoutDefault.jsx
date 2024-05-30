@@ -12,7 +12,7 @@ const LayoutDefault = ({ children }) => {
       <div className="flex">
         <Slider />
 
-        {children}  
+        {children} 
       </div>
     </div>
   );

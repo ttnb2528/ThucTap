@@ -5,9 +5,9 @@ import { Table } from "antd";
 import IconWrapper from "~/utils/IconWrapper/IconWrapper";
 
 // icons
-import { FaAddressBook } from "react-icons/fa";
+import { LiaHandPointRight } from "react-icons/lia";
 
-const Admission = () => {
+const Classification = () => {
   const columns = [
     {
       title: "STT",
@@ -15,7 +15,7 @@ const Admission = () => {
       key: "stt",
     },
     {
-      title: "Mã TS",
+      title: "Mã HSSV",
       dataIndex: "idEnroll",
       key: "idEnroll",
     },
@@ -23,6 +23,21 @@ const Admission = () => {
       title: "Họ và tên",
       dataIndex: "name",
       key: "name",
+    },
+    {
+      title: "Ngày sinh",
+      dataIndex: "date",
+      key: "date",
+    },
+    {
+      title: "CMTND/CCCD/Hộ chiếu",
+      dataIndex: "idCard",
+      key: "idCard",
+    },
+    {
+      title: "loại hình đào tạo",
+      dataIndex: "typeTraining",
+      key: "typeTraining",
     },
     {
       title: "Trình độ đào tạo",
@@ -35,21 +50,6 @@ const Admission = () => {
       key: "career",
     },
     {
-      title: "Khóa",
-      dataIndex: "schoolYear",
-      key: "schoolYear",
-    },
-    {
-      title: "Lớp",
-      dataIndex: "class",
-      key: "class",
-    },
-    {
-      title: "Trạng thái",
-      dataIndex: "status",
-      key: "status",
-    },
-    {
       title: "Thao tác",
       dataIndex: "operation",
       key: "operation",
@@ -60,42 +60,39 @@ const Admission = () => {
       stt: "1",
       idEnroll: "B2111898",
       name: "Dương Thiên Tấn",
-      timeEnroll: "26/05/2024",
+      date: "26/05/2024",
+      idCard: '089203002299',
+      typeTraining: "a",
       level: "Cao đẳng",
-      career: "Tin học văn phòng",
-      schoolYear: 45,
-      class: "201",
-      status: "Pass",
+      career: "Tin họ",    
     },
     {
       stt: "2",
       idEnroll: "B2111898",
       name: "Dương Thiên Tấn",
-      timeEnroll: "26/05/2024",
+      date: "26/05/2024",
+      idCard: '089203002299',
+      typeTraining: "a",
       level: "Cao đẳng",
-      career: "Tài chính",
-      schoolYear: 45,
-      class: "201",
-      status: "Pass",
+      career: "Tin họ",    
     },
     {
       stt: "3",
       idEnroll: "B2111898",
       name: "Dương Thiên Tấn",
-      timeEnroll: "26/05/2024",
+      date: "26/05/2024",
+      idCard: '089203002299',
+      typeTraining: "a",
       level: "Cao đẳng",
-      career: "Du lịch",
-      schoolYear: 45,
-      class: "201",
-      status: "Pass",
+      career: "Tin họ",    
     },
   ];
   return (
     <div className="flex-1">
       <div className="flex items-center ml-2">
-        <IconWrapper icon={FaAddressBook} />
+        <IconWrapper icon={LiaHandPointRight} />
         <h1 className="p-2 uppercase text-xl font-semibold">
-          Thông tin học sinh, sinh viên nhập trường
+          Phân lớp cho học sinh, sinh viên
         </h1>
       </div>
       <div className="dash"></div>
@@ -111,12 +108,30 @@ const Admission = () => {
           </div>
 
           <div className="flex flex-col justify-center">
+            <label htmlFor="idCard">CMTND/CCCD/Hộ chiếu</label>
+            <input
+              id="idCard"
+              type="text"
+              placeholder="Nhập CMTND/CCCD/Hộ chiếu"
+            />
+          </div>
+
+          <div className="flex flex-col justify-center">
             <label htmlFor="enrollTime">Thời gian tuyển sinh</label>
             <input
               id="enrollTime"
               type="text"
               placeholder="Chọn thời gian tuyển sinh"
             />
+          </div>
+
+          <div className="flex flex-col justify-center">
+            <label htmlFor="typeTraining">Loại hình đào tạo</label>
+            <select name="typeTraining" id="typeTraining">
+              <option selected>Chọn loại hình đào tạo</option>
+              <option value="a">a</option>
+              <option value="b">b</option>
+            </select>
           </div>
 
           <div className="flex flex-col justify-center">
@@ -138,47 +153,9 @@ const Admission = () => {
             </select>
           </div>
 
-          <div className="flex flex-col justify-center">
-            <label htmlFor="schoolYear">Khóa học</label>
-            <select name="schoolYear" id="schoolYear">
-              <option selected>Chọn khóa học</option>
-              <option value="2023-2024">2023-2024</option>
-              <option value="2024-2025">2024-2025</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col justify-center">
-            <label htmlFor="classSchoolYear">Lớp khóa học</label>
-            <select name="classSchoolYear" id="classSchoolYear">
-              <option selected>Chọn lớp khóa học</option>
-              <option value="a">a</option>
-              <option value="b">b</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col justify-center">
-            <label htmlFor="status">Trạng thái</label>
-            <select name="status" id="status">
-              <option selected>Tất cả</option>
-              <option value="9/12">9/12</option>
-              <option value="12/12">12/12</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col justify-center">
-            <label htmlFor="peoples">Dân tộc</label>
-            <select name="peoples" id="peoples">
-              <option selected>Chọn dân tộc</option>
-              <option value="kinh">Kinh</option>
-              <option value="...">...</option>
-            </select>
-          </div>
-
-          <div className="flex flex-col justify-center">
-            <label htmlFor="dateCreated">Ngày tạo</label>
-            <input id="dateCreated" type="text" placeholder="Chọn ngày tạo" />
-          </div>
-
+          <div></div>
+          <div></div>
+          <div></div>
           <div></div>
           <div></div>
 
@@ -211,4 +188,4 @@ const Admission = () => {
   );
 };
 
-export default Admission;
+export default Classification;

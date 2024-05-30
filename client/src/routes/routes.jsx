@@ -1,8 +1,13 @@
+// Layouts
+import HeaderOnly from "~/Layout/HeaderOnly/HeaderOnly";
+
+// pages
 import RegForTarget from "~/Page/RegForTarget/RegForTarget";
 import ManageEnrollInfo from "~/Page/ManageEnrollInfo/ManageEnrollInfo";
 import AdmissionConfirm from "~/Page/AdmissionConfirm/AdmissionConfirm";
 import Admission from "~/Page/Admission/Admission";
-import HeaderOnly from "~/Layout/HeaderOnly/HeaderOnly";
+import Classification from "~/Page/Classification/Classification";
+import ChangeClass from "~/Page/ChangeClass/ChangeClass";
 import Login from "~/Page/Login/Login";
 
 const publicRoutes = [
@@ -11,6 +16,8 @@ const publicRoutes = [
   { path: "/quanlythontintuyensinh", component: ManageEnrollInfo },
   { path: "/xacnhannhaphoc", component: AdmissionConfirm },
   { path: "/nhaptruong", component: Admission },
+  { path: "/phanlop", component: Classification },
+  { path: "/chuyenlop", component: ChangeClass },
   { path: "/dangnhap", component: Login, layout: HeaderOnly },
 ];
 

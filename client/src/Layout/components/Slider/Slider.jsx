@@ -90,14 +90,14 @@ const Slider = () => {
               </Link>
             </li>
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/phanlop" className="flex items-center">
                 <IconWrapper icon={LiaHandPointRight} />
                 <span className="ml-2">Phân lớp</span>
               </Link>
             </li>
 
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/chuyenlop" className="flex items-center">
                 <IconWrapper icon={FaExchangeAlt} />
                 <span className="ml-2">Chuyển ngành</span>
               </Link>
