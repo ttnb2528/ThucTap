@@ -8,6 +8,7 @@ import AdmissionConfirm from "~/Page/AdmissionConfirm/AdmissionConfirm";
 import Admission from "~/Page/Admission/Admission";
 import Classification from "~/Page/Classification/Classification";
 import ChangeClass from "~/Page/ChangeClass/ChangeClass";
+import ChangeIndustry from "~/Page/ChangeIndustry/ChangeIndustry";
 import Login from "~/Page/Login/Login";
 
 const publicRoutes = [
@@ -18,6 +19,7 @@ const publicRoutes = [
   { path: "/nhaptruong", component: Admission },
   { path: "/phanlop", component: Classification },
   { path: "/chuyenlop", component: ChangeClass },
+  { path: "/chuyennganh", component: ChangeIndustry },
   { path: "/dangnhap", component: Login, layout: HeaderOnly },
 ];
 

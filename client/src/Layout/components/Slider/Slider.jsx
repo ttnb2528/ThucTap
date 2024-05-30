@@ -97,14 +97,14 @@ const Slider = () => {
             </li>
 
             <li>
-              <Link to="/chuyenlop" className="flex items-center">
+              <Link to="/chuyennganh" className="flex items-center">
                 <IconWrapper icon={FaExchangeAlt} />
                 <span className="ml-2">Chuyển ngành</span>
               </Link>
             </li>
 
             <li>
-              <Link to="/nhaptruong" className="flex items-center">
+              <Link to="/chuyenlop" className="flex items-center">
                 <IconWrapper icon={BiSolidChevronRightSquare} />
                 <span className="ml-2">Chuyển lớp</span>
               </Link>
