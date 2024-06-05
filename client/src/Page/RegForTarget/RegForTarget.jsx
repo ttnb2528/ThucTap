@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table } from "antd";
 
 // utils
@@ -8,8 +8,11 @@ import IconWrapper from "~/utils/IconWrapper/IconWrapper";
 import { HiUserGroup } from "react-icons/hi2";
 import { FiUpload, FiDownload } from "react-icons/fi";
 import { RiFileExcel2Fill } from "react-icons/ri";
+import { getToken } from "../../functions/getToken.js";
+import { useNavigate } from "react-router-dom";
 
 const RegForTarget = () => {
+  const navigation = useNavigate();
   const columns = [
     {
       title: "STT",
@@ -81,6 +84,13 @@ const RegForTarget = () => {
       regYear: 2024,
     },
   ];
+
+  useEffect(() => {
+    const user = getToken();
+    if (!user) {
+      navigation("/dangnhap");
+    }
+  });
   return (
     <div className="flex-1">
       <div className="flex items-center ml-2">

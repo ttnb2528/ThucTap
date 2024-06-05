@@ -962,6 +962,13 @@ input::placeholder {
   }
 }
 
+@media (min-width: 1536px) {
+  .\32xl\:px-\[5\%\] {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+
 .\[\&\>li\]\:cursor-pointer>li {
   cursor: pointer;
 }

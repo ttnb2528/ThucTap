@@ -1,4 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { API_LOGIN } from "../../API/Auth/login.api.js";
 // import {
 //   MDBContainer,
 //   MDBCol,
@@ -10,6 +15,47 @@ import React from "react";
 // } from "mdb-react-ui-kit";
 
 const Login = () => {
+  const navigation = useNavigate();
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async () => {
+    // console.clear();
+    console.log(form);
+
+    const result = await API_LOGIN(form);
+    console.log(result);
+    if (result.status === 200) {
+      if (result.data.status === 200 && result.data.data.role === "10") {
+        localStorage.setItem("user", JSON.stringify(result.data.data));
+        navigation("/");
+        return;
+      }
+      if (result.data.status === 200 && result.data.data.role !== "10") {
+        toast.error("tài khoản không có quyền truy cập");
+        return;
+      }
+
+      if (result.data.status === 300) {
+        console.log(result.data.message);
+        toast.error("Email hoặc mật khẩu không chính xác");
+        return;
+      }
+
+      if (result.data.status === 400) {
+        console.log(result.data.message);
+        toast.warn("Email và mật khẩu không được để trống");
+        return;
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center mx-auto mt-20">
       <h1 className="text-5xl mb-4 font-semibold">Đăng nhập</h1>
@@ -30,8 +76,11 @@ const Login = () => {
               <input
                 type="email"
                 id="email"
+                name="email"
                 className="form-control form-control-lg w-full p-2 border border-gray-300 rounded"
                 placeholder="Nhập địa chỉ email"
+                value={form.email}
+                onChange={handleChange}
               />
             </div>
 
@@ -42,8 +91,11 @@ const Login = () => {
               <input
                 type="password"
                 id="password"
+                name="password"
                 className="form-control form-control-lg w-full p-2 border border-gray-300 rounded"
                 placeholder="Nhập mật khẩu"
+                value={form.password}
+                onChange={handleChange}
               />
             </div>
 
@@ -68,14 +120,15 @@ const Login = () => {
               <button
                 type="button"
                 className="bg-blue-600 text-white px-10 py-2 rounded-lg"
+                onClick={handleSubmit}
               >
                 Đăng nhập
               </button>
-              
             </div>
           </form>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

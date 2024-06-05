@@ -1,0 +1,5 @@
+sửa các file ở model route 
+- Thêm các folder controller và file controller
+- Quy tắt đặt tên file: tác dụng file đến đố tượng nào .controller.js
+vd: login.controller.js, findoneUser.controller.js
+vd: user.model.js
