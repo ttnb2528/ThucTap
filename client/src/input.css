@@ -6,10 +6,22 @@
     @apply border-b border-gray-300;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
     @apply border border-gray-400 px-2 py-1 mt-3 rounded text-sm
 }
 
 input::placeholder {
     @apply text-gray-600 text-sm;
+}
+
+/* transition */
+
+.linear-150 {
+    @apply transition duration-150 ease-linear;
+}
+
+.linear-300 {
+    @apply transition duration-300 ease-linear;
 }
