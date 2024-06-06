@@ -1,14 +1,24 @@
-const { jsonGenerate } = require("../../utils/helpers");
-const { StatusCode } = require("../../utils/constants");
-const User = require("../../models/user.model");
+const { jsonGenerate } = require("../../utils/helpers.js");
+const { StatusCode } = require("../../utils/constants.js");
+const User = require("../../models/user.model.js");
+const Student = require("../../models/student.model.js");
+
 const bcrypt = require("bcrypt");
 const Jwt = require("jsonwebtoken");
 
 const createRandomUser = async (req, res) => {
   try {
-    const name = req.body.name;
+    const { name, role } = req.body;
+    const nameRole = role === "1" ? "teacher" : false;
+
+    if (!nameRole) {
+      return res.json(
+        jsonGenerate(StatusCode.MULTIPLECHOICE, "Role is not valid")
+      );
+    }
+
     const randomCode = Math.random().toString(10).slice(-5);
-    const generalEmail = `${name}${randomCode}@gmail.com`;
+    const generalEmail = `${name}${randomCode}@${nameRole}.com`;
 
     console.log(generalEmail);
 
@@ -31,7 +41,7 @@ const createRandomUser = async (req, res) => {
     user = await User.create({
       email: generalEmail,
       password: hashPassword,
-      role: "1",
+      role: role,
     });
 
     return res.json(

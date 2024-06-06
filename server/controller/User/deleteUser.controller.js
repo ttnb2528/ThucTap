@@ -13,7 +13,7 @@ const deleteUser = async (req, res) => {
     );
     const data = await User.findByIdAndDelete(_id)
     return res.json(
-      jsonGenerate(StatusCode.OK, "Xoá Nhân Viên", data)
+      jsonGenerate(StatusCode.OK, "Xoá sinh viên", data)
     );
   } catch (error) {
     console.log(error);

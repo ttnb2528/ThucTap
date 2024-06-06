@@ -4,6 +4,7 @@ const cors = require("cors");
 const AuthMiddleware = require("../middelewares/AuthMiddleware.js");
 const AuthRouter = require("./auth.route.js");
 const UserRouter = require("./user.route.js");
+const StudentRouter = require("./student.route.js");
 
 // Middleware
 app.use(cors());
@@ -12,6 +13,7 @@ const router = express.Router();
 
 app.use("/auth", AuthRouter);
 app.use("/user",AuthMiddleware, UserRouter );
+app.use("/student",AuthMiddleware, StudentRouter );
 
 
 module.exports = app;

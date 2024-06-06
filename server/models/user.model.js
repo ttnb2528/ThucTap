@@ -19,7 +19,5 @@ module.exports = User;
 
 //role
 
-// lv1 nhân vien
-// lv2 nhân viên + quản lý kho
-// lv3 chủ cưa hàng
+// 1: teacher
 // lv10 developer

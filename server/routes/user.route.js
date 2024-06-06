@@ -16,7 +16,4 @@ router.get("/findone", findOneUser);
 
 
 
-
-
-
 module.exports = router;
