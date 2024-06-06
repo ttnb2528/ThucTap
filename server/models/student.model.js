@@ -4,7 +4,7 @@ const studentSchema = new mongoose.Schema(
   {
     code: { type: String },
     fullName: { type: String },
-
+    date: { type: Date },
     isSex: { type: String },
     cccd: { type: String },
     ethnic: { type: String },
@@ -12,6 +12,19 @@ const studentSchema = new mongoose.Schema(
     phone: {
       type: String,
     },
+    levelTraining: { type: String },
+    career: [{ type: mongoose.Schema.Types.ObjectId, ref: "career" }],
+    grades: [
+      {
+        subject: { type: mongoose.Schema.Types.ObjectId, ref: "subject" },
+        scores: [
+          {
+            type: { type: String },
+            score: { type: Number },
+          },
+        ],
+      },
+    ],
   },
   { timestamps: true }
 );

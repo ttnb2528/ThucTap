@@ -3,7 +3,10 @@ const { StatusCode } = require("../../utils/constants.js");
 const { jsonGenerate } = require("../../utils/helpers.js");
 
 const listStudent = async (req, res) => {
-  const result = await Student.find();
+  const result = await Student.find().populate([
+    { path: "career", model: "career" },
+    { path: "grades.subject", model: "subject" },
+  ]);
 
   if (result) {
     res.json(jsonGenerate(StatusCode.OK, "List student", result));
