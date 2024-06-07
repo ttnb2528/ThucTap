@@ -1,128 +1,141 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
+import moment from "moment";
+// import * as XLSX from "xlsx";
 
 // utils
 import IconWrapper from "~/utils/IconWrapper/IconWrapper";
 
+// functions
+import { getToken } from "~/functions/getToken.js";
+import { exportXLSX } from "~/functions/exportXLSX.js";
+
+// api
+import { API_LIST_STUDENT } from "../../API/Student/listStudent.api.js";
+
 // icons
 import { PiArrowCircleUpLight } from "react-icons/pi";
+import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
+import { FiUpload, FiDownload } from "react-icons/fi";
 
 const UpdateInfoStudent = () => {
-  const columns = [
-    {
-      title: "STT",
-      dataIndex: "stt",
-      key: "stt",
-    },
-    {
-      title: "Mã TS",
-      dataIndex: "idEnroll",
-      key: "idEnroll",
-    },
-    {
-      title: "Họ và tên",
-      dataIndex: "name",
-      key: "name",
-    },
+  const [data, setData] = useState([]);
+  const [sheetData, setSheetData] = useState(null);
+  console.log(getToken());
 
-    {
-      title: "Ngày sinh",
-      dataIndex: "date",
-      key: "date",
-    },
+  const fetchStudent = async () => {
+    const result = await API_LIST_STUDENT(getToken());
+    if (result.status === 200 && result.data.status === 200) {
+      const fetchData = result.data.data.map((student, index) => {
+        return {
+          stt: index + 1,
+          code: student?.code,
+          fullName: student?.fullName,
+          date: moment(student?.date).format("DD-MM-YYYY"),
+          isSex: student?.isSex,
+          cccd: student?.cccd,
+          ethnic: student?.ethnic,
+          address: student?.address,
+          phone: student?.phone,
+          operation: (
+            <div className="flex justify-between items-center ">
+              <span className="cursor-pointer hover:text-blue-500">
+                <FaEye />{" "}
+              </span>
+              <span className="cursor-pointer hover:text-blue-500">
+                <FaEdit />{" "}
+              </span>
+              <span className="cursor-pointer hover:text-blue-500">
+                <FaTrash />
+              </span>
+            </div>
+          ),
+        };
+      });
+      setData(fetchData);
+      setSheetData(fetchData);
+    }
+  };
 
-    {
-      title: "Giới tính",
-      dataIndex: "gender",
-      key: "gender",
-    },
+  useEffect(() => {
+    fetchStudent();
+  }, []);
 
-    {
-      title: "CMTND/CCCCD/Hộ chiếu",
-      dataIndex: "idCard",
-      key: "idCard",
-    },
-    {
-      title: "Dân tộc",
-      dataIndex: "peoples",
-      key: "peoples",
-    },
-    {
-      title: "Địa chỉ liên hệ",
-      dataIndex: "address",
-      key: "address",
-    },
-    {
-      title: "Phường/Xã",
-      dataIndex: "wards",
-      key: "wards",
-    },
-    {
-      title: "Quận/Huyện",
-      dataIndex: "district",
-      key: "district",
-    },
+  const columnMapping = {
+    stt: "STT",
+    code: "Mã TS",
+    fullName: "Họ và tên",
+    date: "Ngày sinh",
+    isSex: "Giới tính",
+    cccd: "CMTND/CCCCD/Hộ chiếu",
+    ethnic: "Dân tộc",
+    address: "Địa chỉ",
+    phone: "Số điện thoại",
+    operation: "Thao tác",
+  };
 
-    {
-      title: "Tỉnh/TP",
-      dataIndex: "province",
-      key: "province",
-    },
-    {
-      title: "Trạng thái",
-      dataIndex: "status",
-      key: "status",
-    },
-    {
-      title: "Thao tác",
-      dataIndex: "operation",
-      key: "operation",
-    },
-  ];
-  const data = [
-    {
-      stt: "1",
-      idEnroll: "B2111898",
-      name: "Dương Thiên Tấn",
-      date: "25/11/2003",
-      gender: "Nam",
-      idCard: "086203002299",
-      peoples: "Kinh",
-      address: "300b, Nguyễn Huệ",
-      wards: "Thị trấn Chợ Mới",
-      district:"Chợ Mới",
-      province: "An Giang",
-      status: "Pass",
-    },
-    {
-      stt: "2",
-      idEnroll: "B2111898",
-      name: "Dương Thiên Tấn",
-      date: "25/11/2003",
-      gender: "Nam",
-      idCard: "086203002299",
-      peoples: "Kinh",
-      address: "300b, Nguyễn Huệ",
-      wards: "Thị trấn Chợ Mới",
-      district:"Chợ Mới",
-      province: "An Giang",
-      status: "Pass",
-    },
-    {
-      stt: "3",
-      idEnroll: "B2111898",
-      name: "Dương Thiên Tấn",
-      date: "25/11/2003",
-      gender: "Nam",
-      idCard: "086203002299",
-      peoples: "Kinh",
-      address: "300b, Nguyễn Huệ",
-      wards: "Thị trấn Chợ Mới",
-      district:"Chợ Mới",
-      province: "An Giang",
-      status: "Pass",
-    },
-  ];
+  const columns = Object.keys(columnMapping).map((key) => ({
+    title: columnMapping[key],
+    dataIndex: key,
+    key: key,
+  }));
+
+  // const handleOnExport = () => {
+  //   var wb = XLSX.utils.book_new();
+  //   let ws = XLSX.utils.json_to_sheet(sheetData);
+
+  //   XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+
+  //   XLSX.writeFile(wb, "student.xlsx");
+  // };
+
+  console.log(data);
+  console.log(sheetData);
+  // const data = [
+  //   {
+  //     stt: "1",
+  //     idEnroll: "B2111898",
+  //     name: "Dương Thiên Tấn",
+  //     date: "25/11/2003",
+  //     gender: "Nam",
+  //     idCard: "086203002299",
+  //     peoples: "Kinh",
+  //     address: "300b, Nguyễn Huệ",
+  //     wards: "Thị trấn Chợ Mới",
+  //     district: "Chợ Mới",
+  //     province: "An Giang",
+  //     status: "Pass",
+  //   },
+  //   {
+  //     stt: "2",
+  //     idEnroll: "B2111898",
+  //     name: "Dương Thiên Tấn",
+  //     date: "25/11/2003",
+  //     gender: "Nam",
+  //     idCard: "086203002299",
+  //     peoples: "Kinh",
+  //     address: "300b, Nguyễn Huệ",
+  //     wards: "Thị trấn Chợ Mới",
+  //     district: "Chợ Mới",
+  //     province: "An Giang",
+  //     status: "Pass",
+  //   },
+  //   {
+  //     stt: "3",
+  //     idEnroll: "B2111898",
+  //     name: "Dương Thiên Tấn",
+  //     date: "25/11/2003",
+  //     gender: "Nam",
+  //     idCard: "086203002299",
+  //     peoples: "Kinh",
+  //     address: "300b, Nguyễn Huệ",
+  //     wards: "Thị trấn Chợ Mới",
+  //     district: "Chợ Mới",
+  //     province: "An Giang",
+  //     status: "Pass",
+  //   },
+  // ];
+
   return (
     <div className="flex-1">
       <div className="flex items-center ml-2">
@@ -220,10 +233,14 @@ const UpdateInfoStudent = () => {
             <h1 className="font-bold">Kết quả tìm kiếm 0/0 bản ghi</h1>
           </div>
 
-          <div>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-              Lưu tất cả
-            </button>
+          <div className="flex items-center gap-4 mr-10">
+            <label htmlFor="upload">
+              <IconWrapper icon={FiUpload} />
+            </label>
+            <input type="file" name="upload" id="upload" hidden />
+            <span onClick={() => exportXLSX("student.xlsx", sheetData)}>
+              <IconWrapper icon={FiDownload} />
+            </span>
           </div>
         </div>
 
