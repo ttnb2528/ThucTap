@@ -4,7 +4,7 @@ import moment from "moment";
 // icons
 import { GrLinkPrevious } from "react-icons/gr";
 
-const ModalViewInfo = ({ handleHideAddModal, data }) => {
+const ModalViewInfo = ({ handleHideModal, data }) => {
   console.log(data);
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-60 z-30 flex justify-center items-center">
@@ -14,7 +14,7 @@ const ModalViewInfo = ({ handleHideAddModal, data }) => {
       >
         <div
           className="flex justify-between items-center my-3 text-2xl font-semibold"
-          onClick={handleHideAddModal}
+          onClick={handleHideModal}
         >
           <span className="pl-3">
             <GrLinkPrevious />
@@ -79,7 +79,10 @@ const ModalViewInfo = ({ handleHideAddModal, data }) => {
           </div>
         </div>
         <div className="flex justify-end mt-3 mr-5">
-          <button className="bg-blue-500 text-white py-2 px-5 rounded-md hover:bg-blue-600">
+          <button
+            onClick={handleHideModal}
+            className="bg-blue-500 text-white py-2 px-5 rounded-md hover:bg-blue-600"
+          >
             OK
           </button>
         </div>

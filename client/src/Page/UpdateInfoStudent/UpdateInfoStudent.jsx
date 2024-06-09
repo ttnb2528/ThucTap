@@ -8,6 +8,7 @@ import { Modal } from "antd";
 // components
 import ModalAddStudent from "./Component/ModalAddStudent.jsx";
 import ModalViewInfo from "./Component/ModalViewInfo.jsx";
+import ModalUpdateStudent from "./Component/ModalUpdateStudent.jsx";
 
 // utils
 import IconWrapper from "~/utils/IconWrapper/IconWrapper";
@@ -29,8 +30,13 @@ const UpdateInfoStudent = () => {
   const [isModal, setIsModal] = useState(false);
   const [viewInfo, setViewInfo] = useState(false);
   const [viewData, setViewData] = useState(null);
+  const [updateStudent, setUpdateStudent] = useState(false);
+  const [updateData, setUpdateData] = useState(null);
+
   const [data, setData] = useState([]);
+
   const [sheetData, setSheetData] = useState(null);
+
   const [studentToDelete, setStudentToDelete] = useState(null);
 
   useEffect(() => {
@@ -91,8 +97,11 @@ const UpdateInfoStudent = () => {
               >
                 <FaEye />
               </span>
-              <span className="cursor-pointer hover:text-blue-500">
-                <FaEdit />{" "}
+              <span
+                className="cursor-pointer hover:text-blue-500"
+                onClick={() => handleModalUpdate(student)}
+              >
+                <FaEdit />
               </span>
               <span
                 className="cursor-pointer hover:text-blue-500"
@@ -191,6 +200,11 @@ const UpdateInfoStudent = () => {
   const handleViewInfo = (data) => {
     setViewData(data);
     setViewInfo(true);
+  };
+
+  const handleModalUpdate = (data) => {
+    setUpdateStudent(true);
+    setUpdateData(data);
   };
 
   return (
@@ -322,8 +336,15 @@ const UpdateInfoStudent = () => {
       )}
       {viewInfo && (
         <ModalViewInfo
-          handleHideAddModal={() => setViewInfo(false)}
+          handleHideModal={() => setViewInfo(false)}
           data={viewData}
+        />
+      )}
+      {updateStudent && (
+        <ModalUpdateStudent
+          fetchStudent={fetchStudent}
+          handleHideModal={() => setUpdateStudent(false)}
+          data={updateData}
         />
       )}
     </>
