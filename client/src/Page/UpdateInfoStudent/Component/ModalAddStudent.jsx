@@ -115,7 +115,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
           <span className="pl-3">
             <GrLinkPrevious />
           </span>
-          <h1>Thêm Sinh viên</h1>
+          <h1>Thêm lý lịch sinh viên</h1>
           <div></div>
         </div>
         <div className="dash"></div>
@@ -183,7 +183,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
             className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
             onClick={handleSubmit}
           >
-            Thêm sinh viên
+            ThemeF
           </button>
         </div>
       </div>
