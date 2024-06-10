@@ -16,14 +16,6 @@ export const code_validation = {
   required: true,
 };
 
-export const cccd_validation = {
-  name: "cccd",
-  label: "CMTND/CCCD/Hộ chiếu",
-  type: "text",
-  id: "cccd",
-  placeholder: "Nhập căng cước công dân",
-};
-
 export const address_validation = {
   name: "address",
   label: "Địa chỉ",
@@ -85,7 +77,7 @@ export const nationality_validation = {
   id: "nationality",
   placeholder: "Nhập quốc tịch",
   required: true,
-}
+};
 
 export const isSex_validation = {
   name: "isSex",
@@ -170,4 +162,116 @@ export const career_validation = {
   id: "career",
   required: true,
   options: [],
+};
+
+export const cccd_validation = {
+  name: "cccd",
+  label: "CMTND/CCCD/Hộ chiếu",
+  type: "text",
+  id: "cccd",
+  placeholder: "Nhập căng cước công dân",
+};
+
+export const place_cccd_validation = {
+  name: "place_cccd",
+  label: "Nơi cấp",
+  type: "text",
+  id: "place_cccd",
+  placeholder: "Nhập nơi cấp",
+};
+
+export const email_validation = {
+  name: "email",
+  label: "Email",
+  type: "email",
+  id: "email",
+  placeholder: "Nhập email",
+};
+
+export const guardianName_validation = {
+  name: "guardianName",
+  label: "Họ và tên người giám hộ",
+  type: "text",
+  id: "guardianName",
+  placeholder: "Nhập họ và tên người giám hộ",
+};
+
+export const relationshipWithStudent_validation = {
+  name: "relationshipWithStudent",
+  label: "Quan hệ với sinh viên",
+  type: "text",
+  id: "relationshipWithStudent",
+  placeholder: "Nhập quan hệ với sinh viên",
+};
+
+export const cccd_guardian_validation = {
+  name: "cccd_guardian",
+  label: "CMTND/CCCD/Hộ chiếu người giám hộ",
+  type: "text",
+  id: "cccd_guardian",
+  placeholder: "Nhập căng cước công dân người giám hộ",
+};
+
+export const phone_guardian_validation = {
+  name: "phone_guardian",
+  label: "Số điện thoại người giám hộ",
+  type: "text",
+  id: "phone_guardian",
+  placeholder: "Nhập số điện thoại người giám hộ",
+};
+
+export const religion_validation = {
+  name: "religion",
+  label: "Tôn giáo",
+  type: "text",
+  id: "religion",
+  placeholder: "Nhập tôn giáo",
+};
+
+export const policyObject_validation = {
+  name: "policyObject",
+  label: "Đối tượng chính sách",
+  type: "text",
+  id: "policyObject",
+  placeholder: "Nhập đối tượng chính sách",
+};
+
+export const priorityObject_validation = {
+  name: "priorityObject",
+  label: "Đối tượng ưu tiên",
+  type: "text",
+  id: "priorityObject",
+  placeholder: "Nhập đối tượng ưu tiên",
+};
+
+export const place_group_validation = {
+  name: "place_group",
+  label: "Nơi vào đoàn",
+  type: "text",
+  id: "place_group",
+  placeholder: "Nhập nơi vào đoàn",
+};
+
+export const place_party_validation = {
+  name: "place_party",
+  label: "Nơi vào đảng",
+  type: "text",
+  id: "place_party",
+  placeholder: "Nhập nơi vào đảng",
+};
+
+export const course_validation = {
+  name: "course",
+  label: "Khóa",
+  type: "text",
+  id: "course",
+  placeholder: "Nhập khóa",
+};
+
+export const classCourse_validation = {
+  name: "classCourse",
+  label: "Lớp",
+  type: "text",
+  id: "classCourse",
+  placeholder: "Nhập lớp",
 };
