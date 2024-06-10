@@ -6,18 +6,20 @@ export const Input = ({
   placeholder,
   multiline,
   select,
+  required,
   options,
   value,
   onChange,
 }) => {
   const input_tailwind =
-    "bg-white p-2 font-medium rounded-md w-full border outline-none border-slate-300 placeholder:opacity-60";
+    "bg-white pl-2 py-0 w-full rounded-md flex-1 border outline-none border-slate-300 placeholder:opacity-60 placeholder:text-xs h-[35px]";
   return (
-    <div className="flex flex-col w-full ">
-      <div className="flex justify-between">
-        <label htmlFor={id} className="font-semibold capitalize">
+    <div className="grid ">
+      <div className="flex items-center">
+        <label htmlFor={id} className="font-semibold text-xs capitalize">
           {label}
         </label>
+        {required ? <span className="text-red-500 ml-1 text-xs">*</span> : <span></span>}
       </div>
       {multiline ? (
         <textarea
@@ -29,7 +31,7 @@ export const Input = ({
           onChange={onChange}
         ></textarea>
       ) : select ? (
-        <select name={name} id={id} value={value} onChange={onChange}>
+        <select name={name} id={id} value={value} onChange={onChange} className="h-[35px]">
           {options.map((option) => (
             <option key={option.value} value={option.value}>
               {option.name}
