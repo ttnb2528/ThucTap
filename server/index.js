@@ -3,19 +3,23 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const connection = require("./database/connection.db.js");
-const morgan = require('morgan')
+const morgan = require("morgan");
 const router = require("./routes/index.js");
+const axios = require("axios");
 
-
-app.use(morgan(function (tokens, req, res) {
-  return [
-    tokens.method(req, res),
-    tokens.url(req, res),
-    tokens.status(req, res),
-    tokens.res(req, res, 'content-length'), '-',
-    tokens['response-time'](req, res), 'ms'
-  ].join(' ')
-}));
+app.use(
+  morgan(function (tokens, req, res) {
+    return [
+      tokens.method(req, res),
+      tokens.url(req, res),
+      tokens.status(req, res),
+      tokens.res(req, res, "content-length"),
+      "-",
+      tokens["response-time"](req, res),
+      "ms",
+    ].join(" ");
+  })
+);
 
 // Database Connection
 connection();
@@ -28,8 +32,9 @@ app.use(express.json());
 app.use("/api/v1/", router);
 // app.use("/api/motel", AuthMiddleware, MotelRouter);
 
+
 const PORT = process.env.PORT;
-console.clear()
+console.clear();
 const server = app.listen(
   PORT,
   console.log(`

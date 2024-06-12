@@ -15,3 +15,5 @@ export const URL_STUDENT_UPDATE = `${API}/${STUDENT}/updateStudent`;
 
 /*         CAREER          */
 export const URL_CAREER_LIST = `${API}/${CAREER}/listCareer`;
+
+

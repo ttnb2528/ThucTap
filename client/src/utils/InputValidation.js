@@ -25,33 +25,6 @@ export const address_validation = {
   required: true,
 };
 
-export const province_validation = {
-  name: "province",
-  label: "tỉnh/Thành phố",
-  multiline: true,
-  id: "province",
-  placeholder: "Nhập tỉnh/Thành phố",
-  required: true,
-};
-
-export const district_validation = {
-  name: "district",
-  label: "Quận/Huyện",
-  multiline: true,
-  id: "district",
-  placeholder: "Nhập Quận/Huyện",
-  required: true,
-};
-
-export const wards_validation = {
-  name: "wards",
-  label: "Phường/Xã",
-  multiline: true,
-  id: "wards",
-  placeholder: "Nhập Phường/Xã",
-  required: true,
-};
-
 export const phone_validation = {
   name: "phone",
   label: "Số điện thoại",
@@ -169,6 +142,7 @@ export const cccd_validation = {
   label: "CMTND/CCCD/Hộ chiếu",
   type: "text",
   id: "cccd",
+  required: true,
   placeholder: "Nhập căng cước công dân",
 };
 
@@ -176,6 +150,8 @@ export const place_cccd_validation = {
   name: "place_cccd",
   label: "Nơi cấp",
   type: "text",
+  required: true,
+  // value: "Cục cảnh sát quản lý hành chính về trật tự xã hội",
   id: "place_cccd",
   placeholder: "Nhập nơi cấp",
 };

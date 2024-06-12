@@ -51,13 +51,16 @@ const validate = (data) => {
     fullName: Joi.string().required().label("fullName"),
     date: Joi.date().required().label("date"),
     isSex: Joi.string().required().label("isSex"),
+    cccd: Joi.string().required().label("cccd"),
+    date_cccd: Joi.date().required().label("date_cccd"),
+    place_cccd: Joi.string().required().label("place_cccd"),
     phone: Joi.string().required().label("phone"),
     ethnic: Joi.string().required().label("ethnic"),
     nationality: Joi.string().required().label("nationality"),
     address: Joi.string().required().label("address"),
     province: Joi.string().required().label("province"),
     district: Joi.string().required().label("district"),
-    wards: Joi.string().required().label("wards"),
+    ward: Joi.string().required().label("wards"),
     dateAdmission: Joi.date().required().label("dateAdmission"),
     educationLevel: Joi.string().required().label("educationLevel"),
     typeOfAdmission: Joi.string().required().label("typeOfAdmission"),
@@ -66,7 +69,7 @@ const validate = (data) => {
     admissionObject: Joi.string().required().label("admissionObject"),
     levelTraining: Joi.string().required().label("levelTraining"),
     career: Joi.string().required().label("career"),
-  });
+  }).unknown(true);
 
   return schema.validate(data);
 };
