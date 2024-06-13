@@ -50,6 +50,7 @@ import { API_GET_WARD } from "../../../API/Location/getWard.api.js";
 // functions
 import { getToken } from "~/functions/getToken.js";
 import InputDate from "./InputDate.jsx";
+import ScannerQr from "../../../utils/ScannerQr.js";
 
 const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -64,6 +65,8 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
   const [selectedProvinceId, setSelectedProvinceId] = useState(null);
   const [selectedDistrictId, setSelectedDistrictId] = useState(null);
   const [selectedWardId, setSelectedWardId] = useState(null);
+  const [showModalScanner, setShowModalScanner] = useState(false);
+  const [dataQr, setDataQr] = useState([])
 
   const [form, setForm] = useState({
     code: "",
@@ -221,370 +224,382 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
   }, [selectedDistrictId]);
 
   career_validation.options = careers;
-  console.log(provinces);
-  console.log(form);
-  console.log(selectedProvinceId);
-  console.log(districts);
-  console.log(selectedDistrictId);
-  console.log(wards);
+  // console.log(provinces);
+  // console.log(form);
+  // console.log(selectedProvinceId);
+  // console.log(districts);
+  // console.log(selectedDistrictId);
+  // console.log(wards);
+
+  console.log(dataQr);
 
   return (
-    <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-60 z-30 flex justify-center items-center">
-      <div
-        className="w-[90%] h-[90%] bg-white rounded-md relative overflow-y-scroll"
-        style={{ scrollbarWidth: "none" }}
-      >
-        <div className="flex justify-between items-center my-3 text-2xl font-semibold">
-          <span className="pl-3 cursor-pointer" onClick={handleHideAddModal}>
-            <GrLinkPrevious />
-          </span>
-          <h1>Thêm lý lịch sinh viên</h1>
-          <div></div>
-        </div>
-        <div className="dash"></div>
-        <div className="pl-3 my-2 font-bold">Thông tin sinh viên</div>
-        <div className="mt-3 grid md:grid-cols-4 gap-5 p-3">
-          <Input
-            {...code_validation}
-            value={form.code}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...name_validation}
-            value={form.fullName}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...cccd_validation}
-            value={form.cccd}
-            onChange={handleInputChange}
-          />
-          <Input
-            {...phone_validation}
-            value={form.phone}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...email_validation}
-            value={form.email}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...place_cccd_validation}
-            value={form.place_cccd}
-            onChange={handleInputChange}
-          />
-
-          <InputDate
-            required={true}
-            label={"Ngày cấp"}
-            selectedDate={selectedCccd_date}
-            setSelectedDate={(date) => {
-              setSelectedCccd_date(date);
-              setForm((prevForm) => ({ ...prevForm, date_cccd: date }));
-            }}
-          />
-
-          <InputDate
-            required={true}
-            label={"Ngày sinh"}
-            selectedDate={selectedDate}
-            setSelectedDate={(date) => {
-              setSelectedDate(date);
-              setForm((prevForm) => ({ ...prevForm, date }));
-            }}
-          />
-        </div>
-        <div className="mt-3 grid md:grid-cols-3 gap-5 p-3">
-          <Input
-            {...isSex_validation}
-            value={form.isSex}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...ethnic_validation}
-            value={form.ethnic}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...religion_validation}
-            value={form.religion}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...nationality_validation}
-            value={form.nationality}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...guardianName_validation}
-            value={form.guardianName}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...relationshipWithStudent_validation}
-            value={form.relationshipWithStudent}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...phone_guardian_validation}
-            value={form.phone_guardian}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...cccd_guardian_validation}
-            value={form.cccd_guardian}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...course_validation}
-            value={form.course}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...classCourse_validation}
-            value={form.classCourse}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...place_party_validation}
-            value={form.place_party}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...place_group_validation}
-            value={form.place_group}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="mt-3 grid md:grid-cols-4 gap-5 p-3">
-          <Input
-            {...career_validation}
-            value={form.career}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...levelTraining_validation}
-            value={form.levelTraining}
-            onChange={handleInputChange}
-          />
-
-          <InputDate
-            required={false}
-            label={"Ngày vào đảng"}
-            selectedDate={selectedDate_party}
-            setSelectedDate={(date) => {
-              setSelectedDate_party(date);
-              setForm((prevForm) => ({ ...prevForm, date_party: date }));
-            }}
-          />
-
-          <InputDate
-            required={false}
-            label={"Ngày vào đoàn"}
-            selectedDate={selectedDate_group}
-            setSelectedDate={(date) => {
-              setSelectedDate_group(date);
-              setForm((prevForm) => ({ ...prevForm, date_group: date }));
-            }}
-          />
-        </div>
-        <div className="pl-3 my-2 font-bold">Địa chỉ liên lạc</div>
-        <div className="mt-3 grid md:grid-cols-4 gap-5 p-3">
-          <Input
-            {...address_validation}
-            value={form.address}
-            onChange={handleInputChange}
-          />
-
-          <div className="grid">
-            <div className="flex items-center">
-              <label
-                htmlFor="province"
-                className="font-semibold text-xs capitalize"
-              >
-                Tỉnh/Thành phố <span className="text-red-500">*</span>
-              </label>
-            </div>
-            <select
-              name="province"
-              id="province"
-              className="h-[35px]"
-              onChange={(e) => {
-                const selectedProvince = provinces.find(
-                  (province) => province.value === e.target.value
-                );
-                setForm({
-                  ...form,
-                  province: selectedProvince ? selectedProvince.name : "",
-                  district: "",
-                  ward: "",
-                });
-                setSelectedProvinceId(e.target.value);
-              }}
-              value={selectedProvinceId}
+    <>
+      {showModalScanner && (
+        <ScannerQr onClose={() => setShowModalScanner(false)} onScanSuccess={setDataQr} />
+      )}
+      <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-60 z-30 flex justify-center items-center">
+        <div
+          className="w-[90%] h-[90%] bg-white rounded-md relative overflow-y-scroll"
+          style={{ scrollbarWidth: "none" }}
+        >
+          <div className="flex justify-between items-center my-3 text-2xl font-semibold">
+            <span className="pl-3 cursor-pointer" onClick={handleHideAddModal}>
+              <GrLinkPrevious />
+            </span>
+            <h1>Thêm lý lịch sinh viên</h1>
+            <button
+              className="p-2 bg-blue-500 text-white rounded-md text-base mr-3"
+              onClick={() => setShowModalScanner(true)}
             >
-              <option value="">Chọn tỉnh/thành phố</option>
-              {provinces.map((province) => (
-                <option key={province.value} value={province.value}>
-                  {province.name}
-                </option>
-              ))}
-            </select>
+              Quét mã QR
+            </button>
+          </div>
+          <div className="dash"></div>
+          <div className="pl-3 my-2 font-bold">Thông tin sinh viên</div>
+          <div className="mt-3 grid md:grid-cols-4 gap-5 p-3">
+            <Input
+              {...code_validation}
+              value={form.code}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...name_validation}
+              value={form.fullName}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...cccd_validation}
+              value={form.cccd}
+              onChange={handleInputChange}
+            />
+            <Input
+              {...phone_validation}
+              value={form.phone}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...email_validation}
+              value={form.email}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...place_cccd_validation}
+              value={form.place_cccd}
+              onChange={handleInputChange}
+            />
+
+            <InputDate
+              required={true}
+              label={"Ngày cấp"}
+              selectedDate={selectedCccd_date}
+              setSelectedDate={(date) => {
+                setSelectedCccd_date(date);
+                setForm((prevForm) => ({ ...prevForm, date_cccd: date }));
+              }}
+            />
+
+            <InputDate
+              required={true}
+              label={"Ngày sinh"}
+              selectedDate={selectedDate}
+              setSelectedDate={(date) => {
+                setSelectedDate(date);
+                setForm((prevForm) => ({ ...prevForm, date }));
+              }}
+            />
+          </div>
+          <div className="mt-3 grid md:grid-cols-3 gap-5 p-3">
+            <Input
+              {...isSex_validation}
+              value={form.isSex}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...ethnic_validation}
+              value={form.ethnic}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...religion_validation}
+              value={form.religion}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...nationality_validation}
+              value={form.nationality}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...guardianName_validation}
+              value={form.guardianName}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...relationshipWithStudent_validation}
+              value={form.relationshipWithStudent}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...phone_guardian_validation}
+              value={form.phone_guardian}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...cccd_guardian_validation}
+              value={form.cccd_guardian}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...course_validation}
+              value={form.course}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...classCourse_validation}
+              value={form.classCourse}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...place_party_validation}
+              value={form.place_party}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...place_group_validation}
+              value={form.place_group}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="mt-3 grid md:grid-cols-4 gap-5 p-3">
+            <Input
+              {...career_validation}
+              value={form.career}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...levelTraining_validation}
+              value={form.levelTraining}
+              onChange={handleInputChange}
+            />
+
+            <InputDate
+              required={false}
+              label={"Ngày vào đảng"}
+              selectedDate={selectedDate_party}
+              setSelectedDate={(date) => {
+                setSelectedDate_party(date);
+                setForm((prevForm) => ({ ...prevForm, date_party: date }));
+              }}
+            />
+
+            <InputDate
+              required={false}
+              label={"Ngày vào đoàn"}
+              selectedDate={selectedDate_group}
+              setSelectedDate={(date) => {
+                setSelectedDate_group(date);
+                setForm((prevForm) => ({ ...prevForm, date_group: date }));
+              }}
+            />
+          </div>
+          <div className="pl-3 my-2 font-bold">Địa chỉ liên lạc</div>
+          <div className="mt-3 grid md:grid-cols-4 gap-5 p-3">
+            <Input
+              {...address_validation}
+              value={form.address}
+              onChange={handleInputChange}
+            />
+
+            <div className="grid">
+              <div className="flex items-center">
+                <label
+                  htmlFor="province"
+                  className="font-semibold text-xs capitalize"
+                >
+                  Tỉnh/Thành phố <span className="text-red-500">*</span>
+                </label>
+              </div>
+              <select
+                name="province"
+                id="province"
+                className="h-[35px]"
+                onChange={(e) => {
+                  const selectedProvince = provinces.find(
+                    (province) => province.value === e.target.value
+                  );
+                  setForm({
+                    ...form,
+                    province: selectedProvince ? selectedProvince.name : "",
+                    district: "",
+                    ward: "",
+                  });
+                  setSelectedProvinceId(e.target.value);
+                }}
+                value={selectedProvinceId}
+              >
+                <option value="">Chọn tỉnh/thành phố</option>
+                {provinces.map((province) => (
+                  <option key={province.value} value={province.value}>
+                    {province.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="grid">
+              <div className="flex items-center">
+                <label
+                  htmlFor="district"
+                  className="font-semibold text-xs capitalize"
+                >
+                  Quận/Huyện <span className="text-red-500">*</span>
+                </label>
+              </div>
+              <select
+                name="district"
+                id="district"
+                className="h-[35px]"
+                onChange={(e) => {
+                  const selectedDistrict = districts.find(
+                    (district) => district.value === e.target.value
+                  );
+                  setForm({
+                    ...form,
+                    district: selectedDistrict ? selectedDistrict.name : "",
+                    ward: "",
+                  });
+                  setSelectedDistrictId(e.target.value);
+                }}
+                value={selectedDistrictId}
+                disabled={!selectedProvinceId}
+              >
+                <option value="">Chọn quận/huyện</option>
+                {districts.map((district) => (
+                  <option key={district.value} value={district.value}>
+                    {district.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="grid">
+              <div className="flex items-center">
+                <label
+                  htmlFor="ward"
+                  className="font-semibold text-xs capitalize"
+                >
+                  Xã/Phường/Thị trấn <span className="text-red-500">*</span>
+                </label>
+              </div>
+              <select
+                name="ward"
+                id="ward"
+                className="h-[35px]"
+                onChange={(e) => {
+                  const selectedWard = wards.find(
+                    (ward) => ward.value === e.target.value
+                  );
+                  setForm({
+                    ...form,
+                    ward: selectedWard ? selectedWard.name : "",
+                  });
+                  setSelectedWardId(e.target.value);
+                }}
+                value={selectedWardId}
+                disabled={!selectedDistrictId}
+              >
+                <option value="">Chọn xã/phường/thị trấn</option>
+                {wards.map((ward) => (
+                  <option key={ward.value} value={ward.value}>
+                    {ward.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className="pl-3 my-2 font-bold">Thông tin khác</div>
+          <div className="mt-3 grid md:grid-cols-4 gap-5 p-3">
+            <Input
+              {...educationLevel_validation}
+              value={form.educationLevel}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...typeOfAdmission_validation}
+              value={form.typeOfAdmission}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...typeOfTraining_validation}
+              value={form.typeOfTraining}
+              onChange={handleInputChange}
+            />
+            <InputDate
+              required={true}
+              label={"Thời gian tuyển sinh"}
+              selectedDate={selectedDateAdmission}
+              setSelectedDate={(date) => {
+                setSelectedDateAdmission(date);
+                setForm((prevForm) => ({ ...prevForm, dateAdmission: date }));
+              }}
+            />
+          </div>
+          <div className="mt-3 grid md:grid-cols-3 gap-5 p-3">
+            <Input
+              {...formOfTraining_validation}
+              value={form.formOfTraining}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...admissionObject_validation}
+              value={form.admissionObject}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...policyObject_validation}
+              value={form.policyObject}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...priorityObject_validation}
+              value={form.priorityObject}
+              onChange={handleInputChange}
+            />
           </div>
 
-          <div className="grid">
-            <div className="flex items-center">
-              <label
-                htmlFor="district"
-                className="font-semibold text-xs capitalize"
-              >
-                Quận/Huyện <span className="text-red-500">*</span>
-              </label>
-            </div>
-            <select
-              name="district"
-              id="district"
-              className="h-[35px]"
-              onChange={(e) => {
-                const selectedDistrict = districts.find(
-                  (district) => district.value === e.target.value
-                );
-                setForm({
-                  ...form,
-                  district: selectedDistrict ? selectedDistrict.name : "",
-                  ward: "",
-                });
-                setSelectedDistrictId(e.target.value);
-              }}
-              value={selectedDistrictId}
-              disabled={!selectedProvinceId}
+          <div className="flex justify-center items-center py-3">
+            <button
+              className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
+              onClick={handleSubmit}
             >
-              <option value="">Chọn quận/huyện</option>
-              {districts.map((district) => (
-                <option key={district.value} value={district.value}>
-                  {district.name}
-                </option>
-              ))}
-            </select>
+              Thêm
+            </button>
           </div>
-
-          <div className="grid">
-            <div className="flex items-center">
-              <label
-                htmlFor="ward"
-                className="font-semibold text-xs capitalize"
-              >
-                Xã/Phường/Thị trấn <span className="text-red-500">*</span>
-              </label>
-            </div>
-            <select
-              name="ward"
-              id="ward"
-              className="h-[35px]"
-              onChange={(e) => {
-                const selectedWard = wards.find(
-                  (ward) => ward.value === e.target.value
-                );
-                setForm({
-                  ...form,
-                  ward: selectedWard ? selectedWard.name : "",
-                });
-                setSelectedWardId(e.target.value);
-              }}
-              value={selectedWardId}
-              disabled={!selectedDistrictId}
-            >
-              <option value="">Chọn xã/phường/thị trấn</option>
-              {wards.map((ward) => (
-                <option key={ward.value} value={ward.value}>
-                  {ward.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-        <div className="pl-3 my-2 font-bold">Thông tin khác</div>
-        <div className="mt-3 grid md:grid-cols-4 gap-5 p-3">
-          <Input
-            {...educationLevel_validation}
-            value={form.educationLevel}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...typeOfAdmission_validation}
-            value={form.typeOfAdmission}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...typeOfTraining_validation}
-            value={form.typeOfTraining}
-            onChange={handleInputChange}
-          />
-          <InputDate
-            required={true}
-            label={"Thời gian tuyển sinh"}
-            selectedDate={selectedDateAdmission}
-            setSelectedDate={(date) => {
-              setSelectedDateAdmission(date);
-              setForm((prevForm) => ({ ...prevForm, dateAdmission: date }));
-            }}
-          />
-        </div>
-        <div className="mt-3 grid md:grid-cols-3 gap-5 p-3">
-          <Input
-            {...formOfTraining_validation}
-            value={form.formOfTraining}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...admissionObject_validation}
-            value={form.admissionObject}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...policyObject_validation}
-            value={form.policyObject}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...priorityObject_validation}
-            value={form.priorityObject}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div className="flex justify-center items-center py-3">
-          <button
-            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
-            onClick={handleSubmit}
-          >
-            Thêm
-          </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
