@@ -110,7 +110,9 @@ const ModalViewInfo = ({ handleHideModal, data }) => {
           <div className="flex w-full">
             <div className="font-semibold">Ngày vào đoàn:</div>
             <div className="ml-2">
-              {moment(data.date_group).format("DD-MM-YYYY")}
+              {data?.date_group
+                ? moment(data?.date_group).format("DD-MM-YYYY")
+                : ""}
             </div>
           </div>
 
@@ -122,7 +124,9 @@ const ModalViewInfo = ({ handleHideModal, data }) => {
           <div className="flex w-full">
             <div className="font-semibold">Ngày vào đảng:</div>
             <div className="ml-2">
-              {moment(data.date_party).format("DD-MM-YYYY")}
+              {data.date_party
+                ? moment(data.date_party).format("DD-MM-YYYY")
+                : ""}
             </div>
           </div>
 
@@ -131,8 +135,9 @@ const ModalViewInfo = ({ handleHideModal, data }) => {
             <div className="ml-2">{data.place_party}</div>
           </div>
         </div>
-
+        <div className="dash"></div>
         <div className="pl-3 my-2 font-bold">Thông tin Giám hộ</div>
+
         <div className="mt-3 ml-5 grid md:grid-cols-2 gap-5 p-3">
           <div className="flex w-full">
             <div className="font-semibold">Họ tên người giám hộ:</div>
@@ -156,7 +161,7 @@ const ModalViewInfo = ({ handleHideModal, data }) => {
             <div className="ml-2">{data.phone_guardian}</div>
           </div>
         </div>
-
+        <div className="dash"></div>
         <div className="pl-3 my-2 font-bold">Thông tin địa chỉ</div>
         <div className="mt-3 ml-5 grid md:grid-cols-2 gap-5 p-3">
           <div className="flex w-full">
@@ -179,6 +184,8 @@ const ModalViewInfo = ({ handleHideModal, data }) => {
             <div className="ml-2">{data.ward}</div>
           </div>
         </div>
+
+        <div className="dash"></div>
         <div className="pl-3 my-2 font-bold">Thông tin tuyển sinh</div>
         <div className="mt-3 ml-5 grid md:grid-cols-2 gap-5 p-3">
           <div className="flex w-full">
@@ -227,7 +234,7 @@ const ModalViewInfo = ({ handleHideModal, data }) => {
             </div>
           </div>
         </div>
-        <div className="flex justify-end mt-3 mr-5">
+        <div className="flex justify-end my-3 mr-5">
           <button
             onClick={handleHideModal}
             className="bg-blue-500 text-white py-2 px-5 rounded-md hover:bg-blue-600"

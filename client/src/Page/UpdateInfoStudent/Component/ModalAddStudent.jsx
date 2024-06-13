@@ -52,8 +52,11 @@ import { getToken } from "~/functions/getToken.js";
 import InputDate from "./InputDate.jsx";
 
 const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedCccd_date, setSelectedCccd_date] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedCccd_date, setSelectedCccd_date] = useState(null);
+  const [selectedDateAdmission, setSelectedDateAdmission] = useState(null);
+  const [selectedDate_group, setSelectedDate_group] = useState(null);
+  const [selectedDate_party, setSelectedDate_party] = useState(null);
   const [careers, setCareers] = useState([]);
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
@@ -87,9 +90,9 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
     ward: "",
     policyObject: "",
     priorityObject: "",
-    date_group: new Date(),
+    date_group: "",
     place_group: "",
-    date_party: new Date(),
+    date_party: "",
     place_party: "",
     dateAdmission: new Date(),
     educationLevel: "",
@@ -125,12 +128,12 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
     fetchCareer();
   }, []);
 
-  useEffect(() => {
-    setForm((prevForm) => ({
-      ...prevForm,
-      date: selectedDate,
-    }));
-  }, [selectedDate]);
+  // useEffect(() => {
+  //   setForm((prevForm) => ({
+  //     ...prevForm,
+  //     date: selectedDate,
+  //   }));
+  // }, [selectedDate]);
 
   useEffect(() => {
     fetchProvince();
@@ -277,17 +280,23 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
           />
 
           <InputDate
+            required={true}
             label={"Ngày cấp"}
-            value={form.date_cccd}
             selectedDate={selectedCccd_date}
-            setSelectedDate={setSelectedCccd_date}
+            setSelectedDate={(date) => {
+              setSelectedCccd_date(date);
+              setForm((prevForm) => ({ ...prevForm, date_cccd: date }));
+            }}
           />
 
           <InputDate
+            required={true}
             label={"Ngày sinh"}
-            value={form.date}
             selectedDate={selectedDate}
-            setSelectedDate={setSelectedDate}
+            setSelectedDate={(date) => {
+              setSelectedDate(date);
+              setForm((prevForm) => ({ ...prevForm, date }));
+            }}
           />
         </div>
         <div className="mt-3 grid md:grid-cols-3 gap-5 p-3">
@@ -377,17 +386,23 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
           />
 
           <InputDate
+            required={false}
             label={"Ngày vào đảng"}
-            value={form.date_group}
-            selectedDate={selectedDate}
-            setSelectedDate={setSelectedDate}
+            selectedDate={selectedDate_party}
+            setSelectedDate={(date) => {
+              setSelectedDate_party(date);
+              setForm((prevForm) => ({ ...prevForm, date_party: date }));
+            }}
           />
 
           <InputDate
+            required={false}
             label={"Ngày vào đoàn"}
-            value={form.date_party}
-            selectedDate={selectedDate}
-            setSelectedDate={setSelectedDate}
+            selectedDate={selectedDate_group}
+            setSelectedDate={(date) => {
+              setSelectedDate_group(date);
+              setForm((prevForm) => ({ ...prevForm, date_group: date }));
+            }}
           />
         </div>
         <div className="pl-3 my-2 font-bold">Địa chỉ liên lạc</div>
@@ -506,7 +521,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
           </div>
         </div>
         <div className="pl-3 my-2 font-bold">Thông tin khác</div>
-        <div className="mt-3 grid md:grid-cols-3 gap-5 p-3">
+        <div className="mt-3 grid md:grid-cols-4 gap-5 p-3">
           <Input
             {...educationLevel_validation}
             value={form.educationLevel}
@@ -524,7 +539,17 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
             value={form.typeOfTraining}
             onChange={handleInputChange}
           />
-
+          <InputDate
+            required={true}
+            label={"Thời gian tuyển sinh"}
+            selectedDate={selectedDateAdmission}
+            setSelectedDate={(date) => {
+              setSelectedDateAdmission(date);
+              setForm((prevForm) => ({ ...prevForm, dateAdmission: date }));
+            }}
+          />
+        </div>
+        <div className="mt-3 grid md:grid-cols-3 gap-5 p-3">
           <Input
             {...formOfTraining_validation}
             value={form.formOfTraining}
