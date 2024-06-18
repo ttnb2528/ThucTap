@@ -34,6 +34,7 @@ const createSchedule = async (req, res) => {
 const validateTeacher = (data) => {
   const schema = Joi.object({
     fullName: Joi.string().required(),
+    career: Joi.string().required(),
     subject: Joi.string().required(),
     dayOfWeek: Joi.string().valid("2", "3", "4", "5", "6", "7").required(),
     session: Joi.string().valid("sáng", "chiều").required(),

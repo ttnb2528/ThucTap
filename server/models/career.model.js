@@ -2,7 +2,13 @@ const mongoose = require("mongoose");
 
 const careerSchema = new mongoose.Schema(
   {
+    code: { type: String, required: true },
+    levelStraining: { type: String, required: true },
+    Circulars: { type: String, required: true },
     name: { type: String, required: true },
+    levelDecision: { type: String },
+    numberDecision: { type: Number },
+    dateDecision: { type: Date },
   },
   { timestamps: true }
 );

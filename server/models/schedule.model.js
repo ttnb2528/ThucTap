@@ -3,6 +3,11 @@ const mongoose = require("mongoose");
 const scheduleSchema = new mongoose.Schema(
   {
     fullName: { type: String, required: true },
+    career: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "career",
+      required: true,
+    },
     subject: {
       type: mongoose.SchemaTypes.ObjectId,
       ref: "subject",
