@@ -3,7 +3,7 @@ const { StatusCode } = require("../../utils/constants.js");
 const { jsonGenerate } = require("../../utils/helpers.js");
 
 const listSubject = async (req, res) => {
-  const result = await Subject.find();
+  const result = await Subject.find().populate("career");
   if (result) {
     res.json(jsonGenerate(StatusCode.OK, "List subject", result));
   } else {
