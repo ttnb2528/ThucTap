@@ -8,21 +8,7 @@ const Jwt = require("jsonwebtoken");
 
 const createRandomUser = async (req, res) => {
   try {
-    const { name, role } = req.body;
-    const nameRole = role === "1" ? "teacher" : false;
-
-    if (!nameRole) {
-      return res.json(
-        jsonGenerate(StatusCode.MULTIPLECHOICE, "Role is not valid")
-      );
-    }
-
-    const randomCode = Math.random().toString(10).slice(-5);
-    const generalEmail = `${name}${randomCode}@${nameRole}.com`;
-
-    console.log(generalEmail);
-
-    let user = await User.findOne({ email: generalEmail });
+    let user = await User.findOne({ email: req.body.email });
 
     // console.log(user);
 
@@ -30,24 +16,22 @@ const createRandomUser = async (req, res) => {
       return res.json(
         jsonGenerate(
           StatusCode.MULTIPLECHOICE,
-          "User with given email already Exist!"
+          "Email giáo viên đã tồn tại trong hệ thống"
         )
       );
 
-    const randomPassword = Math.random().toString(10).slice(-6);
     const salt = await bcrypt.genSalt(Number(process.env.SALT));
-    const hashPassword = await bcrypt.hash(randomPassword, salt);
+    const hashPassword = await bcrypt.hash(req.body.password, salt);
 
     user = await User.create({
-      email: generalEmail,
+      ...req.body,
+      role: "1",
       password: hashPassword,
-      role: role,
     });
 
     return res.json(
-      jsonGenerate(StatusCode.OK, "Create Success", {
+      jsonGenerate(StatusCode.OK, "Tạo thành công", {
         user,
-        originalPassword: randomPassword,
       })
     );
   } catch (error) {

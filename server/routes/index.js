@@ -7,6 +7,7 @@ const UserRouter = require("./user.route.js");
 const StudentRouter = require("./student.route.js");
 const Career = require("./career.router.js");
 const Subject = require("./Subject.route.js");
+const schedule = require("./schedule.route.js");
 
 const Location = require("./location.route.js");
 
@@ -20,7 +21,9 @@ app.use("/location", Location);
 
 app.use("/user", AuthMiddleware, UserRouter);
 app.use("/student", AuthMiddleware, StudentRouter);
+app.use("/student", AuthMiddleware, StudentRouter);
 app.use("/career", AuthMiddleware, Career);
 app.use("/subject", AuthMiddleware, Subject);
+app.use("/schedule", AuthMiddleware, schedule);
 
 module.exports = app;

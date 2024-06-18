@@ -8,8 +8,10 @@ const deleteUser = require("../controller/User/deleteUser.controller.js");
 const router = express.Router();
 
 
-router.get("/list", listUser);
 router.post("/createRandom", createRandomUser);
+
+
+router.get("/list", listUser);
 router.post("/update", updateUser);
 router.delete("/delete", deleteUser);
 router.get("/findone", findOneUser);
