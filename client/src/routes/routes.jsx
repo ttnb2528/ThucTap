@@ -35,10 +35,17 @@ import SkillsExamInformation from "~/Page/SkillsExamInformation/SkillsExamInform
 import AcademicClass from "~/Page/AcademicClass/AcademicClass";
 import FinancialReport from "~/Page/FinancialReport/FinancialReport";
 import StatisticReport from "~/Page/StatisticReport/StatisticReport";
+import HomePage from "~/Page/HomePage/HomePage.jsx";
 import Login from "~/Page/Login/Login";
+import Teaching from "~/Page/Teaching/Teaching.jsx";
 
 const publicRoutes = [
-  { path: "/", component: RegForTarget },
+  { path: "/", component: Login, layout: HeaderOnly },
+  { path: "/dangnhap", component: Login, layout: HeaderOnly },
+];
+
+const privateRoutes = [
+  { path: "/", component: HomePage },
   { path: "/dangkychitieutuyensinh", component: RegForTarget },
   { path: "/quanlythontintuyensinh", component: ManageEnrollInfo },
   { path: "/xacnhannhaphoc", component: AdmissionConfirm },
@@ -76,8 +83,8 @@ const publicRoutes = [
   { path: "/baocaotaichinh", component: FinancialReport },
   { path: "/baocaothongke", component: StatisticReport },
   { path: "/dangnhap", component: Login, layout: HeaderOnly },
-];
 
-const privateRoutes = [];
+  { path: "/tietgiangday", component: Teaching },
+];
 
 export { publicRoutes, privateRoutes };

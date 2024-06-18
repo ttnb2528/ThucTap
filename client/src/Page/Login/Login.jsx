@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -15,7 +14,6 @@ import { API_LOGIN } from "../../API/Auth/login.api.js";
 // } from "mdb-react-ui-kit";
 
 const Login = () => {
-  const navigation = useNavigate();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -32,13 +30,12 @@ const Login = () => {
     const result = await API_LOGIN(form);
     console.log(result);
     if (result.status === 200) {
-      if (result.data.status === 200 && result.data.data.role === "10") {
+      if (
+        result.data.status === 200 &&
+        (result.data.data.role === "10" || result.data.data.role === "1")
+      ) {
         localStorage.setItem("user", JSON.stringify(result.data.data));
-        navigation("/");
-        return;
-      }
-      if (result.data.status === 200 && result.data.data.role !== "10") {
-        toast.error("tài khoản không có quyền truy cập");
+        window.location = "/";
         return;
       }
 

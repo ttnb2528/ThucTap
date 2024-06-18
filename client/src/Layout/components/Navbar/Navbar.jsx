@@ -3,17 +3,22 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "~/assets/logo.png";
 
 const Navbar = () => {
-  const navigation = useNavigate();
-  const [user, setUser] = useState();
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const u = localStorage.getItem("user");
-    setUser(u);
+    if (u) {
+      setUser(JSON.parse(u));
+    }
   }, []);
+
   const handleLogout = () => {
     localStorage.clear();
-    navigation("/dangnhap");
+    setUser(null); // Clear the user state
+    navigate("/dangnhap");
   };
+
   return (
     <nav className="flex justify-between items-center mx-auto text-white py-2 container 2xl:px-[5%]">
       <div className="flex items-center">
@@ -27,8 +32,11 @@ const Navbar = () => {
 
       <div className="flex items-center">
         {user ? (
-          <button className="outline-none border linear-150 p-2 rounded hover:bg-white hover:text-black">
-            <div onClick={handleLogout}>Đăng xuất</div>
+          <button
+            className="outline-none border linear-150 p-2 rounded hover:bg-white hover:text-black"
+            onClick={handleLogout}
+          >
+            Đăng xuất
           </button>
         ) : (
           <button className="outline-none border linear-150 p-2 rounded hover:bg-white hover:text-black">
