@@ -1,102 +1,90 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 
 // utils
 import IconWrapper from "~/utils/IconWrapper/IconWrapper";
 
-// icons
-import { FaAddressBook } from "react-icons/fa";
+// functions
+import { getToken } from "~/functions/getToken";
 
-const Departments = () => {
-  const columns = [
-    {
-      title: "STT",
-      dataIndex: "stt",
-      key: "stt",
-    },
-    {
-      title: "Mã TS",
-      dataIndex: "idEnroll",
-      key: "idEnroll",
-    },
-    {
-      title: "Họ và tên",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Trình độ đào tạo",
-      dataIndex: "level",
-      key: "level",
-    },
-    {
-      title: "Ngành nghề",
-      dataIndex: "career",
-      key: "career",
-    },
-    {
-      title: "Khóa",
-      dataIndex: "schoolYear",
-      key: "schoolYear",
-    },
-    {
-      title: "Lớp",
-      dataIndex: "class",
-      key: "class",
-    },
-    {
-      title: "Trạng thái",
-      dataIndex: "status",
-      key: "status",
-    },
-    {
-      title: "Thao tác",
-      dataIndex: "operation",
-      key: "operation",
-    },
-  ];
-  const data = [
-    {
-      stt: "1",
-      idEnroll: "B2111898",
-      name: "Dương Thiên Tấn",
-      timeEnroll: "26/05/2024",
-      level: "Cao đẳng",
-      career: "Tin học văn phòng",
-      schoolYear: 45,
-      class: "201",
-      status: "Pass",
-    },
-    {
-      stt: "2",
-      idEnroll: "B2111898",
-      name: "Dương Thiên Tấn",
-      timeEnroll: "26/05/2024",
-      level: "Cao đẳng",
-      career: "Tài chính",
-      schoolYear: 45,
-      class: "201",
-      status: "Pass",
-    },
-    {
-      stt: "3",
-      idEnroll: "B2111898",
-      name: "Dương Thiên Tấn",
-      timeEnroll: "26/05/2024",
-      level: "Cao đẳng",
-      career: "Du lịch",
-      schoolYear: 45,
-      class: "201",
-      status: "Pass",
-    },
-  ];
+// icons
+import {
+  FaEye,
+  FaEdit,
+  FaTrash,
+  FaChevronCircleRight,
+} from "react-icons/fa";
+import { API_LIST_SUBJECT } from "../../API/Subject/listSubject.api.js";
+
+const Subject = () => {
+  const [data, setData] = useState([]);
+
+  const fetchSubject = async () => {
+    const result = await API_LIST_SUBJECT(getToken());
+    // console.log(result);
+
+    if (result.status === 200 && result.data.status === 200) {
+      const fetchSubjectData = result.data.data.map((subject, index) => {
+        return {
+          stt: index + 1,
+          code: subject?.code,
+          name: subject?.name,
+          career: subject?.career.name,
+          type: subject?.type,
+          operation: (
+            <div className="flex justify-between items-center ">
+              <span
+                className="cursor-pointer hover:text-blue-500"
+                // onClick={() => handleViewInfo(student)}
+              >
+                <FaEye />
+              </span>
+              <span
+                className="cursor-pointer hover:text-blue-500"
+                // onClick={() => handleModalUpdate(student)}
+              >
+                <FaEdit />
+              </span>
+              <span
+                className="cursor-pointer hover:text-blue-500"
+                // onClick={() => handleDelete(student._id)}
+                // onClick={() => confirmDelete(student._id)}
+              >
+                <FaTrash />
+              </span>
+            </div>
+          ),
+        };
+      });
+
+      setData(fetchSubjectData);
+    }
+  };
+
+  useEffect(() => {
+    fetchSubject();
+  }, []);
+
+  const columnMapping = {
+    stt: "STT",
+    code: "Mã môn học",
+    name: "Tên môn học",
+    career: "Ngành nghề",
+    type: "Loại",
+    operation: "Thao tác",
+  };
+
+  const columns = Object.keys(columnMapping).map((key) => ({
+    title: columnMapping[key],
+    dataIndex: key,
+    key: key,
+  }));
+
   return (
     <div className="flex-1">
       <div className="flex items-center ml-2">
-        <IconWrapper icon={FaAddressBook} />
-        <h1 className="p-2 uppercase text-xl font-semibold">
-          Thông tin học sinh, sinh viên nhập trường
-        </h1>
+        <IconWrapper icon={FaChevronCircleRight} />
+        <h1 className="p-2 uppercase text-xl font-semibold">Quản lý môn học</h1>
       </div>
       <div className="dash"></div>
       <div className="search m-4 mb-5">
@@ -198,7 +186,7 @@ const Departments = () => {
 
           <div>
             <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-              Lưu tất cả
+              Thêm môn học
             </button>
           </div>
         </div>
@@ -211,4 +199,4 @@ const Departments = () => {
   );
 };
 
-export default Departments;
+export default Subject;

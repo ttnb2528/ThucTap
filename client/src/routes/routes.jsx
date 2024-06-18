@@ -24,7 +24,7 @@ import EquipmentFacilities from "~/Page/EquipmentFacilities/EquipmentFacilities"
 import GeneralInformation from "~/Page/GeneralInformation/GeneralInformation";
 import IdRegulations from "~/Page/IdRegulations/IdRegulations";
 import TrainingFields from "~/Page/TrainingFields/TrainingFields";
-import Departments from "~/Page/Departments/Departments";
+import Subject from "~/Page/Subject/Subject";
 import Course from "~/Page/Course/Course";
 import ClassCourse from "~/Page/ClassCourse/ClassCourse";
 import FormDiscipline from "~/Page/FormDiscipline/FormDiscipline";
@@ -71,7 +71,7 @@ const privateRoutes = [
   { path: "/thongtinchung", component: GeneralInformation },
   { path: "/quydinhdanhma", component: IdRegulations },
   { path: "/nganhnghedaotao", component: TrainingFields },
-  { path: "/khoa", component: Departments },
+  { path: "/monhoc", component: Subject },
   { path: "/khoahoc", component: Course },
   { path: "/lopkhoahoc", component: ClassCourse },
   { path: "/hinhthuckyluat", component: FormDiscipline },
