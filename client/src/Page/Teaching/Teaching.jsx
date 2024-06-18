@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { ToastContainer } from "react-toastify";
 
 // component
-import ModalTeachReg from "./components/ModalTeachReg.jsx";
 
 // utils
 import IconWrapper from "~/utils/IconWrapper/IconWrapper";
@@ -11,11 +10,6 @@ import IconWrapper from "~/utils/IconWrapper/IconWrapper";
 import { FaChevronCircleRight } from "react-icons/fa";
 
 const Teaching = () => {
-  const [show, setShow] = useState(false);
-
-  const handleShowReg = () => {
-    setShow(true);
-  };
   return (
     <>
       <div className="flex-1">
@@ -116,10 +110,7 @@ const Teaching = () => {
             </div>
 
             <div className="flex items-center gap-4 mr-10">
-              <button
-                className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
-                onClick={handleShowReg}
-              >
+              <button className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
                 Đăng ký tiết giảng
               </button>
               {/* <label htmlFor="upload">
@@ -137,8 +128,6 @@ const Teaching = () => {
         </div> */}
         </div>
       </div>
-
-      {show && <ModalTeachReg />}
     </>
   );
 };

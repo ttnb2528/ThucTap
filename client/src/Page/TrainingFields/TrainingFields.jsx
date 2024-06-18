@@ -1,101 +1,90 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 
 // utils
 import IconWrapper from "~/utils/IconWrapper/IconWrapper";
 
+// functions
+import { getToken } from "~/functions/getToken";
+
 // icons
-import { FaAddressBook } from "react-icons/fa";
+import { FaAddressBook, FaEye, FaEdit, FaTrash } from "react-icons/fa";
+import { API_LIST_CAREER } from "~/API/Career/ListCareer.api.js";
 
 const TrainingFields = () => {
-  const columns = [
-    {
-      title: "STT",
-      dataIndex: "stt",
-      key: "stt",
-    },
-    {
-      title: "Mã TS",
-      dataIndex: "idEnroll",
-      key: "idEnroll",
-    },
-    {
-      title: "Họ và tên",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Trình độ đào tạo",
-      dataIndex: "level",
-      key: "level",
-    },
-    {
-      title: "Ngành nghề",
-      dataIndex: "career",
-      key: "career",
-    },
-    {
-      title: "Khóa",
-      dataIndex: "schoolYear",
-      key: "schoolYear",
-    },
-    {
-      title: "Lớp",
-      dataIndex: "class",
-      key: "class",
-    },
-    {
-      title: "Trạng thái",
-      dataIndex: "status",
-      key: "status",
-    },
-    {
-      title: "Thao tác",
-      dataIndex: "operation",
-      key: "operation",
-    },
-  ];
-  const data = [
-    {
-      stt: "1",
-      idEnroll: "B2111898",
-      name: "Dương Thiên Tấn",
-      timeEnroll: "26/05/2024",
-      level: "Cao đẳng",
-      career: "Tin học văn phòng",
-      schoolYear: 45,
-      class: "201",
-      status: "Pass",
-    },
-    {
-      stt: "2",
-      idEnroll: "B2111898",
-      name: "Dương Thiên Tấn",
-      timeEnroll: "26/05/2024",
-      level: "Cao đẳng",
-      career: "Tài chính",
-      schoolYear: 45,
-      class: "201",
-      status: "Pass",
-    },
-    {
-      stt: "3",
-      idEnroll: "B2111898",
-      name: "Dương Thiên Tấn",
-      timeEnroll: "26/05/2024",
-      level: "Cao đẳng",
-      career: "Du lịch",
-      schoolYear: 45,
-      class: "201",
-      status: "Pass",
-    },
-  ];
+  const [data, setData] = useState([]);
+  const fetchCareer = async () => {
+    const result = await API_LIST_CAREER(getToken());
+    // console.log(result);
+
+    if (result.status === 200 && result.data.status === 200) {
+      const fetchCareerData = result.data.data.map((career, index) => {
+        return {
+          stt: index + 1,
+          code: career?.code,
+          levelStraining: career?.levelStraining,
+          Circulars: career?.Circulars,
+          name: career?.name,
+          levelDecision: career?.levelDecision,
+          numberDecision: career?.numberDecision,
+          dateDecision: career?.dateDecision,
+          status: career?.status,
+          operation: (
+            <div className="flex justify-between items-center ">
+              <span
+                className="cursor-pointer hover:text-blue-500"
+                // onClick={() => handleViewInfo(student)}
+              >
+                <FaEye />
+              </span>
+              <span
+                className="cursor-pointer hover:text-blue-500"
+                // onClick={() => handleModalUpdate(student)}
+              >
+                <FaEdit />
+              </span>
+              <span
+                className="cursor-pointer hover:text-blue-500"
+                // onClick={() => handleDelete(student._id)}
+                // onClick={() => confirmDelete(student._id)}
+              >
+                <FaTrash />
+              </span>
+            </div>
+          ),
+        };
+      });
+      setData(fetchCareerData);
+    }
+  };
+
+  useEffect(() => {
+    fetchCareer();
+  }, []);
+
+  const columnMapping = {
+    stt: "STT",
+    code: "Mã ngành nghề",
+    name: "Tên ngành nghề",
+    levelStraining: "Trình độ đào tạo",
+    Circulars: "Thông tư",
+    operation: "Thao tác",
+  };
+
+  const columns = Object.keys(columnMapping).map((key) => ({
+    title: columnMapping[key],
+    dataIndex: key,
+    key: key,
+  }));
+
+  console.log(data);
+
   return (
     <div className="flex-1">
       <div className="flex items-center ml-2">
         <IconWrapper icon={FaAddressBook} />
         <h1 className="p-2 uppercase text-xl font-semibold">
-          Thông tin học sinh, sinh viên nhập trường
+          Ngành nghề đào tạo
         </h1>
       </div>
       <div className="dash"></div>
@@ -197,8 +186,8 @@ const TrainingFields = () => {
           </div>
 
           <div>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-              Lưu tất cả
+            <button className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
+              Thêm ngành nghề
             </button>
           </div>
         </div>

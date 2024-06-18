@@ -407,23 +407,9 @@ const Slider = () => {
           <div className="ml-4 mt-2">
             <ul className="space-y-2 [&>li]:cursor-pointer">
               <li>
-                <Link to="/phanlop" className="flex items-center">
-                  <IconWrapper icon={LiaHandPointRight} />
-                  <span className="ml-2">Phân lớp</span>
-                </Link>
-              </li>
-
-              <li>
                 <Link to="/capnhatlylichsinhvien" className="flex items-center">
                   <IconWrapper icon={PiArrowCircleUpLight} />
                   <span className="ml-2">Lý lịch sinh viên</span>
-                </Link>
-              </li>
-
-              <li>
-                <Link to="/kythikynangnghe" className="flex items-center">
-                  <IconWrapper icon={FaChevronCircleRight} />
-                  <span className="ml-2">Kỳ thi kỹ năng nghề</span>
                 </Link>
               </li>
             </ul>
@@ -432,36 +418,6 @@ const Slider = () => {
       },
       {
         key: "2",
-        label: (
-          <Link
-            to="/hosocanbo"
-            className="font-bold text-base flex items-center"
-          >
-            <IconWrapper icon={FaAddressBook} />
-            <span className="ml-2">Quản lý cán bộ nhà giáo</span>
-          </Link>
-        ),
-        children: (
-          <div className="ml-4 mt-2">
-            <ul className="space-y-2 [&>li]:cursor-pointer">
-              <li>
-                <Link to="/hosocanbo" className="flex items-center">
-                  <IconWrapper icon={FaAddressBook} />
-                  <span className="ml-2">Hồ sơ cán bộ quản lý</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/hosonhagiao" className="flex items-center">
-                  <IconWrapper icon={FaAddressBook} />
-                  <span className="ml-2">Hồ sơ nhà giáo</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        ),
-      },
-      {
-        key: "3",
         label: (
           <Link
             to="/baocaothongke"

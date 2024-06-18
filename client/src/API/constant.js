@@ -14,6 +14,7 @@ export const URL_STUDENT_DELETE = `${API}/${STUDENT}/deleteStudent`;
 export const URL_STUDENT_UPDATE = `${API}/${STUDENT}/updateStudent`;
 
 /*         CAREER          */
+export const URL_CAREER_CREATE = `${API}/${CAREER}/createCareer`;
 export const URL_CAREER_LIST = `${API}/${CAREER}/listCareer`;
 
 
