@@ -144,51 +144,6 @@ const UpdateInfoStudent = () => {
 
   console.log(data);
   console.log(sheetData);
-  // const data = [
-  //   {
-  //     stt: "1",
-  //     idEnroll: "B2111898",
-  //     name: "Dương Thiên Tấn",
-  //     date: "25/11/2003",
-  //     gender: "Nam",
-  //     idCard: "086203002299",
-  //     peoples: "Kinh",
-  //     address: "300b, Nguyễn Huệ",
-  //     wards: "Thị trấn Chợ Mới",
-  //     district: "Chợ Mới",
-  //     province: "An Giang",
-  //     status: "Pass",
-  //   },
-  //   {
-  //     stt: "2",
-  //     idEnroll: "B2111898",
-  //     name: "Dương Thiên Tấn",
-  //     date: "25/11/2003",
-  //     gender: "Nam",
-  //     idCard: "086203002299",
-  //     peoples: "Kinh",
-  //     address: "300b, Nguyễn Huệ",
-  //     wards: "Thị trấn Chợ Mới",
-  //     district: "Chợ Mới",
-  //     province: "An Giang",
-  //     status: "Pass",
-  //   },
-  //   {
-  //     stt: "3",
-  //     idEnroll: "B2111898",
-  //     name: "Dương Thiên Tấn",
-  //     date: "25/11/2003",
-  //     gender: "Nam",
-  //     idCard: "086203002299",
-  //     peoples: "Kinh",
-  //     address: "300b, Nguyễn Huệ",
-  //     wards: "Thị trấn Chợ Mới",
-  //     district: "Chợ Mới",
-  //     province: "An Giang",
-  //     status: "Pass",
-  //   },
-  // ];
-
   const handleShowAddModal = () => {
     setIsModal(true);
   };
@@ -219,8 +174,8 @@ const UpdateInfoStudent = () => {
         </div>
         <div className="dash"></div>
         <div className="search m-4 mb-5">
-          <div className="search-input grid grid-cols-6 gap-5">
-            <div className="flex flex-col justify-center">
+          <div className="search-input grid grid-cols-7  gap-5">
+            <div className="flex flex-col justify-center text-xs">
               <label htmlFor="name">Mã TS/Họ và tên</label>
               <input
                 id="name"
@@ -229,7 +184,7 @@ const UpdateInfoStudent = () => {
               />
             </div>
 
-            <div className="flex flex-col justify-center">
+            <div className="flex flex-col justify-center text-xs">
               <label htmlFor="idCard">CMTND/CCCD/Hộ chiếu</label>
               <input
                 id="idCard"
@@ -238,39 +193,7 @@ const UpdateInfoStudent = () => {
               />
             </div>
 
-            <div className="flex flex-col justify-center">
-              <label htmlFor="gender">Giới tính</label>
-              <select name="gender" id="gender">
-                <option selected>Chọn giới tính</option>
-                <option value="nam">Nam</option>
-                <option value="nữ">Nữ</option>
-              </select>
-            </div>
-
-            <div className="flex flex-col justify-center">
-              <label htmlFor="peoples">Dân tộc</label>
-              <select name="peoples" id="peoples">
-                <option selected>Chọn dân tộc</option>
-                <option value="kinh">Kinh</option>
-                <option value="...">...</option>
-              </select>
-            </div>
-
-            <div className="flex flex-col justify-center">
-              <label htmlFor="status">Trạng thái</label>
-              <select name="status" id="status">
-                <option selected>Tất cả</option>
-                <option value="9/12">9/12</option>
-                <option value="12/12">12/12</option>
-              </select>
-            </div>
-
-            <div className="flex flex-col justify-center">
-              <label htmlFor="dateCreated">Ngày tạo</label>
-              <input id="dateCreated" type="text" placeholder="Chọn ngày tạo" />
-            </div>
-
-            <div className="flex flex-col justify-center">
+            <div className="flex flex-col justify-center text-xs">
               <label htmlFor="schoolYear">Khóa học</label>
               <select name="schoolYear" id="schoolYear">
                 <option selected>Chọn khóa học</option>
@@ -279,7 +202,7 @@ const UpdateInfoStudent = () => {
               </select>
             </div>
 
-            <div className="flex flex-col justify-center">
+            <div className="flex flex-col justify-center text-xs">
               <label htmlFor="classSchoolYear">Lớp khóa học</label>
               <select name="classSchoolYear" id="classSchoolYear">
                 <option selected>Chọn lớp khóa học</option>
@@ -288,12 +211,19 @@ const UpdateInfoStudent = () => {
               </select>
             </div>
 
-            <div></div>
-            <div></div>
+            <div className="flex flex-col justify-center text-xs">
+              <label htmlFor="career">Ngành</label>
+              <select name="classSchoolYear" id="classSchoolYear">
+                <option selected>Chọn Ngành</option>
+                <option value="a">a</option>
+                <option value="b">b</option>
+              </select>
+            </div>
+
             <div></div>
 
             <div className="flex flex-col justify-end">
-              <button className="w-32 py-2 px-3 bg-blue-500 text-white rounded hover:bg-blue-600">
+              <button className="w-32 p-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm">
                 Tìm Kiếm
               </button>
             </div>

@@ -29,7 +29,8 @@ import Course from "~/Page/Course/Course";
 import ClassCourse from "~/Page/ClassCourse/ClassCourse";
 import FormDiscipline from "~/Page/FormDiscipline/FormDiscipline";
 import FormReward from "~/Page/FormReward/FormReward";
-import ScienceResearchTopic from "~/Page/ScienceResearchTopic/ScienceResearchTopic";
+import Schedule from "~/Page/Schedule/Schedule";
+import CreateSchedule from "../Page/CreateShedule/CreateSchedule.jsx";
 import AffiliatedUnits from "~/Page/AffiliatedUnits/AffiliatedUnits";
 import SkillsExamInformation from "~/Page/SkillsExamInformation/SkillsExamInformation";
 import AcademicClass from "~/Page/AcademicClass/AcademicClass";
@@ -76,7 +77,8 @@ const privateRoutes = [
   { path: "/lopkhoahoc", component: ClassCourse },
   { path: "/hinhthuckyluat", component: FormDiscipline },
   { path: "/hinhthuckhenthuong", component: FormReward },
-  { path: "/detainghiencuukhoahoc", component: ScienceResearchTopic },
+  { path: "/thoikhoabieu", component: Schedule },
+  { path: "/taothoikhoabieu", component: CreateSchedule, layout: HeaderOnly },
   { path: "/donvitructhuoc", component: AffiliatedUnits },
   { path: "/kythikynangnghe", component: SkillsExamInformation },
   { path: "/lophocvu", component: AcademicClass },

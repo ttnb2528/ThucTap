@@ -325,9 +325,9 @@ const Slider = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/detainghiencuukhoahoc" className="flex items-center">
+                <Link to="/thoikhoabieu" className="flex items-center">
                   <IconWrapper icon={FaChevronCircleRight} />
-                  <span className="ml-2">Đề tài nghiên cứu khoa học</span>
+                  <span className="ml-2">Thời khóa biểu</span>
                 </Link>
               </li>
               <li>

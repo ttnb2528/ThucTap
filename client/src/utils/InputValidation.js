@@ -22,7 +22,6 @@ export const address_validation = {
   multiline: true,
   id: "address",
   placeholder: "Nhập địa chỉ",
-  required: true,
 };
 
 export const phone_validation = {
@@ -40,7 +39,6 @@ export const ethnic_validation = {
   type: "text",
   id: "ethnic",
   placeholder: "Nhập dân tộc",
-  required: true,
 };
 
 export const nationality_validation = {
@@ -49,7 +47,6 @@ export const nationality_validation = {
   type: "text",
   id: "nationality",
   placeholder: "Nhập quốc tịch",
-  required: true,
 };
 
 export const isSex_validation = {
@@ -80,7 +77,6 @@ export const educationLevel_validation = {
   type: "text",
   id: "educationLevel",
   placeholder: "Nhập trình độ học vấn",
-  required: true,
 };
 
 export const typeOfAdmission_validation = {
@@ -89,7 +85,6 @@ export const typeOfAdmission_validation = {
   type: "text",
   id: "typeOfAdmission",
   placeholder: "Nhập hình thức tuyển sinh",
-  required: true,
 };
 
 export const typeOfTraining_validation = {
@@ -98,7 +93,6 @@ export const typeOfTraining_validation = {
   type: "text",
   id: "typeOfTraining",
   placeholder: "Nhập loại hình đào tạo",
-  required: true,
 };
 
 export const formOfTraining_validation = {
@@ -107,7 +101,6 @@ export const formOfTraining_validation = {
   type: "text",
   id: "formOfTraining",
   placeholder: "Nhập hình thức đào tạo",
-  required: true,
 };
 
 export const admissionObject_validation = {
@@ -116,7 +109,6 @@ export const admissionObject_validation = {
   type: "text",
   id: "admissionObject",
   placeholder: "Nhập đối tượng tuyển sinh",
-  required: true,
 };
 
 export const levelTraining_validation = {
@@ -142,7 +134,6 @@ export const cccd_validation = {
   label: "CMTND/CCCD/Hộ chiếu",
   type: "text",
   id: "cccd",
-  required: true,
   placeholder: "Nhập căng cước công dân",
 };
 
@@ -150,7 +141,6 @@ export const place_cccd_validation = {
   name: "place_cccd",
   label: "Nơi cấp",
   type: "text",
-  required: true,
   // value: "Cục cảnh sát quản lý hành chính về trật tự xã hội",
   id: "place_cccd",
   placeholder: "Nhập nơi cấp",
@@ -236,12 +226,26 @@ export const place_party_validation = {
   placeholder: "Nhập nơi vào đảng",
 };
 
+const yearCourse = new Date().getFullYear();
+const courses = [
+  `${yearCourse - 1} - ${yearCourse}`,
+  `${yearCourse} - ${yearCourse + 1}`,
+  `${yearCourse + 1} - ${yearCourse + 2}`,
+];
+
 export const course_validation = {
   name: "course",
   label: "Khóa",
-  type: "text",
+  select: true,
   id: "course",
   placeholder: "Nhập khóa",
+  options: [
+    { name: "Chọn lớp", value: "" },
+    ...courses.map((course) => ({
+      name: course,
+      value: course,
+    })),
+  ],
 };
 
 export const classCourse_validation = {

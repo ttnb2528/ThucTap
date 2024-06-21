@@ -66,7 +66,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
   const [selectedDistrictId, setSelectedDistrictId] = useState(null);
   const [selectedWardId, setSelectedWardId] = useState(null);
   const [showModalScanner, setShowModalScanner] = useState(false);
-  const [dataQr, setDataQr] = useState([])
+  const [dataQr, setDataQr] = useState([]);
 
   const [form, setForm] = useState({
     code: "",
@@ -106,6 +106,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
     course: "",
     classCourse: "",
   });
+  
 
   const fetchCareer = async () => {
     const result = await API_LIST_CAREER(getToken());
@@ -224,19 +225,16 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
   }, [selectedDistrictId]);
 
   career_validation.options = careers;
-  // console.log(provinces);
-  // console.log(form);
-  // console.log(selectedProvinceId);
-  // console.log(districts);
-  // console.log(selectedDistrictId);
-  // console.log(wards);
 
   console.log(dataQr);
 
   return (
     <>
       {showModalScanner && (
-        <ScannerQr onClose={() => setShowModalScanner(false)} onScanSuccess={setDataQr} />
+        <ScannerQr
+          onClose={() => setShowModalScanner(false)}
+          onScanSuccess={setDataQr}
+        />
       )}
       <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-60 z-30 flex justify-center items-center">
         <div
@@ -294,7 +292,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
             />
 
             <InputDate
-              required={true}
+              required={false}
               label={"Ngày cấp"}
               selectedDate={selectedCccd_date}
               setSelectedDate={(date) => {
@@ -433,7 +431,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
                   htmlFor="province"
                   className="font-semibold text-xs capitalize"
                 >
-                  Tỉnh/Thành phố <span className="text-red-500">*</span>
+                  Tỉnh/Thành phố
                 </label>
               </div>
               <select
@@ -469,7 +467,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
                   htmlFor="district"
                   className="font-semibold text-xs capitalize"
                 >
-                  Quận/Huyện <span className="text-red-500">*</span>
+                  Quận/Huyện
                 </label>
               </div>
               <select
@@ -505,7 +503,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
                   htmlFor="ward"
                   className="font-semibold text-xs capitalize"
                 >
-                  Xã/Phường/Thị trấn <span className="text-red-500">*</span>
+                  Xã/Phường/Thị trấn
                 </label>
               </div>
               <select
@@ -554,7 +552,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
               onChange={handleInputChange}
             />
             <InputDate
-              required={true}
+              required={false}
               label={"Thời gian tuyển sinh"}
               selectedDate={selectedDateAdmission}
               setSelectedDate={(date) => {
