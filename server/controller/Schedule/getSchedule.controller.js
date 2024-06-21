@@ -4,36 +4,20 @@ const { jsonGenerate } = require("../../utils/helpers.js");
 
 const getSchedule = async (req, res) => {
   try {
-    const schedules = await regTeach.find().populate("subject");
+    const schedules = await regTeach.find().populate("subject").populate("career");
 
-    const timetable = {};
+    const timetable = [];
 
     schedules.forEach((entry) => {
-      const period = entry.periods;
-      const day = entry.dayOfWeek;
-      const session = entry.session;
-      const room = entry.room;
-
-      // Initialize period if it doesn't exist
-      if (!timetable[period]) {
-        timetable[period] = {};
-      }
-
-      // Initialize day if it doesn't exist within the period
-      if (!timetable[period][day]) {
-        timetable[period][day] = { "sáng": [], "chiều": [] };
-      }
-
-      // Initialize session if it doesn't exist within the day
-      if (!timetable[period][day][session]) {
-        timetable[period][day][session] = [];
-      }
-
-      // Add the entry to the timetable
-      timetable[period][day][session].push({
+      timetable.push({
+        year: entry.year,
+        career: entry.career.name,
+        period: entry.period,
+        day: entry.dayOfWeek,
+        session: entry.session,
+        room: entry.room,
         teacher: entry.fullName,
-        subject: entry.subject.name,
-        room: room,
+        subject: entry.subject.code,
         classPeriod: entry.classPeriod,
       });
     });

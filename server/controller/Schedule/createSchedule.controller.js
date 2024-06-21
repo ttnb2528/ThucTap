@@ -14,6 +14,35 @@ const createSchedule = async (req, res) => {
   }
 
   try {
+    // Lấy các lịch học hiện tại trong cùng buổi và ngày trong tuần
+    const existingSchedules = await schedule.find({
+      year: req.body.year,
+      period: req.body.period,
+      dayOfWeek: req.body.dayOfWeek,
+      session: req.body.session,
+      room: req.body.room,
+    });
+
+    // Tách các tiết học từ chuỗi `classPeriod`
+    const newClassPeriods = req.body.classPeriod.split(",").map(Number);
+
+    // Kiểm tra sự trùng lặp về buổi và số tiết
+    for (let existingSchedule of existingSchedules) {
+      const existingClassPeriods = existingSchedule.classPeriod
+        .split(",")
+        .map(Number);
+      for (let period of newClassPeriods) {
+        if (existingClassPeriods.includes(period)) {
+          return res.json(
+            jsonGenerate(
+              StatusCode.MULTIPLECHOICE,
+              "Trùng tiết học hoặc buổi với một môn học khác"
+            )
+          );
+        }
+      }
+    }
+
     const result = await schedule.create({
       ...req.body,
     });
@@ -36,9 +65,14 @@ const validateTeacher = (data) => {
     fullName: Joi.string().required(),
     career: Joi.string().required(),
     subject: Joi.string().required(),
-    dayOfWeek: Joi.string().valid("2", "3", "4", "5", "6", "7").required(),
-    session: Joi.string().valid("sáng", "chiều").required(),
-    periods: Joi.string().valid("kỳ 1", "kỳ 2", "kỳ 3", "kỳ 4").required(),
+    dayOfWeek: Joi.string()
+      .valid("Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7")
+      .required(),
+    session: Joi.string().valid("Sáng", "Chiều").required(),
+    year: Joi.string().required(),
+    period: Joi.string()
+      .valid("Học kỳ 1", "Học kỳ 2", "Học kỳ 3", "Học kỳ 4")
+      .required(),
     classPeriod: Joi.string().required(),
     room: Joi.string().required(),
   });

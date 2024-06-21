@@ -4,9 +4,7 @@ const regTeach = require("../../models/schedule.model.js");
 
 const listSchedule = async (req, res) => {
   try {
-    const result = await regTeach
-      .find()
-      .populate("subject");
+    const result = await regTeach.find().populate("subject").populate("career");
     if (result) {
       return res.json(jsonGenerate(StatusCode.OK, "Success", result));
     }
