@@ -7,7 +7,7 @@ const careerSchema = new mongoose.Schema(
     Circulars: { type: String, required: true },
     name: { type: String, required: true },
     levelDecision: { type: String },
-    numberDecision: { type: Number },
+    numberDecision: { type: String },
     dateDecision: { type: Date },
   },
   { timestamps: true }

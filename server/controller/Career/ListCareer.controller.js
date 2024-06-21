@@ -1,4 +1,4 @@
-const Career = require("../../models/career.model.js");
+const Career = require("../../models/Career.model.js");
 const { StatusCode } = require("../../utils/constants.js");
 const { jsonGenerate } = require("../../utils/helpers.js");
 

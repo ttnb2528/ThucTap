@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const Career = require("../../models/career.model.js");
+const Career = require("../../models/Career.model.js");
 const { StatusCode } = require("../../utils/constants.js");
 const { jsonGenerate } = require("../../utils/helpers.js");
 
@@ -23,7 +23,7 @@ const createCareer = async (req, res) => {
     );
   } catch (error) {
     return res.json(
-      jsonGenerate(StatusCode.SERVER_ERROR, "Internal Server Error")
+      jsonGenerate(StatusCode.SERVER_ERROR, "Internal Server Error", error)
     );
   }
 };
