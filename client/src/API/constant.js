@@ -18,6 +18,8 @@ export const URL_STUDENT_UPDATE = `${API}/${STUDENT}/updateStudent`;
 /*         CAREER          */
 export const URL_CAREER_CREATE = `${API}/${CAREER}/createCareer`;
 export const URL_CAREER_LIST = `${API}/${CAREER}/listCareer`;
+export const URL_CAREER_DELETE = `${API}/${CAREER}/deleteCareer`;
+export const URL_CAREER_EDIT = `${API}/${CAREER}/editCareer`;
 
 /*         SUBJECT          */
 export const URL_SUBJECT_CREATE = `${API}/${SUBJECT}/createSubject`;
