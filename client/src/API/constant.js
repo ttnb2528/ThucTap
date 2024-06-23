@@ -5,6 +5,7 @@ let STUDENT = "student";
 let CAREER = "career";
 let SUBJECT = "subject";
 let SCHEDULE = "schedule";
+let CLASS = "class";
 
 /*         AUTH          */
 export const URL_LOGIN = `${API}/${AUTH}/login`;
@@ -28,3 +29,10 @@ export const URL_SUBJECT_LIST = `${API}/${SUBJECT}/listSubject`;
 /*         SCHEDULE          */
 export const URL_SCHEDULE_CREATE = `${API}/${SCHEDULE}/createSchedule`;
 export const URL_SCHEDULE_GET = `${API}/${SCHEDULE}/getSchedule`;
+
+/*         CLASS          */
+export const URL_CLASS_CREATE = `${API}/${CLASS}/createClass`;
+export const URL_CLASS_LIST = `${API}/${CLASS}/listClasses`;
+export const URL_CLASS_LIST_CAREER = `${API}/${CLASS}/listClassWithCareer`;
+export const URL_CLASS_DELETE = `${API}/${CLASS}/deleteClass`;
+export const URL_CLASS_UPDATE = `${API}/${CLASS}/updateClass`;
