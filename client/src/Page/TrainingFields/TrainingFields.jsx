@@ -221,14 +221,14 @@ const TrainingFields = () => {
 
       {showView && (
         <ModalViewCareer
-          handleHideAddModal={() => setShowView(false)}
+          handleHideViewModal={() => setShowView(false)}
           data={viewData}
         />
       )}
 
       {showEdit && (
         <ModalEditCareer
-          handleHideAddModal={() => setShowEdit(false)}
+          handleHideUpdateModal={() => setShowEdit(false)}
           data={editData}
           fetchCareer={fetchCareer}
         />

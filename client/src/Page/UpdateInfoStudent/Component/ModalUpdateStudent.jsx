@@ -22,7 +22,6 @@ import {
   typeOfTraining_validation,
   formOfTraining_validation,
   admissionObject_validation,
-  levelTraining_validation,
   career_validation,
   cccd_validation,
   place_cccd_validation,
@@ -49,6 +48,7 @@ import { API_UPDATE_STUDENT } from "../../../API/Student/updateStudent.api.js";
 import { API_GET_PROVINCE } from "../../../API/Location/getProvince.api.js";
 import { API_GET_DISTRICT } from "../../../API/Location/getDistrict.api.js";
 import { API_GET_WARD } from "../../../API/Location/getWard.api.js";
+import { API_LIST_CLASS_CAREER } from "../../../API/Class/listClassWithCareer.api.js";
 
 const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
   const [selectedDate, setSelectedDate] = useState(data?.date);
@@ -64,6 +64,7 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
   );
 
   const [careers, setCareers] = useState([]);
+  const [classes, setClasses] = useState([]);
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
@@ -80,8 +81,8 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
     date_cccd: data?.date_cccd || "",
     ethnic: data?.ethnic || "",
     phone: data?.phone || "",
-    levelTraining: data?.levelTraining || "",
-    career: data?.career[0]._id || "",
+    levelTraining: data?.career.levelTraining || "",
+    career: data?.career._id || "",
     place_cccd: data?.place_cccd || "",
     email: data?.email || "",
     guardianName: data?.guardianName || "",
@@ -106,13 +107,13 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
     formOfTraining: data?.formOfTraining || "",
     admissionObject: data?.admissionObject || "",
     course: data?.course || "",
-    classCourse: data?.classCourse || "",
+    classCourse: data?.classCourse._id || "",
     address: data?.address || "",
   });
 
   const fetchCareer = async () => {
     const result = await API_LIST_CAREER(getToken());
-    console.log(result);
+    // console.log(result);
     if (result.status === 200 && result.data.status === 200) {
       const careerOptions = result.data.data.map((career) => {
         return {
@@ -128,6 +129,46 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
       setCareers(careerOptions);
     }
   };
+
+  const fetchClass = async (data) => {
+    const result = await API_LIST_CLASS_CAREER(getToken(), data);
+    console.log("data: " + data);
+    if (result.status === 200 && result.data.status === 200) {
+      const classOptions = result.data.data.map((classItem) => ({
+        name: classItem.className,
+        value: classItem._id,
+      }));
+
+      if (classOptions.length === 0) {
+        classOptions.unshift({
+          name: "Không có lớp",
+          value: "",
+        });
+      } else {
+        classOptions.unshift({
+          name: "Chọn lớp",
+          value: "",
+        });
+      }
+
+      setClasses(classOptions);
+    } else {
+      setClasses([
+        {
+          name: "Không có lớp",
+          value: "",
+        },
+      ]);
+    }
+  };
+
+  useEffect(() => {
+    if (form.career) {
+      fetchClass(form.career);
+    } else {
+      setClasses([]);
+    }
+  }, [form.career]);
 
   useEffect(() => {
     fetchCareer();
@@ -145,6 +186,7 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
   const handleSubmit = async (id) => {
     console.clear();
     // console.log(form);
+    console.log(id);
 
     const result = await API_UPDATE_STUDENT(getToken(), id, form);
     console.log(result);
@@ -226,6 +268,7 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
   }, [selectedDistrictId]);
 
   career_validation.options = careers;
+  classCourse_validation.options = classes;
 
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-60 z-30 flex justify-center items-center">
@@ -233,23 +276,22 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
         className="w-[90%] h-[90%] bg-white rounded-md relative overflow-y-scroll"
         style={{ scrollbarWidth: "none" }}
       >
-        <div
-          className="flex justify-between items-center my-3 text-2xl font-semibold"
-          onClick={handleHideModal}
-        >
-          <span className="pl-3">
+        <div className="flex justify-between items-center my-3 text-2xl font-semibold">
+          <span className="pl-3 cursor-pointer" onClick={handleHideModal}>
             <GrLinkPrevious />
           </span>
-          <h1>Cập nhật thông tin Sinh viên</h1>
+          <h1>Chỉnh sửa lý lịch sinh viên</h1>
           <div></div>
         </div>
         <div className="dash"></div>
+        <div className="pl-3 my-2 font-bold">Thông tin sinh viên</div>
         <div className="mt-3 grid md:grid-cols-4 gap-5 p-3">
           <Input
             {...code_validation}
             value={form.code}
             onChange={handleInputChange}
           />
+
           <Input
             {...name_validation}
             value={form.fullName}
@@ -261,7 +303,6 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
             value={form.cccd}
             onChange={handleInputChange}
           />
-
           <Input
             {...phone_validation}
             value={form.phone}
@@ -296,7 +337,7 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
             selectedDate={selectedDate}
             setSelectedDate={(date) => {
               setSelectedDate(date);
-              setForm((prevForm) => ({ ...prevForm, date: date }));
+              setForm((prevForm) => ({ ...prevForm, date }));
             }}
           />
         </div>
@@ -350,8 +391,8 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
           />
 
           <Input
-            {...course_validation}
-            value={form.course}
+            {...career_validation}
+            value={form.career}
             onChange={handleInputChange}
           />
 
@@ -359,6 +400,33 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
             {...classCourse_validation}
             value={form.classCourse}
             onChange={handleInputChange}
+          />
+
+          <Input
+            {...course_validation}
+            value={form.course}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="mt-3 grid md:grid-cols-4 gap-5 p-3">
+          <InputDate
+            required={false}
+            label={"Ngày vào đảng"}
+            selectedDate={selectedDate_party}
+            setSelectedDate={(date) => {
+              setSelectedDate_party(date);
+              setForm((prevForm) => ({ ...prevForm, date_party: date }));
+            }}
+          />
+
+          <InputDate
+            required={false}
+            label={"Ngày vào đoàn"}
+            selectedDate={selectedDate_group}
+            setSelectedDate={(date) => {
+              setSelectedDate_group(date);
+              setForm((prevForm) => ({ ...prevForm, date_group: date }));
+            }}
           />
 
           <Input
@@ -371,37 +439,6 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
             {...place_group_validation}
             value={form.place_group}
             onChange={handleInputChange}
-          />
-        </div>
-        <div className="mt-3 grid md:grid-cols-4 gap-5 p-3">
-          <Input
-            {...career_validation}
-            value={form.career}
-            onChange={handleInputChange}
-          />
-
-          <Input
-            {...levelTraining_validation}
-            value={form.levelTraining}
-            onChange={handleInputChange}
-          />
-
-          <InputDate
-            label={"Ngày vào đảng"}
-            selectedDate={selectedDate_party}
-            setSelectedDate={(date) => {
-              setSelectedDate_party(date);
-              setForm((prevForm) => ({ ...prevForm, date_party: date }));
-            }}
-          />
-
-          <InputDate
-            label={"Ngày vào đoàn"}
-            selectedDate={selectedDate_group}
-            setSelectedDate={(date) => {
-              setSelectedDate_group(date);
-              setForm((prevForm) => ({ ...prevForm, date_group: date }));
-            }}
           />
         </div>
         <div className="pl-3 my-2 font-bold">Địa chỉ liên lạc</div>
@@ -543,9 +580,8 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
             value={form.typeOfTraining}
             onChange={handleInputChange}
           />
-
           <InputDate
-            required={true}
+            required={false}
             label={"Thời gian tuyển sinh"}
             selectedDate={selectedDateAdmission}
             setSelectedDate={(date) => {
@@ -579,12 +615,13 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
             onChange={handleInputChange}
           />
         </div>
+
         <div className="flex justify-center items-center py-3">
           <button
             className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
             onClick={() => handleSubmit(data._id)}
           >
-            Cập nhật sinh viên
+            Cập nhật
           </button>
         </div>
       </div>

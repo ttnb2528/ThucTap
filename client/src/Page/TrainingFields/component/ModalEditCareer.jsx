@@ -9,7 +9,7 @@ import { getToken } from "~/functions/getToken";
 import moment from "moment";
 import { API_EDIT_CAREER } from "../../../API/Career/editCareer.api.js";
 
-const ModalEditCareer = ({ handleHideAddModal, data, fetchCareer }) => {
+const ModalEditCareer = ({ handleHideUpdateModal, data, fetchCareer }) => {
   const [form, setForm] = useState({
     code: data?.code,
     name: data?.name,
@@ -34,7 +34,7 @@ const ModalEditCareer = ({ handleHideAddModal, data, fetchCareer }) => {
     if (result.status === 200 && result.data.status === 200) {
       toast.success(result.data.message);
       fetchCareer();
-      handleHideAddModal();
+      handleHideUpdateModal();
     }
 
     if (result.status === 200 && result.data.status !== 200) {
@@ -48,7 +48,7 @@ const ModalEditCareer = ({ handleHideAddModal, data, fetchCareer }) => {
         style={{ scrollbarWidth: "none" }}
       >
         <div className="flex justify-between items-center my-3 text-2xl font-semibold">
-          <span className="pl-3 cursor-pointer" onClick={handleHideAddModal}>
+          <span className="pl-3 cursor-pointer" onClick={handleHideUpdateModal}>
             <GrLinkPrevious />
           </span>
           <h1>Chỉnh sửa ngành</h1>

@@ -30,7 +30,7 @@ export const phone_validation = {
   type: "text",
   id: "phone",
   placeholder: "Nhập số điện thoại",
-  required: true,
+  // required: true,
 };
 
 export const ethnic_validation = {
@@ -135,15 +135,17 @@ export const cccd_validation = {
   type: "text",
   id: "cccd",
   placeholder: "Nhập căng cước công dân",
+  required: true,
 };
 
 export const place_cccd_validation = {
   name: "place_cccd",
   label: "Nơi cấp",
   type: "text",
-  // value: "Cục cảnh sát quản lý hành chính về trật tự xã hội",
+  value: "Cục cảnh sát quản lý hành chính về trật tự xã hội",
   id: "place_cccd",
   placeholder: "Nhập nơi cấp",
+  required: true,
 };
 
 export const email_validation = {
@@ -239,8 +241,9 @@ export const course_validation = {
   select: true,
   id: "course",
   placeholder: "Nhập khóa",
+  required: true,
   options: [
-    { name: "Chọn lớp", value: "" },
+    { name: "Chọn khóa", value: "" },
     ...courses.map((course) => ({
       name: course,
       value: course,
@@ -251,7 +254,9 @@ export const course_validation = {
 export const classCourse_validation = {
   name: "classCourse",
   label: "Lớp",
-  type: "text",
+  select: true,
+  required: true,
   id: "classCourse",
   placeholder: "Nhập lớp",
+  options: [],
 };

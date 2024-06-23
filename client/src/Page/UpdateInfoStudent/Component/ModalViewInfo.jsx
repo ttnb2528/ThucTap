@@ -77,7 +77,7 @@ const ModalViewInfo = ({ handleHideModal, data }) => {
 
           <div className="flex w-full">
             <div className="font-semibold">Lớp:</div>
-            <div className="ml-2">{data.classCourse}</div>
+            <div className="ml-2">{data.classCourse.className}</div>
           </div>
 
           <div className="flex w-full">
@@ -88,7 +88,9 @@ const ModalViewInfo = ({ handleHideModal, data }) => {
           <div className="flex w-full">
             <div className="font-semibold">Ngày cấp:</div>
             <div className="ml-2">
-              {moment(data.date_cccd).format("DD-MM-YYYY")}
+              {data?.date_group
+                ? moment(data?.date_cccd).format("DD-MM-YYYY")
+                : ""}
             </div>
           </div>
 
@@ -191,7 +193,9 @@ const ModalViewInfo = ({ handleHideModal, data }) => {
           <div className="flex w-full">
             <div className="font-semibold">Thời gian tuyến sinh:</div>
             <div className="ml-2">
-              {moment(data.dateAdmission).format("DD-MM-YYYY")}
+              {data?.date_group
+                ? moment(data?.dateAdmission).format("DD-MM-YYYY")
+                : ""}
             </div>
           </div>
 
@@ -222,16 +226,12 @@ const ModalViewInfo = ({ handleHideModal, data }) => {
 
           <div className="flex w-full">
             <div className="font-semibold">Trình độ đào tạo:</div>
-            <div className="ml-2">{data.levelTraining}</div>
+            <div className="ml-2">{data.career.levelStraining}</div>
           </div>
 
           <div className="flex w-full">
             <div className="font-semibold">Ngành nghề:</div>
-            <div className="pl-2">
-              {data.career.map((c) => {
-                return c.name;
-              })}
-            </div>
+            <div className="pl-2">{data.career.name}</div>
           </div>
         </div>
         <div className="flex justify-end my-3 mr-5">

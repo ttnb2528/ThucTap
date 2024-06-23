@@ -3,7 +3,7 @@ import moment from "moment";
 
 import { GrLinkPrevious } from "react-icons/gr";
 
-const ModalViewCareer = ({ handleHideAddModal, data }) => {
+const ModalViewCareer = ({ handleHideViewModal, data }) => {
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-60 z-30 flex justify-center items-center">
       <div
@@ -11,7 +11,7 @@ const ModalViewCareer = ({ handleHideAddModal, data }) => {
         style={{ scrollbarWidth: "none" }}
       >
         <div className="flex justify-between items-center my-3 text-2xl font-semibold">
-          <span className="pl-3 cursor-pointer" onClick={handleHideAddModal}>
+          <span className="pl-3 cursor-pointer" onClick={handleHideViewModal}>
             <GrLinkPrevious />
           </span>
           <h1>Thông tin ngành</h1>
@@ -61,7 +61,7 @@ const ModalViewCareer = ({ handleHideAddModal, data }) => {
         <div className="flex justify-center items-center mt-5">
           <button
             className="border bg-primary p-2 text-white rounded-lg"
-            onClick={handleHideAddModal}
+            onClick={handleHideViewModal}
           >
             Quay lại
           </button>

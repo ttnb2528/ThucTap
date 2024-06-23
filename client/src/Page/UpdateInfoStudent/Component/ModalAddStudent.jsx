@@ -22,7 +22,6 @@ import {
   typeOfTraining_validation,
   formOfTraining_validation,
   admissionObject_validation,
-  levelTraining_validation,
   career_validation,
   cccd_validation,
   place_cccd_validation,
@@ -46,6 +45,7 @@ import { API_CREATE_STUDENT } from "~/API/Student/createStudent.api.js";
 import { API_GET_PROVINCE } from "../../../API/Location/getProvince.api.js";
 import { API_GET_DISTRICT } from "../../../API/Location/getDistrict.api.js";
 import { API_GET_WARD } from "../../../API/Location/getWard.api.js";
+import { API_LIST_CLASS_CAREER } from "../../../API/Class/listClassWithCareer.api.js";
 
 // functions
 import { getToken } from "~/functions/getToken.js";
@@ -59,6 +59,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
   const [selectedDate_group, setSelectedDate_group] = useState(null);
   const [selectedDate_party, setSelectedDate_party] = useState(null);
   const [careers, setCareers] = useState([]);
+  const [classes, setClasses] = useState([]);
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
@@ -71,14 +72,13 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
   const [form, setForm] = useState({
     code: "",
     fullName: "",
-    date: new Date(),
-    date_cccd: new Date(),
+    date: "",
+    date_cccd: "",
     isSex: "",
     cccd: "",
     ethnic: "Kinh",
     address: "",
     phone: "",
-    levelTraining: "",
     career: "",
     place_cccd: "Cục cảnh sát quản lý hành chính về trật tự xã hội",
     email: "",
@@ -97,7 +97,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
     place_group: "",
     date_party: "",
     place_party: "",
-    dateAdmission: new Date(),
+    dateAdmission: "",
     educationLevel: "",
     typeOfAdmission: "",
     typeOfTraining: "",
@@ -106,7 +106,6 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
     course: "",
     classCourse: "",
   });
-  
 
   const fetchCareer = async () => {
     const result = await API_LIST_CAREER(getToken());
@@ -127,10 +126,49 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
       setCareers(careerOptions);
     }
   };
+  const fetchClass = async (data) => {
+    const result = await API_LIST_CLASS_CAREER(getToken(), data);
+    console.log("data: " + data);
+    if (result.status === 200 && result.data.status === 200) {
+      const classOptions = result.data.data.map((classItem) => ({
+        name: classItem.className,
+        value: classItem._id,
+      }));
+
+      if (classOptions.length === 0) {
+        classOptions.unshift({
+          name: "Không có lớp",
+          value: "",
+        });
+      } else {
+        classOptions.unshift({
+          name: "Chọn lớp",
+          value: "",
+        });
+      }
+
+      setClasses(classOptions);
+    } else {
+      setClasses([
+        {
+          name: "Không có lớp",
+          value: "",
+        },
+      ]);
+    }
+  };
 
   useEffect(() => {
     fetchCareer();
   }, []);
+
+  useEffect(() => {
+    if (form.career) {
+      fetchClass(form.career);
+    } else {
+      setClasses([]);
+    }
+  }, [form.career]);
 
   // useEffect(() => {
   //   setForm((prevForm) => ({
@@ -225,6 +263,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
   }, [selectedDistrictId]);
 
   career_validation.options = careers;
+  classCourse_validation.options = classes;
 
   console.log(dataQr);
 
@@ -361,8 +400,8 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
             />
 
             <Input
-              {...course_validation}
-              value={form.course}
+              {...career_validation}
+              value={form.career}
               onChange={handleInputChange}
             />
 
@@ -373,30 +412,12 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
             />
 
             <Input
-              {...place_party_validation}
-              value={form.place_party}
-              onChange={handleInputChange}
-            />
-
-            <Input
-              {...place_group_validation}
-              value={form.place_group}
+              {...course_validation}
+              value={form.course}
               onChange={handleInputChange}
             />
           </div>
           <div className="mt-3 grid md:grid-cols-4 gap-5 p-3">
-            <Input
-              {...career_validation}
-              value={form.career}
-              onChange={handleInputChange}
-            />
-
-            <Input
-              {...levelTraining_validation}
-              value={form.levelTraining}
-              onChange={handleInputChange}
-            />
-
             <InputDate
               required={false}
               label={"Ngày vào đảng"}
@@ -415,6 +436,18 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
                 setSelectedDate_group(date);
                 setForm((prevForm) => ({ ...prevForm, date_group: date }));
               }}
+            />
+
+            <Input
+              {...place_party_validation}
+              value={form.place_party}
+              onChange={handleInputChange}
+            />
+
+            <Input
+              {...place_group_validation}
+              value={form.place_group}
+              onChange={handleInputChange}
             />
           </div>
           <div className="pl-3 my-2 font-bold">Địa chỉ liên lạc</div>
