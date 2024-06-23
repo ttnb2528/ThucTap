@@ -13,8 +13,8 @@ const createClass = async (req, res) => {
   }
 
   try {
-    const { className } = req.body;
-    const existingClass = await Class.findOne({ className });
+    const { className, career } = req.body;
+    const existingClass = await Class.findOne({ className, career });
 
     if (existingClass) {
       return res.json(jsonGenerate(StatusCode.BAD_REQUEST, "Lớp đã tồn tại"));
