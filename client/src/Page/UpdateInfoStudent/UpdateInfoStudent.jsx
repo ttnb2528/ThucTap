@@ -20,6 +20,9 @@ import { exportXLSX } from "~/functions/exportXLSX.js";
 // api
 import { API_LIST_STUDENT } from "~/API/Student/listStudent.api.js";
 import { API_DELETE_STUDENT } from "~/API/Student/deleteStudent.js";
+import { API_LIST_CAREER } from "../../API/Career/ListCareer.api.js";
+import { API_LIST_CLASS } from "../../API/Class/listClass.api.js";
+import { API_LIST_STUDENT_CONDITION } from "../../API/Student/listStudentWithCondition.api.js";
 
 // icons
 import { PiArrowCircleUpLight } from "react-icons/pi";
@@ -34,9 +37,70 @@ const UpdateInfoStudent = () => {
   const [updateData, setUpdateData] = useState(null);
 
   const [data, setData] = useState([]);
+  const [careerData, setCareerData] = useState([]);
+  const [classesData, setClassesData] = useState([]);
 
+  // search
+  const [search, setSearch] = useState({
+    course: "all",
+    classCourse: "all",
+    career: "all",
+  });
+
+  const getData = async () => {
+    console.log(search);
+
+    const result = await API_LIST_STUDENT_CONDITION(getToken(), search);
+    if (result.status === 200 && result.data.status === 200) {
+      const fetchData = result.data.data.map((student, index) => {
+        return {
+          stt: index + 1,
+          code: student?.code,
+          fullName: student?.fullName,
+          date: moment(student?.date).format("DD-MM-YYYY"),
+          isSex: student?.isSex,
+          cccd: student?.cccd,
+          ethnic: student?.ethnic,
+          address: student?.address,
+          phone: student?.phone,
+          operation: (
+            <div className="flex justify-between items-center ">
+              <span
+                className="cursor-pointer hover:text-blue-500"
+                onClick={() => handleViewInfo(student)}
+              >
+                <FaEye />
+              </span>
+              <span
+                className="cursor-pointer hover:text-blue-500"
+                onClick={() => handleModalUpdate(student)}
+              >
+                <FaEdit />
+              </span>
+              <span
+                className="cursor-pointer hover:text-blue-500"
+                // onClick={() => handleDelete(student._id)}
+                onClick={() => confirmDelete(student._id)}
+              >
+                <FaTrash />
+              </span>
+            </div>
+          ),
+        };
+      });
+      setData(fetchData);
+      setSheetData(fetchData);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, [search]);
+
+  // export xlsx data
   const [sheetData, setSheetData] = useState(null);
 
+  // delete
   const [studentToDelete, setStudentToDelete] = useState(null);
 
   useEffect(() => {
@@ -119,8 +183,42 @@ const UpdateInfoStudent = () => {
     }
   };
 
+  const fetchCareer = async () => {
+    const result = await API_LIST_CAREER(getToken());
+
+    if (result.status === 200 && result.data.status === 200) {
+      const careerData = result.data.data.map((career) => {
+        return {
+          value: career._id,
+          label: career.name,
+        };
+      });
+
+      setCareerData(careerData);
+    } else {
+      console.log("error");
+    }
+  };
+
+  const fetchClasses = async () => {
+    const result = await API_LIST_CLASS(getToken());
+
+    if (result.status === 200 && result.data.status === 200) {
+      const classesData = result.data.data.map((classItem) => {
+        return {
+          value: classItem._id,
+          label: classItem.className,
+        };
+      });
+
+      setClassesData(classesData);
+    }
+  };
+
   useEffect(() => {
     fetchStudent();
+    fetchCareer();
+    fetchClasses();
   }, []);
 
   const columnMapping = {
@@ -142,8 +240,8 @@ const UpdateInfoStudent = () => {
     key: key,
   }));
 
-  console.log(data);
-  console.log(sheetData);
+  // console.log(data);
+  // console.log(sheetData);
   const handleShowAddModal = () => {
     setIsModal(true);
   };
@@ -162,6 +260,13 @@ const UpdateInfoStudent = () => {
     setUpdateData(data);
   };
 
+  const currentYear = new Date().getFullYear();
+  const courseYears = [
+    `${currentYear - 1} - ${currentYear}`,
+    `${currentYear} - ${currentYear + 1}`,
+    `${currentYear + 1} - ${currentYear + 2}`,
+  ];
+
   return (
     <>
       <div className="flex-1">
@@ -176,47 +281,82 @@ const UpdateInfoStudent = () => {
         <div className="search m-4 mb-5">
           <div className="search-input grid grid-cols-7  gap-5">
             <div className="flex flex-col justify-center text-xs">
-              <label htmlFor="name">Mã TS/Họ và tên</label>
+              <label htmlFor="nameSearch">Mã TS/Họ và tên</label>
               <input
-                id="name"
+                id="nameSearch"
+                name="nameSearch"
                 type="text"
                 placeholder="Mã tuyển sinh/Họ và tên"
               />
             </div>
 
             <div className="flex flex-col justify-center text-xs">
-              <label htmlFor="idCard">CMTND/CCCD/Hộ chiếu</label>
+              <label htmlFor="idCardSearch">CMTND/CCCD/Hộ chiếu</label>
               <input
-                id="idCard"
+                id="idCardSearch"
+                name="idCardSearch"
                 type="text"
                 placeholder="Nhập CMTND/CCCD/Hộ chiếu"
               />
             </div>
 
             <div className="flex flex-col justify-center text-xs">
-              <label htmlFor="schoolYear">Khóa học</label>
-              <select name="schoolYear" id="schoolYear">
-                <option selected>Chọn khóa học</option>
-                <option value="2023-2024">2023-2024</option>
-                <option value="2024-2025">2024-2025</option>
+              <label htmlFor="courseSearch">Khóa học</label>
+              <select
+                name="course"
+                id="courseSearch"
+                onChange={(e) =>
+                  setSearch({ ...search, course: e.target.value })
+                }
+              >
+                <option value="all" selected>
+                  Chọn khóa học
+                </option>
+                {courseYears.map((year, index) => (
+                  <option key={index} value={year}>
+                    {year}
+                  </option>
+                ))}
               </select>
             </div>
 
             <div className="flex flex-col justify-center text-xs">
-              <label htmlFor="classSchoolYear">Lớp khóa học</label>
-              <select name="classSchoolYear" id="classSchoolYear">
-                <option selected>Chọn lớp khóa học</option>
-                <option value="a">a</option>
-                <option value="b">b</option>
+              <label htmlFor="classSearch">Lớp khóa học</label>
+              <select
+                name="classCourse"
+                id="classSearch"
+                onChange={(e) =>
+                  setSearch({ ...search, classCourse: e.target.value })
+                }
+              >
+                <option value="all" selected>
+                  Chọn lớp khóa học
+                </option>
+                {classesData.map((classItem, index) => (
+                  <option key={index} value={classItem.value}>
+                    {classItem.label}
+                  </option>
+                ))}
               </select>
             </div>
 
             <div className="flex flex-col justify-center text-xs">
-              <label htmlFor="career">Ngành</label>
-              <select name="classSchoolYear" id="classSchoolYear">
-                <option selected>Chọn Ngành</option>
-                <option value="a">a</option>
-                <option value="b">b</option>
+              <label htmlFor="careerSearch">Ngành</label>
+              <select
+                name="career"
+                id="careerSearch"
+                onChange={(e) =>
+                  setSearch({ ...search, career: e.target.value })
+                }
+              >
+                <option value="all" selected>
+                  Chọn Ngành
+                </option>
+                {careerData.map((career, index) => (
+                  <option key={index} value={career.value}>
+                    {career.label}
+                  </option>
+                ))}
               </select>
             </div>
 
