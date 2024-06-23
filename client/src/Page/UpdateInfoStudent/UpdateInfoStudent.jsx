@@ -28,6 +28,7 @@ import { API_LIST_STUDENT_CONDITION } from "../../API/Student/listStudentWithCon
 import { PiArrowCircleUpLight } from "react-icons/pi";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import { FiUpload, FiDownload } from "react-icons/fi";
+import useDebounce from "../../hooks/useDebounce.js";
 
 const UpdateInfoStudent = () => {
   const [isModal, setIsModal] = useState(false);
@@ -42,15 +43,19 @@ const UpdateInfoStudent = () => {
 
   // search
   const [search, setSearch] = useState({
+    fullName: "",
+    cccd: "",
     course: "all",
     classCourse: "all",
     career: "all",
   });
 
+  const debounce = useDebounce(search, 500);
+
   const getData = async () => {
     console.log(search);
-
-    const result = await API_LIST_STUDENT_CONDITION(getToken(), search);
+    console.log(debounce);
+    const result = await API_LIST_STUDENT_CONDITION(getToken(), debounce);
     if (result.status === 200 && result.data.status === 200) {
       const fetchData = result.data.data.map((student, index) => {
         return {
@@ -95,7 +100,7 @@ const UpdateInfoStudent = () => {
 
   useEffect(() => {
     getData();
-  }, [search]);
+  }, [debounce]);
 
   // export xlsx data
   const [sheetData, setSheetData] = useState(null);
@@ -284,17 +289,19 @@ const UpdateInfoStudent = () => {
               <label htmlFor="nameSearch">Mã TS/Họ và tên</label>
               <input
                 id="nameSearch"
-                name="nameSearch"
+                name="fullName"
+                onChange={(e) => setSearch({ ...search, fullName: e.target.value })}
                 type="text"
                 placeholder="Mã tuyển sinh/Họ và tên"
               />
             </div>
 
             <div className="flex flex-col justify-center text-xs">
-              <label htmlFor="idCardSearch">CMTND/CCCD/Hộ chiếu</label>
+              <label htmlFor="cccd">CMTND/CCCD/Hộ chiếu</label>
               <input
-                id="idCardSearch"
-                name="idCardSearch"
+                id="cccd"
+                name="cccd"
+                onChange={(e) => setSearch({ ...search, cccd: e.target.value })}
                 type="text"
                 placeholder="Nhập CMTND/CCCD/Hộ chiếu"
               />
