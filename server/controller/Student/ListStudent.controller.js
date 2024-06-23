@@ -5,6 +5,7 @@ const { jsonGenerate } = require("../../utils/helpers.js");
 const listStudent = async (req, res) => {
   const result = await Student.find().populate([
     { path: "career", model: "career" },
+    { path: "classCourse", model: "class" },
     { path: "grades.subject", model: "subject" },
   ]);
 
