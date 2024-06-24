@@ -290,7 +290,9 @@ const UpdateInfoStudent = () => {
               <input
                 id="nameSearch"
                 name="fullName"
-                onChange={(e) => setSearch({ ...search, fullName: e.target.value })}
+                onChange={(e) =>
+                  setSearch({ ...search, fullName: e.target.value })
+                }
                 type="text"
                 placeholder="Mã tuyển sinh/Họ và tên"
               />
@@ -312,13 +314,12 @@ const UpdateInfoStudent = () => {
               <select
                 name="course"
                 id="courseSearch"
+                value={search.course}
                 onChange={(e) =>
                   setSearch({ ...search, course: e.target.value })
                 }
               >
-                <option value="all" selected>
-                  Chọn khóa học
-                </option>
+                <option value="all">Chọn khóa học</option>
                 {courseYears.map((year, index) => (
                   <option key={index} value={year}>
                     {year}
@@ -331,14 +332,13 @@ const UpdateInfoStudent = () => {
               <label htmlFor="classSearch">Lớp khóa học</label>
               <select
                 name="classCourse"
+                value={search.classCourse}
                 id="classSearch"
                 onChange={(e) =>
                   setSearch({ ...search, classCourse: e.target.value })
                 }
               >
-                <option value="all" selected>
-                  Chọn lớp khóa học
-                </option>
+                <option value="all">Chọn lớp khóa học</option>
                 {classesData.map((classItem, index) => (
                   <option key={index} value={classItem.value}>
                     {classItem.label}
@@ -352,13 +352,12 @@ const UpdateInfoStudent = () => {
               <select
                 name="career"
                 id="careerSearch"
+                value={search.career} // Use value prop instead of selected
                 onChange={(e) =>
                   setSearch({ ...search, career: e.target.value })
                 }
               >
-                <option value="all" selected>
-                  Chọn Ngành
-                </option>
+                <option value="all">Chọn Ngành</option>
                 {careerData.map((career, index) => (
                   <option key={index} value={career.value}>
                     {career.label}

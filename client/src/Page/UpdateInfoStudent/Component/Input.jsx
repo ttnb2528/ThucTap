@@ -24,15 +24,17 @@ export const Input = ({
   };
   return (
     <div className="grid">
-      <div className="flex items-center">
-        <label htmlFor={id} className="font-semibold text-xs capitalize">
-          {label}
-        </label>
-        {required ? (
-          <span className="text-red-500 ml-1 text-xs">*</span>
-        ) : (
-          <span></span>
-        )}
+      <div className="flex items-center justify-between">
+        <div>
+          <label htmlFor={id} className="font-semibold text-xs capitalize">
+            {label}
+          </label>
+          {required ? (
+            <span className="text-red-500 ml-1 text-xs">*</span>
+          ) : (
+            <span></span>
+          )}
+        </div>
       </div>
       {multiline ? (
         <textarea

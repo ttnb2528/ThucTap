@@ -46,29 +46,44 @@ import { API_GET_PROVINCE } from "../../../API/Location/getProvince.api.js";
 import { API_GET_DISTRICT } from "../../../API/Location/getDistrict.api.js";
 import { API_GET_WARD } from "../../../API/Location/getWard.api.js";
 import { API_LIST_CLASS_CAREER } from "../../../API/Class/listClassWithCareer.api.js";
+import { API_LIST_STUDENT } from "~/API/Student/listStudent.api.js";
 
 // functions
 import { getToken } from "~/functions/getToken.js";
 import InputDate from "./InputDate.jsx";
 import ScannerQr from "../../../utils/ScannerQr.js";
+import { parseDateString } from "~/functions/parseDateString.js";
 
 const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
+  // date
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedCccd_date, setSelectedCccd_date] = useState(null);
   const [selectedDateAdmission, setSelectedDateAdmission] = useState(null);
   const [selectedDate_group, setSelectedDate_group] = useState(null);
   const [selectedDate_party, setSelectedDate_party] = useState(null);
+
+  // fetch api
   const [careers, setCareers] = useState([]);
   const [classes, setClasses] = useState([]);
+
+  // fetch location
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
+
+  // handle location
   const [selectedProvinceId, setSelectedProvinceId] = useState(null);
   const [selectedDistrictId, setSelectedDistrictId] = useState(null);
   const [selectedWardId, setSelectedWardId] = useState(null);
+
+  // modal scanner
   const [showModalScanner, setShowModalScanner] = useState(false);
   const [dataQr, setDataQr] = useState([]);
 
+  // generate code
+  const [nextStudentCode, setNextStudentCode] = useState("");
+
+  // form
   const [form, setForm] = useState({
     code: "",
     fullName: "",
@@ -126,6 +141,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
       setCareers(careerOptions);
     }
   };
+
   const fetchClass = async (data) => {
     const result = await API_LIST_CLASS_CAREER(getToken(), data);
     console.log("data: " + data);
@@ -250,6 +266,46 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
     }
   };
 
+  const generateStudentCode = (studentList) => {
+    // Start with base code
+    let baseCode = "BN";
+
+    if (studentList && studentList.length > 0) {
+      // Find hightest student code
+      const highestCode = studentList.reduce((maxCode, student) => {
+        const studentCode = parseInt(student.code.substring(2)); // Extract the numeric part after "BN"
+        return studentCode > maxCode ? studentCode : maxCode;
+      }, 0);
+
+      // Increment the highest code to generate next code
+      const nextCodeNumber = highestCode + 1;
+      baseCode += nextCodeNumber.toString().padStart(6, "0"); // Format the number to 6 digits with leading zeros
+    } else {
+      // If no students exist, start with BN000001
+      baseCode += "000001";
+    }
+
+    return baseCode;
+  };
+
+  useEffect(() => {
+    const fetchStudentList = async () => {
+      const result = await API_LIST_STUDENT(getToken());
+      // console.log(result);
+      if (result.status === 200 && result.data.status === 200) {
+        const studentList = result.data.data;
+        const generatedCode = generateStudentCode(studentList);
+        setNextStudentCode(generatedCode);
+        setForm((prevForm) => ({
+          ...prevForm,
+          code: generatedCode,
+        }));
+      }
+    };
+
+    fetchStudentList();
+  }, []);
+
   useEffect(() => {
     if (selectedProvinceId) {
       fetchDistricts();
@@ -265,7 +321,27 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
   career_validation.options = careers;
   classCourse_validation.options = classes;
 
-  console.log(dataQr);
+  useEffect(() => {
+    if (dataQr.length > 0) {
+      // console.log(dataQr[3]);
+      // console.log(parseDateString(dataQr[3]));
+
+      setForm({
+        ...form,
+        cccd: dataQr[0],
+        fullName: dataQr[2],
+        date: parseDateString(dataQr[3]),
+        isSex: dataQr[4],
+        address: dataQr[5],
+        date_cccd: parseDateString(dataQr[6]),
+      });
+
+      setSelectedDate(parseDateString(dataQr[3]));
+      setSelectedCccd_date(parseDateString(dataQr[6]));
+    }
+  }, [dataQr]);
+
+  // console.log(dataQr);
 
   return (
     <>
@@ -297,7 +373,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
           <div className="mt-3 grid md:grid-cols-4 gap-5 p-3">
             <Input
               {...code_validation}
-              value={form.code}
+              value={nextStudentCode}
               onChange={handleInputChange}
             />
 

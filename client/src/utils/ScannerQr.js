@@ -9,12 +9,22 @@ const ScannerQr = ({ onClose, onScanSuccess }) => {
       console.warn(`Code scan error = ${error}`);
     }
 
+    function onSuccess(decodedText, decodedResult) {
+      // Split the decoded text by '||' and convert to an array
+      const resultArray = decodedText.split("|");
+      console.log(`Code matched = ${decodedText}`, decodedResult);
+      // Call onScanSuccess with the final result array
+      console.clear();
+      onScanSuccess(resultArray);
+      onClose();
+    }
+
     const html5QrcodeScanner = new Html5QrcodeScanner(
       "reader",
       { fps: 10, qrbox: { width: 250, height: 250 } },
       /* verbose= */ false
     );
-    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+    html5QrcodeScanner.render(onSuccess, onScanFailure);
 
     // Cleanup function to stop the scanner when component unmounts
     return () => {
