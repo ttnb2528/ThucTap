@@ -184,7 +184,8 @@ const UpdateInfoStudent = () => {
         };
       });
       setData(fetchData);
-      setSheetData(fetchData);
+      // setSheetData(fetchData);
+      setSheetData(result.data.data);
     }
   };
 
@@ -228,7 +229,7 @@ const UpdateInfoStudent = () => {
 
   const columnMapping = {
     stt: "STT",
-    code: "Mã TS",
+    code: "Mã SV",
     fullName: "Họ và tên",
     date: "Ngày sinh",
     isSex: "Giới tính",
