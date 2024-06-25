@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Table } from "antd";
+// Table, 
+import { Pagination } from "antd";
 import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -37,9 +38,12 @@ const UpdateInfoStudent = () => {
   const [updateStudent, setUpdateStudent] = useState(false);
   const [updateData, setUpdateData] = useState(null);
 
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   const [careerData, setCareerData] = useState([]);
   const [classesData, setClassesData] = useState([]);
+
+  // table test
+  const [students, setStudents] = useState([]);
 
   // search
   const [search, setSearch] = useState({
@@ -50,51 +54,56 @@ const UpdateInfoStudent = () => {
     career: "all",
   });
 
+  // pagination
+  const [current, setCurrent] = useState(1);
+  const pageSize = 5;
+
   const debounce = useDebounce(search, 500);
 
   const getData = async () => {
-    console.log(search);
-    console.log(debounce);
+    // console.log(search);
+    // console.log(debounce);
     const result = await API_LIST_STUDENT_CONDITION(getToken(), debounce);
     if (result.status === 200 && result.data.status === 200) {
-      const fetchData = result.data.data.map((student, index) => {
-        return {
-          stt: index + 1,
-          code: student?.code,
-          fullName: student?.fullName,
-          date: moment(student?.date).format("DD-MM-YYYY"),
-          isSex: student?.isSex,
-          cccd: student?.cccd,
-          ethnic: student?.ethnic,
-          address: student?.address,
-          phone: student?.phone,
-          operation: (
-            <div className="flex justify-between items-center ">
-              <span
-                className="cursor-pointer hover:text-blue-500"
-                onClick={() => handleViewInfo(student)}
-              >
-                <FaEye />
-              </span>
-              <span
-                className="cursor-pointer hover:text-blue-500"
-                onClick={() => handleModalUpdate(student)}
-              >
-                <FaEdit />
-              </span>
-              <span
-                className="cursor-pointer hover:text-blue-500"
-                // onClick={() => handleDelete(student._id)}
-                onClick={() => confirmDelete(student._id)}
-              >
-                <FaTrash />
-              </span>
-            </div>
-          ),
-        };
-      });
-      setData(fetchData);
-      setSheetData(fetchData);
+      // const fetchData = result.data.data.map((student, index) => {
+      //   return {
+      //     stt: index + 1,
+      //     code: student?.code,
+      //     fullName: student?.fullName,
+      //     date: moment(student?.date).format("DD-MM-YYYY"),
+      //     isSex: student?.isSex,
+      //     cccd: student?.cccd,
+      //     ethnic: student?.ethnic,
+      //     address: student?.address,
+      //     phone: student?.phone,
+      //     operation: (
+      //       <div className="flex justify-between items-center ">
+      //         <span
+      //           className="cursor-pointer hover:text-blue-500"
+      //           onClick={() => handleViewInfo(student)}
+      //         >
+      //           <FaEye />
+      //         </span>
+      //         <span
+      //           className="cursor-pointer hover:text-blue-500"
+      //           onClick={() => handleModalUpdate(student)}
+      //         >
+      //           <FaEdit />
+      //         </span>
+      //         <span
+      //           className="cursor-pointer hover:text-blue-500"
+      //           // onClick={() => handleDelete(student._id)}
+      //           onClick={() => confirmDelete(student._id)}
+      //         >
+      //           <FaTrash />
+      //         </span>
+      //       </div>
+      //     ),
+      //   };
+      // });
+      // setData(fetchData);
+      setStudents(result.data.data);
+      setSheetData(result.data.data);
     }
   };
 
@@ -147,43 +156,44 @@ const UpdateInfoStudent = () => {
   const fetchStudent = async () => {
     const result = await API_LIST_STUDENT(getToken());
     if (result.status === 200 && result.data.status === 200) {
-      const fetchData = result.data.data.map((student, index) => {
-        return {
-          stt: index + 1,
-          code: student?.code,
-          fullName: student?.fullName,
-          date: moment(student?.date).format("DD-MM-YYYY"),
-          isSex: student?.isSex,
-          cccd: student?.cccd,
-          ethnic: student?.ethnic,
-          address: student?.address,
-          phone: student?.phone,
-          operation: (
-            <div className="flex justify-between items-center ">
-              <span
-                className="cursor-pointer hover:text-blue-500"
-                onClick={() => handleViewInfo(student)}
-              >
-                <FaEye />
-              </span>
-              <span
-                className="cursor-pointer hover:text-blue-500"
-                onClick={() => handleModalUpdate(student)}
-              >
-                <FaEdit />
-              </span>
-              <span
-                className="cursor-pointer hover:text-blue-500"
-                // onClick={() => handleDelete(student._id)}
-                onClick={() => confirmDelete(student._id)}
-              >
-                <FaTrash />
-              </span>
-            </div>
-          ),
-        };
-      });
-      setData(fetchData);
+      // const fetchData = result.data.data.map((student, index) => {
+      //   return {
+      //     stt: index + 1,
+      //     code: student?.code,
+      //     fullName: student?.fullName,
+      //     date: moment(student?.date).format("DD-MM-YYYY"),
+      //     isSex: student?.isSex,
+      //     cccd: student?.cccd,
+      //     ethnic: student?.ethnic,
+      //     address: student?.address,
+      //     phone: student?.phone,
+      //     operation: (
+      //       <div className="flex justify-between items-center ">
+      //         <span
+      //           className="cursor-pointer hover:text-blue-500"
+      //           onClick={() => handleViewInfo(student)}
+      //         >
+      //           <FaEye />
+      //         </span>
+      //         <span
+      //           className="cursor-pointer hover:text-blue-500"
+      //           onClick={() => handleModalUpdate(student)}
+      //         >
+      //           <FaEdit />
+      //         </span>
+      //         <span
+      //           className="cursor-pointer hover:text-blue-500"
+      //           // onClick={() => handleDelete(student._id)}
+      //           onClick={() => confirmDelete(student._id)}
+      //         >
+      //           <FaTrash />
+      //         </span>
+      //       </div>
+      //     ),
+      //   };
+      // });
+      setStudents(result.data.data);
+      // setData(fetchData);
       // setSheetData(fetchData);
       setSheetData(result.data.data);
     }
@@ -227,24 +237,24 @@ const UpdateInfoStudent = () => {
     fetchClasses();
   }, []);
 
-  const columnMapping = {
-    stt: "STT",
-    code: "Mã SV",
-    fullName: "Họ và tên",
-    date: "Ngày sinh",
-    isSex: "Giới tính",
-    cccd: "CMTND/CCCCD/Hộ chiếu",
-    ethnic: "Dân tộc",
-    address: "Địa chỉ",
-    phone: "Số điện thoại",
-    operation: "Thao tác",
-  };
+  // const columnMapping = {
+  //   stt: "STT",
+  //   code: "Mã SV",
+  //   fullName: "Họ và tên",
+  //   date: "Ngày sinh",
+  //   isSex: "Giới tính",
+  //   cccd: "CMTND/CCCCD/Hộ chiếu",
+  //   ethnic: "Dân tộc",
+  //   address: "Địa chỉ",
+  //   phone: "Số điện thoại",
+  //   operation: "Thao tác",
+  // };
 
-  const columns = Object.keys(columnMapping).map((key) => ({
-    title: columnMapping[key],
-    dataIndex: key,
-    key: key,
-  }));
+  // const columns = Object.keys(columnMapping).map((key) => ({
+  //   title: columnMapping[key],
+  //   dataIndex: key,
+  //   key: key,
+  // }));
 
   // console.log(data);
   // console.log(sheetData);
@@ -401,9 +411,75 @@ const UpdateInfoStudent = () => {
           </div>
 
           <div className="mt-3">
-            <Table columns={columns} dataSource={data} rowKey="stt" />
+            {/* <Table columns={columns} dataSource={data} rowKey="stt" /> */}
+
+            <div className="grid grid-cols-[0.3fr_0.5fr_0.6fr_0.8fr_0.4fr_1fr_1.2fr_0.7fr_0.4fr] gap-3 pl-2 [&>p]:font-semibold [&>p]:border-r py-3 bg-gray-50">
+              <p>STT</p>
+              <p>Mã SV</p>
+              <p>Ngày sinh</p>
+              <p>Họ và tên</p>
+              <p>Giới tính</p>
+              <p>CMTND/CCCD/Hộ chiếu</p>
+              <p>Địa chỉ</p>
+              <p>Số điện thoại</p>
+              <p style={{ borderRight: "none" }}>Thao tác</p>
+            </div>
+            <div>
+              <div className="dash my-2"></div>
+              {students
+                .slice((current - 1) * pageSize, current * pageSize)
+                .map((student, i) => {
+                  return (
+                    <div key={i}>
+                      <div className="w-full grid grid-cols-[0.3fr_0.5fr_0.6fr_0.8fr_0.4fr_1fr_1.2fr_0.7fr_0.4fr] py-2 gap-3 pl-2 text-sm [&>p]:line-clamp-1">
+                        <p>{(current - 1) * pageSize + i + 1}</p>
+                        <p>{student.code}</p>
+                        <p>{moment(student.date).format("DD-MM-YYYY")}</p>
+                        <p>{student.fullName}</p>
+                        <p>{student.isSex}</p>
+                        <p>{student.cccd}</p>
+                        <p>{student.address}</p>
+                        <p>{student.phone}</p>
+                        <p>
+                          <span className="flex justify-between items-center">
+                            <span
+                              className="cursor-pointer hover:text-blue-500"
+                              onClick={() => handleViewInfo(student)}
+                            >
+                              <FaEye />
+                            </span>
+                            <span
+                              className="cursor-pointer hover:text-blue-500"
+                              onClick={() => handleModalUpdate(student)}
+                            >
+                              <FaEdit />
+                            </span>
+                            <span
+                              className="cursor-pointer hover:text-blue-500"
+                              // onClick={() => handleDelete(student._id)}
+                              onClick={() => confirmDelete(student._id)}
+                            >
+                              <FaTrash />
+                            </span>
+                          </span>
+                        </p>
+                      </div>
+                      <div className="dash my-3"></div>
+                    </div>
+                  );
+                })}
+            </div>
           </div>
         </div>
+
+        <Pagination
+          className="text-right"
+          current={current}
+          onChange={setCurrent}
+          pageSize={pageSize}
+          total={students.length}
+          responsive={true}
+        />
       </div>
       {isModal && (
         <ModalAddStudent

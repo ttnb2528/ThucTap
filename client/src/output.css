@@ -856,6 +856,10 @@ video {
   grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 
+.grid-cols-\[0\.3fr_0\.5fr_0\.6fr_0\.8fr_0\.4fr_1fr_1\.2fr_0\.7fr_0\.4fr\] {
+  grid-template-columns: 0.3fr 0.5fr 0.6fr 0.8fr 0.4fr 1fr 1.2fr 0.7fr 0.4fr;
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -951,6 +955,11 @@ video {
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));
 }
 
+.bg-gray-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+
 .bg-neutral-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(245 245 245 / var(--tw-bg-opacity));
@@ -1026,16 +1035,6 @@ video {
   padding-bottom: 0.75rem;
 }
 
-.px-2 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-}
-
-.py-0\.5 {
-  padding-top: 0.125rem;
-  padding-bottom: 0.125rem;
-}
-
 .pl-2 {
   padding-left: 0.5rem;
 }
@@ -1062,6 +1061,10 @@ video {
 
 .text-center {
   text-align: center;
+}
+
+.text-right {
+  text-align: right;
 }
 
 .text-2xl {
@@ -1280,4 +1283,19 @@ input::placeholder {
 
 .\[\&\>li\]\:cursor-pointer>li {
   cursor: pointer;
+}
+
+.\[\&\>p\]\:line-clamp-1>p {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.\[\&\>p\]\:border-r>p {
+  border-right-width: 1px;
+}
+
+.\[\&\>p\]\:font-semibold>p {
+  font-weight: 600;
 }

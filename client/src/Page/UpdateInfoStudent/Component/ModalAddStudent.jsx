@@ -72,9 +72,9 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
   const [wards, setWards] = useState([]);
 
   // handle location
-  const [selectedProvinceId, setSelectedProvinceId] = useState(null);
-  const [selectedDistrictId, setSelectedDistrictId] = useState(null);
-  const [selectedWardId, setSelectedWardId] = useState(null);
+  const [selectedProvinceId, setSelectedProvinceId] = useState("");
+  const [selectedDistrictId, setSelectedDistrictId] = useState("");
+  const [selectedWardId, setSelectedWardId] = useState("");
 
   // modal scanner
   const [showModalScanner, setShowModalScanner] = useState(false);
@@ -124,7 +124,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
 
   const fetchCareer = async () => {
     const result = await API_LIST_CAREER(getToken());
-    console.log(result);
+    // console.log(result);
     if (result.status === 200 && result.data.status === 200) {
       const careerOptions = result.data.data.map((career) => {
         return {
@@ -144,7 +144,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
 
   const fetchClass = async (data) => {
     const result = await API_LIST_CLASS_CAREER(getToken(), data);
-    console.log("data: " + data);
+    // console.log("data: " + data);
     if (result.status === 200 && result.data.status === 200) {
       const classOptions = result.data.data.map((classItem) => ({
         name: classItem.className,
@@ -223,7 +223,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
 
   const fetchProvince = async () => {
     const result = await API_GET_PROVINCE();
-    console.log(result);
+    // console.log(result);
     if (result.status === 200 && result.data.status === 200) {
       const provinceOptions = result.data.data.results.map((province) => {
         return {

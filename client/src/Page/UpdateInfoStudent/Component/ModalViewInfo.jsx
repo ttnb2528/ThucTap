@@ -5,7 +5,7 @@ import moment from "moment";
 import { GrLinkPrevious } from "react-icons/gr";
 
 const ModalViewInfo = ({ handleHideModal, data }) => {
-  console.log(data);
+  // console.log(data);
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-60 z-30 flex justify-center items-center">
       <div

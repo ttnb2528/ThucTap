@@ -68,9 +68,9 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
-  const [selectedProvinceId, setSelectedProvinceId] = useState(null);
-  const [selectedDistrictId, setSelectedDistrictId] = useState(null);
-  const [selectedWardId, setSelectedWardId] = useState(null);
+  const [selectedProvinceId, setSelectedProvinceId] = useState("");
+  const [selectedDistrictId, setSelectedDistrictId] = useState("");
+  const [selectedWardId, setSelectedWardId] = useState("");
 
   const [form, setForm] = useState({
     code: data?.code || "",
@@ -132,7 +132,7 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
 
   const fetchClass = async (data) => {
     const result = await API_LIST_CLASS_CAREER(getToken(), data);
-    console.log("data: " + data);
+    // console.log("data: " + data);
     if (result.status === 200 && result.data.status === 200) {
       const classOptions = result.data.data.map((classItem) => ({
         name: classItem.className,
@@ -186,22 +186,28 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
   const handleSubmit = async (id) => {
     console.clear();
     // console.log(form);
-    console.log(id);
+    // console.log(id);
 
-    const result = await API_UPDATE_STUDENT(getToken(), id, form);
-    console.log(result);
-    if (result.status === 200 && result.data.status === 200) {
-      toast.success(result.data.message);
-      fetchStudent();
-      handleHideModal();
-    } else {
-      toast.error(result.data.message);
+    try {
+      const result = await API_UPDATE_STUDENT(getToken(), id, form);
+      console.log(result);
+      if (result.status === 200 && result.data.status === 200) {
+        toast.success(result.data.message);
+        fetchStudent();
+        handleHideModal();
+      }
+      if (result.status === 200 && result.data.status === 300) {
+        toast.warn(result.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Có lỗi xảy ra, vui lòng thử lại sau");
     }
   };
 
   const fetchProvince = async () => {
     const result = await API_GET_PROVINCE();
-    console.log(result);
+    // console.log(result);
     if (result.status === 200 && result.data.status === 200) {
       const provinceOptions = result.data.data.results.map((province) => {
         return {
@@ -211,8 +217,10 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
       });
 
       const provinceId = result.data.data.results.find(
-        (province) => province.province_name === form.province
+        (province) => province.province_id === form.province
       )?.province_id;
+
+      // console.log(provinceId);
       setSelectedProvinceId(provinceId);
 
       setProvinces(provinceOptions);
@@ -221,7 +229,7 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
 
   const fetchDistricts = async () => {
     const result = await API_GET_DISTRICT(selectedProvinceId);
-    console.log(result);
+    // console.log(result);
     if (result.status === 200 && result.data.status === 200) {
       const districtOptions = result.data.data.results.map((district) => {
         return {
@@ -231,7 +239,7 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
       });
 
       const districtId = result.data.data.results.find(
-        (district) => district.district_name === form.district
+        (district) => district.district_id === form.district
       )?.district_id;
 
       setSelectedDistrictId(districtId);
@@ -242,7 +250,7 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
 
   const fetchWards = async () => {
     const result = await API_GET_WARD(selectedDistrictId);
-    console.log(result);
+    // console.log(result);
     if (result.status === 200 && result.data.status === 200) {
       const wardOptions = result.data.data.results.map((ward) => {
         return {
@@ -250,6 +258,12 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
           value: ward.ward_id,
         };
       });
+
+      const wardId = result.data.data.results.find(
+        (ward) => ward.ward_id === form.ward
+      )?.ward_id;
+
+      setSelectedWardId(wardId);
 
       setWards(wardOptions);
     }
@@ -481,7 +495,7 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
                 <option
                   key={province.value}
                   value={province.value}
-                  selected={province.name === form.province}
+                  // selected={province.name === form.province}
                 >
                   {province.name}
                 </option>
@@ -518,7 +532,7 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
                 <option
                   key={district.value}
                   value={district.value}
-                  selected={district.name === form.district}
+                  // selected={district.name === form.district}
                 >
                   {district.name}
                 </option>
@@ -553,7 +567,7 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
                 <option
                   key={ward.value}
                   value={ward.value}
-                  selected={ward.name === form.ward}
+                  // selected={ward.name === form.ward}
                 >
                   {ward.name}
                 </option>
