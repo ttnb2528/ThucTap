@@ -60,15 +60,14 @@ const validate = (data) => {
   const schema = Joi.object({
     code: Joi.string().required().label("Mã sinh viên"),
     fullName: Joi.string().required().label("Họ và tên"),
+    cccd: Joi.string().required().label("CMTND/CCCD/Hộ chiếu"),
+    place_cccd: Joi.string().required().label("nơi cấp"),
+    date_cccd: Joi.date().required().label("ngày cấp"),
     date: Joi.date().required().label("Ngày sinh"),
     isSex: Joi.string().required().label("Giới tính"),
     career: Joi.string().required().label("Ngành"),
     classCourse: Joi.string().required().label("Lớp"),
     course: Joi.string().required().label("Khóa học"),
-
-    // cccd: Joi.string().required().label("cccd"),
-    // date_cccd: Joi.date().required().label("date_cccd"),
-    // place_cccd: Joi.string().required().label("place_cccd"),
     // phone: Joi.string().required().label("phone"),
     // ethnic: Joi.string().required().label("ethnic"),
     // nationality: Joi.string().required().label("nationality"),
