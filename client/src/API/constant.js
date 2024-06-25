@@ -22,10 +22,14 @@ export const URL_CAREER_CREATE = `${API}/${CAREER}/createCareer`;
 export const URL_CAREER_LIST = `${API}/${CAREER}/listCareer`;
 export const URL_CAREER_DELETE = `${API}/${CAREER}/deleteCareer`;
 export const URL_CAREER_EDIT = `${API}/${CAREER}/editCareer`;
+export const URL_CAREER_LIST_CONDITION = `${API}/${CAREER}/listCareerWithCondition`;
 
 /*         SUBJECT          */
 export const URL_SUBJECT_CREATE = `${API}/${SUBJECT}/createSubject`;
 export const URL_SUBJECT_LIST = `${API}/${SUBJECT}/listSubject`;
+export const URL_SUBJECT_DELETE = `${API}/${SUBJECT}/deleteSubject`;
+export const URL_SUBJECT_UPDATE = `${API}/${SUBJECT}/updateSubject`;
+export const URL_SUBJECT_LIST_CONDITION = `${API}/${SUBJECT}/listSubjectWithCondition`;
 
 /*         SCHEDULE          */
 export const URL_SCHEDULE_CREATE = `${API}/${SCHEDULE}/createSchedule`;

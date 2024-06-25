@@ -15,9 +15,11 @@ import ModalAddTrainingFields from "./component/ModalAddTrainingFields.jsx";
 import { FaAddressBook, FaEye, FaEdit, FaTrash } from "react-icons/fa";
 
 import { API_LIST_CAREER } from "~/API/Career/ListCareer.api.js";
+import { API_LIST_CAREER_CONDITION } from "~/API/Career/listCareerWithCondition.api.js";
 import { API_DELETE_CAREER } from "../../API/Career/deleteCareer.api.js";
 import ModalViewCareer from "./component/ModalViewCareer.jsx";
 import ModalEditCareer from "./component/ModalEditCareer.jsx";
+import useDebounce from "../../hooks/useDebounce.js";
 
 const TrainingFields = () => {
   const [data, setData] = useState([]);
@@ -27,6 +29,63 @@ const TrainingFields = () => {
   const [viewData, setViewData] = useState(null);
   const [editData, setEditData] = useState(null);
   const [careerToDelete, setCareerToDelete] = useState(null);
+
+  // search
+  const [search, setSearch] = useState({
+    code: "",
+    name: "",
+    levelStraining: "all",
+  });
+
+  const debounce = useDebounce(search, 500);
+
+  const getData = async () => {
+    const result = await API_LIST_CAREER_CONDITION(getToken(), debounce);
+
+    if (result.status === 200 && result.data.status === 200) {
+      const fetchCareerData = result.data.data.map((career, index) => {
+        return {
+          stt: index + 1,
+          code: career?.code,
+          levelStraining: career?.levelStraining,
+          Circulars: career?.Circulars,
+          name: career?.name,
+          levelDecision: career?.levelDecision,
+          numberDecision: career?.numberDecision,
+          dateDecision: career?.dateDecision,
+          status: career?.status,
+          operation: (
+            <div className="flex justify-between items-center ">
+              <span
+                className="cursor-pointer hover:text-blue-500"
+                onClick={() => handleViewInfo(career)}
+              >
+                <FaEye />
+              </span>
+              <span
+                className="cursor-pointer hover:text-blue-500"
+                onClick={() => handleEditInfo(career)}
+              >
+                <FaEdit />
+              </span>
+              <span
+                className="cursor-pointer hover:text-blue-500"
+                // onClick={() => handleDelete(student._id)}
+                onClick={() => confirmDelete(career._id)}
+              >
+                <FaTrash />
+              </span>
+            </div>
+          ),
+        };
+      });
+      setData(fetchCareerData);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, [debounce]);
 
   const handleShow = () => {
     setShow(true);
@@ -160,21 +219,40 @@ const TrainingFields = () => {
         <div className="search m-4 mb-5">
           <div className="search-input grid grid-cols-6 gap-5">
             <div className="flex flex-col justify-center text-sm">
-              <label htmlFor="level">Trình độ đào tạo</label>
-              <select name="level" id="level">
-                <option selected>Chọn trình độ đào tạo</option>
-                <option value="sơ cấp">Sơ cấp</option>
-                <option value="trung cấp">Trung cấp</option>
-              </select>
+              <label htmlFor="name">Tên ngành</label>
+              <input
+                id="name"
+                type="text"
+                name="name"
+                placeholder="Nhập mã tên ngành"
+                onChange={(e) => setSearch({ ...search, name: e.target.value })}
+              />
             </div>
 
             <div className="flex flex-col justify-center text-sm">
-              <label htmlFor="career">Ngành nghề</label>
-              <select name="career" id="career">
-                <option selected>Chọn ngành nghề</option>
-                <option value="du lịch">Du lịch</option>
-                <option value="kế toán">Kế toán</option>
-                <option value="tin học">Tin học</option>
+              <label htmlFor="code">Mã ngành</label>
+              <input
+                id="code"
+                type="text"
+                name="code"
+                placeholder="Nhập mã ngành nghề"
+                onChange={(e) => setSearch({ ...search, code: e.target.value })}
+              />
+            </div>
+
+            <div className="flex flex-col justify-center text-sm">
+              <label htmlFor="level">Trình độ đào tạo</label>
+              <select
+                name="level"
+                id="level"
+                onChange={(e) =>
+                  setSearch({ ...search, levelStraining: e.target.value })
+                }
+              >
+                <option value="all">Chọn trình độ đào tạo</option>
+                <option value="Sơ cấp">Sơ cấp</option>
+                <option value="Trung cấp">Trung cấp</option>
+                <option value="Cao đẳng">Cao đẳng</option>
               </select>
             </div>
 

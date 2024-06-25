@@ -121,7 +121,7 @@ const UpdateInfoStudent = () => {
     if (studentToDelete !== null) {
       Modal.confirm({
         title: "Xác nhận xóa",
-        content: "Bạn có chắc muốn xóa sinh viên này này không?",
+        content: "Bạn có chắc muốn xóa sinh viên này không?",
         okText: "Xóa",
         okType: "danger",
         cancelText: "Hủy",
