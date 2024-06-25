@@ -4,35 +4,16 @@ const { jsonGenerate } = require("../../utils/helpers.js");
 
 const listSubject = async (req, res) => {
   try {
-    const { idCareer } = req.query;
-
-    if (!idCareer) {
-      const result = await Subject.find().populate("career");
-      if (result) {
-        res.json(jsonGenerate(StatusCode.OK, "List subject", result));
-      } else {
-        res.json(
-          jsonGenerate(StatusCode.INTERNAL_SERVER_ERROR, "No subjects found")
-        );
-      }
+    const result = await Subject.find().populate("career");
+    if (result) {
+      return res.json(jsonGenerate(StatusCode.OK, "List subject", result));
     } else {
-      const result = await Subject.find({ career: idCareer }).populate(
-        "career"
+      return res.json(
+        jsonGenerate(StatusCode.INTERNAL_SERVER_ERROR, "No subjects found")
       );
-      if (result) {
-        res.json(jsonGenerate(StatusCode.OK, "List subject", result));
-      } else {
-        res.json(
-          jsonGenerate(
-            StatusCode.INTERNAL_SERVER_ERROR,
-            "No subjects found for the specified career"
-          )
-        );
-      }
     }
   } catch (error) {
-    console.error("Error in listSubject:", error);
-    res.json(
+    return res.json(
       jsonGenerate(
         StatusCode.INTERNAL_SERVER_ERROR,
         "Internal Server Error",
