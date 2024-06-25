@@ -1,10 +1,9 @@
 const Joi = require("joi");
-
 const Subject = require("../../models/subject.model.js");
 const { StatusCode } = require("../../utils/constants.js");
 const { jsonGenerate } = require("../../utils/helpers.js");
 
-const createSubject = async (req, res) => {
+const updateSubject = async (req, res) => {
   const { error } = validate(req.body);
 
   if (error) {
@@ -14,11 +13,19 @@ const createSubject = async (req, res) => {
   }
 
   try {
-    const result = await Subject.create({
+    const { _id } = req.query;
+    const subject = await Subject.findByIdAndUpdate(_id, {
       ...req.body,
     });
+
+    if (!subject) {
+      return res.json(
+        jsonGenerate(StatusCode.MULTIPLECHOICE, "Không tìm thấy môn học")
+      );
+    }
+
     return res.json(
-      jsonGenerate(StatusCode.OK, "Thêm môn học thành công", result)
+      jsonGenerate(StatusCode.OK, "Cập nhật môn học thành công", subject)
     );
   } catch (error) {
     console.log(error);
@@ -45,4 +52,4 @@ const validate = (data) => {
   return schema.validate(data);
 };
 
-module.exports = createSubject;
+module.exports = updateSubject;
