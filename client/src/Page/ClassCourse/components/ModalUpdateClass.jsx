@@ -6,18 +6,18 @@ import { GrLinkPrevious } from "react-icons/gr";
 
 // apis
 import { API_LIST_CAREER } from "../../../API/Career/ListCareer.api.js";
+import { API_UPDATE_CLASS } from "../../../API/Class/updateClass.api.js";
 
 // functions
 import { getToken } from "~/functions/getToken";
-import { API_CREATE_CLASS } from "../../../API/Class/createClass.api.js";
 
-const ModalAddClass = ({ handleHideAddModal, fetchClasses }) => {
+const ModalUpdateClass = ({ handleHideUpdateModal, fetchClasses, data }) => {
   const [careers, setCareers] = useState([]);
   const [form, setForm] = useState({
-    className: "",
-    career: "",
-    year: "",
-    course: "",
+    className: data?.className,
+    career: data?.career._id,
+    year: data?.year,
+    course: data?.course,
   });
 
   const handleChange = (e) => {
@@ -39,11 +39,11 @@ const ModalAddClass = ({ handleHideAddModal, fetchClasses }) => {
     fetchCareer();
   }, []);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (id) => {
     console.log(form);
 
-    const result = await API_CREATE_CLASS(getToken(), form);
-
+    const result = await API_UPDATE_CLASS(getToken(), form, id);
+    console.log(result);
     if (result.status === 200 && result.data.status === 300) {
       toast.warn(result.data.message);
     }
@@ -51,7 +51,7 @@ const ModalAddClass = ({ handleHideAddModal, fetchClasses }) => {
     if (result.status === 200 && result.data.status === 200) {
       toast.success(result.data.message);
       fetchClasses();
-      handleHideAddModal();
+      handleHideUpdateModal();
     }
   };
 
@@ -70,7 +70,7 @@ const ModalAddClass = ({ handleHideAddModal, fetchClasses }) => {
         style={{ scrollbarWidth: "none" }}
       >
         <div className="flex justify-between items-center my-3 text-2xl font-semibold">
-          <span className="pl-3 cursor-pointer" onClick={handleHideAddModal}>
+          <span className="pl-3 cursor-pointer" onClick={handleHideUpdateModal}>
             <GrLinkPrevious />
           </span>
           <h1>Thông tin ngành</h1>
@@ -96,7 +96,7 @@ const ModalAddClass = ({ handleHideAddModal, fetchClasses }) => {
           <div className="grid">
             <label className="font-semibold">Ngành:</label>
             <select name="career" value={form.career} onChange={handleChange}>
-              <option value="">Chọn ngành</option>
+              <option value="all">Chọn ngành</option>
               {careers.map((career) => (
                 <option key={career._id} value={career._id}>
                   {career.name}
@@ -105,24 +105,10 @@ const ModalAddClass = ({ handleHideAddModal, fetchClasses }) => {
             </select>
           </div>
 
-          {/* <div className="grid">
-            <label className="font-semibold">Trình độ đào tạo:</label>
-            <select
-              name="levelStraining"
-              value={form.levelStraining}
-              onChange={handleChange}
-            >
-              <option selected>Chọn trình độ đào tạo</option>
-              <option value="Sơ cấp">Sơ cấp</option>
-              <option value="Trung cấp">Trung cấp</option>
-              <option value="Cao đăng">Cao đẳng</option>
-            </select>
-          </div> */}
-
           <div className="grid">
             <label className="font-semibold">Năm:</label>
             <select name="year" value={form.year} onChange={handleChange}>
-              <option selected>Chọn năm</option>
+              <option value="all">Chọn năm</option>
               {years.map((year) => (
                 <option key={year} value={year}>
                   {year}
@@ -134,7 +120,7 @@ const ModalAddClass = ({ handleHideAddModal, fetchClasses }) => {
           <div className="grid">
             <label className="font-semibold">Khóa:</label>
             <select name="course" value={form.course} onChange={handleChange}>
-              <option selected>Chọn Khóa</option>
+              <option value="all">Chọn Khóa</option>
               {courseYears.map((courseYear) => (
                 <option key={courseYear} value={courseYear}>
                   {courseYear}
@@ -142,30 +128,14 @@ const ModalAddClass = ({ handleHideAddModal, fetchClasses }) => {
               ))}
             </select>
           </div>
-
-          {/* <div className="grid">
-            <label className="font-semibold">Sinh viên:</label>
-            <input
-              type="text"
-              name="className"
-              placeholder="Nhập tên lớp"
-              className="bg-white pl-2 py-0 w-full rounded-md flex-1 border outline-none border-slate-300 placeholder:opacity-60 placeholder:text-xs h-[35px]"
-            /> */}
-          {/* <button
-              title="Chi tiết"
-              className="bg-primary font-semibold text-xs mb-1 text-white px-[4px] rounded-xl"
-            >
-              <Link to={"/capnhatlylichsinhvien"}>&#62;</Link>
-            </button> */}
-          {/* </div> */}
         </div>
 
         <div className="flex justify-center items-center mt-5">
           <button
             className="border bg-primary p-2 text-white rounded-lg"
-            onClick={handleSubmit}
+            onClick={() => handleSubmit(data._id)}
           >
-            Thêm
+            Lưu
           </button>
         </div>
       </div>
@@ -173,4 +143,4 @@ const ModalAddClass = ({ handleHideAddModal, fetchClasses }) => {
   );
 };
 
-export default ModalAddClass;
+export default ModalUpdateClass;

@@ -748,12 +748,16 @@ video {
   display: none;
 }
 
+.h-\[30\%\] {
+  height: 30%;
+}
+
 .h-\[35px\] {
   height: 35px;
 }
 
-.h-\[49\%\] {
-  height: 49%;
+.h-\[40\%\] {
+  height: 40%;
 }
 
 .h-\[50\%\] {
@@ -774,14 +778,6 @@ video {
 
 .h-auto {
   height: auto;
-}
-
-.h-\[40\%\] {
-  height: 40%;
-}
-
-.h-\[30\%\] {
-  height: 30%;
 }
 
 .min-h-\[100vh\] {
