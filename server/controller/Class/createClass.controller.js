@@ -8,7 +8,7 @@ const createClass = async (req, res) => {
 
   if (error) {
     return res.json(
-      jsonGenerate(StatusCode.BAD_REQUEST, error.details[0].message)
+      jsonGenerate(StatusCode.MULTIPLECHOICE, error.details[0].message)
     );
   }
 
@@ -17,7 +17,9 @@ const createClass = async (req, res) => {
     const existingClass = await Class.findOne({ className, career });
 
     if (existingClass) {
-      return res.json(jsonGenerate(StatusCode.BAD_REQUEST, "Lớp đã tồn tại"));
+      return res.json(
+        jsonGenerate(StatusCode.MULTIPLECHOICE, "Lớp đã tồn tại")
+      );
     }
 
     const result = await Class.create({

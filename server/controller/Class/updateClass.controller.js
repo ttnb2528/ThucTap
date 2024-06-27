@@ -8,7 +8,7 @@ const updateClass = async (req, res) => {
 
   if (error) {
     return res.json(
-      jsonGenerate(StatusCode.BAD_REQUEST, error.details[0].message)
+      jsonGenerate(StatusCode.MULTIPLECHOICE, error.details[0].message)
     );
   }
 
@@ -19,6 +19,22 @@ const updateClass = async (req, res) => {
     if (!result) {
       return res.json(
         jsonGenerate(StatusCode.MULTIPLECHOICE, "Không tìm thấy lớp học")
+      );
+    }
+
+    const { className, career } = req.body;
+
+    const existingClass = await Class.findOne({
+      className,
+      career,
+      _id: {
+        $ne: _id, // Thêm điều kiện này để loại bỏ lớp học hiện tại khỏi kiểm tra trùng lặp
+      },
+    });
+
+    if (existingClass) {
+      return res.json(
+        jsonGenerate(StatusCode.MULTIPLECHOICE, "Lớp học đã tồn tại")
       );
     }
 
@@ -45,12 +61,13 @@ const validate = (data) => {
     className: Joi.string().required().label("Tên lớp"),
     course: Joi.string().required().label("Khóa"),
     career: Joi.string().required().label("Tên ngành"),
-    year: Joi.string().required().label("Năm"),
+    year: Joi.number().required().label("Năm"),
   })
     .messages({
       "string.empty": "{#label} không được để trống",
       "any.required": "{#label} là bắt buộc",
       "string.base": "{#label} phải là chuỗi ký tự",
+      "number.base": "{#label} phải là số",
     })
     .unknown(true);
 

@@ -15,12 +15,16 @@ const listClassWithCareer = async (req, res) => {
         return res.json(jsonGenerate(StatusCode.OK, "Thành công", result));
       } else {
         return res.json(
-          jsonGenerate(StatusCode.MULTIPLECHOICE, "Không tìm thấy")
+          jsonGenerate(StatusCode.MULTIPLECHOICE, "Không có dữ liệu", result)
         );
       }
     } catch (error) {
       return res.json(
-        jsonGenerate(StatusCode.INTERNAL_SERVER_ERROR, error.message)
+        jsonGenerate(
+          StatusCode.INTERNAL_SERVER_ERROR,
+          "Internal Server Error",
+          error.message
+        )
       );
     }
   } else {
