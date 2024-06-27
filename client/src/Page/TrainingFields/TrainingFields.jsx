@@ -170,7 +170,7 @@ const TrainingFields = () => {
   };
 
   const handleDelete = async (id) => {
-    console.log(id);
+    // console.log(id);
 
     const result = await API_DELETE_CAREER(getToken(), id);
     // console.log(result);

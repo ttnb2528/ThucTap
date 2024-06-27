@@ -29,7 +29,7 @@ const ModalAddTrainingFields = ({ handleHideAddModal, fetchCareer }) => {
     // console.log(form);
 
     const result = await API_CREATE_CAREER(getToken(), form);
-    console.log(result);
+    // console.log(result);
 
     if (result.status === 200 && result.data.status === 200) {
       toast.success(result.data.message);
@@ -90,7 +90,7 @@ const ModalAddTrainingFields = ({ handleHideAddModal, fetchCareer }) => {
               value={form.levelStraining}
               onChange={handleChange}
             >
-              <option selected>Chọn trình độ đào tạo</option>
+              <option value="">Chọn trình độ đào tạo</option>
               <option value="Sơ cấp">Sơ cấp</option>
               <option value="Trung cấp">Trung cấp</option>
               <option value="Cao đăng">Cao đẳng</option>

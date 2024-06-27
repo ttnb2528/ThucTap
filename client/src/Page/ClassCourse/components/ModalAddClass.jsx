@@ -40,7 +40,7 @@ const ModalAddClass = ({ handleHideAddModal, fetchClasses }) => {
   }, []);
 
   const handleSubmit = async () => {
-    console.log(form);
+    // console.log(form);
 
     const result = await API_CREATE_CLASS(getToken(), form);
 
@@ -105,24 +105,10 @@ const ModalAddClass = ({ handleHideAddModal, fetchClasses }) => {
             </select>
           </div>
 
-          {/* <div className="grid">
-            <label className="font-semibold">Trình độ đào tạo:</label>
-            <select
-              name="levelStraining"
-              value={form.levelStraining}
-              onChange={handleChange}
-            >
-              <option selected>Chọn trình độ đào tạo</option>
-              <option value="Sơ cấp">Sơ cấp</option>
-              <option value="Trung cấp">Trung cấp</option>
-              <option value="Cao đăng">Cao đẳng</option>
-            </select>
-          </div> */}
-
           <div className="grid">
             <label className="font-semibold">Năm:</label>
             <select name="year" value={form.year} onChange={handleChange}>
-              <option selected>Chọn năm</option>
+              <option value="">Chọn năm</option>
               {years.map((year) => (
                 <option key={year} value={year}>
                   {year}
@@ -134,7 +120,7 @@ const ModalAddClass = ({ handleHideAddModal, fetchClasses }) => {
           <div className="grid">
             <label className="font-semibold">Khóa:</label>
             <select name="course" value={form.course} onChange={handleChange}>
-              <option selected>Chọn Khóa</option>
+              <option value="">Chọn Khóa</option>
               {courseYears.map((courseYear) => (
                 <option key={courseYear} value={courseYear}>
                   {courseYear}
@@ -142,22 +128,6 @@ const ModalAddClass = ({ handleHideAddModal, fetchClasses }) => {
               ))}
             </select>
           </div>
-
-          {/* <div className="grid">
-            <label className="font-semibold">Sinh viên:</label>
-            <input
-              type="text"
-              name="className"
-              placeholder="Nhập tên lớp"
-              className="bg-white pl-2 py-0 w-full rounded-md flex-1 border outline-none border-slate-300 placeholder:opacity-60 placeholder:text-xs h-[35px]"
-            /> */}
-          {/* <button
-              title="Chi tiết"
-              className="bg-primary font-semibold text-xs mb-1 text-white px-[4px] rounded-xl"
-            >
-              <Link to={"/capnhatlylichsinhvien"}>&#62;</Link>
-            </button> */}
-          {/* </div> */}
         </div>
 
         <div className="flex justify-center items-center mt-5">

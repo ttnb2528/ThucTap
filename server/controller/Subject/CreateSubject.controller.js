@@ -9,7 +9,7 @@ const createSubject = async (req, res) => {
 
   if (error) {
     return res.json(
-      jsonGenerate(StatusCode.BAD_REQUEST, error.details[0].message)
+      jsonGenerate(StatusCode.MULTIPLECHOICE, error.details[0].message)
     );
   }
 

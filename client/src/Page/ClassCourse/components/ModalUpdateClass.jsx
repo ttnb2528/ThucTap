@@ -40,10 +40,10 @@ const ModalUpdateClass = ({ handleHideUpdateModal, fetchClasses, data }) => {
   }, []);
 
   const handleSubmit = async (id) => {
-    console.log(form);
+    // console.log(form);
 
     const result = await API_UPDATE_CLASS(getToken(), form, id);
-    console.log(result);
+    // console.log(result);
     if (result.status === 200 && result.data.status === 300) {
       toast.warn(result.data.message);
     }

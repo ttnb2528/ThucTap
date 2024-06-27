@@ -11,16 +11,16 @@ import { API_EDIT_CAREER } from "../../../API/Career/editCareer.api.js";
 
 const ModalEditCareer = ({ handleHideUpdateModal, data, fetchCareer }) => {
   const [form, setForm] = useState({
-    code: data?.code,
-    name: data?.name,
-    levelStraining: data?.levelStraining,
-    Circulars: data?.Circulars,
-    levelDecision: data?.levelDecision,
-    numberDecision: data?.numberDecision,
-    dateDecision: data?.dateDecision,
+    code: data?.code || "",
+    name: data?.name || "",
+    levelStraining: data?.levelStraining || "",
+    Circulars: data?.Circulars || "",
+    levelDecision: data?.levelDecision || "",
+    numberDecision: data?.numberDecision || "",
+    dateDecision: data?.dateDecision || "",
   });
 
-  console.log(form.dateDecision);
+  // console.log(form.dateDecision);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

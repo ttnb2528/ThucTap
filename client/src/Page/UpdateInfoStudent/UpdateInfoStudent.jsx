@@ -140,9 +140,9 @@ const UpdateInfoStudent = () => {
   };
 
   const handleDelete = async (id) => {
-    console.log(id);
+    // console.log(id);
     const result = await API_DELETE_STUDENT(getToken(), id);
-    console.log(result);
+    // console.log(result);
     if (result.status === 200 && result.data.status === 500) {
       return toast.error(result.data.message);
     }

@@ -206,8 +206,8 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
   };
 
   const handleSubmit = async () => {
-    console.clear();
-    console.log(form);
+    // console.clear();
+    // console.log(form);
     const result = await API_CREATE_STUDENT(getToken(), form);
     console.log(result);
     if (result.status === 200 && result.data.status === 300) {
@@ -238,7 +238,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
 
   const fetchDistricts = async () => {
     const result = await API_GET_DISTRICT(selectedProvinceId);
-    console.log(result);
+    // console.log(result);
     if (result.status === 200 && result.data.status === 200) {
       const districtOptions = result.data.data.results.map((district) => {
         return {
@@ -253,7 +253,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
 
   const fetchWards = async () => {
     const result = await API_GET_WARD(selectedDistrictId);
-    console.log(result);
+    // console.log(result);
     if (result.status === 200 && result.data.status === 200) {
       const wardOptions = result.data.data.results.map((ward) => {
         return {

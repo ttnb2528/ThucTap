@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 // icons
 import { GrLinkPrevious } from "react-icons/gr";
@@ -10,7 +11,7 @@ import { API_CREATE_SUBJECT } from "../../../API/Subject/createSubject.api.js";
 // Functions
 import { getToken } from "~/functions/getToken";
 
-const ModalAddSubject = ({ handleHideAddModal }) => {
+const ModalAddSubject = ({ handleHideAddModal, fetchSubject }) => {
   const [careers, setCareers] = useState([]);
   const [form, setForm] = useState({
     code: "",
@@ -45,7 +46,17 @@ const ModalAddSubject = ({ handleHideAddModal }) => {
   const handleSubmit = async () => {
     // console.log(form);
     const result = await API_CREATE_SUBJECT(getToken(), form);
-    console.log(result);
+    // console.log(result);
+
+    if (result.status === 200 && result.data.status !== 200) {
+      toast.error(result.data.message);
+    }
+
+    if (result.status === 200 && result.data.status === 200) {
+      toast.success(result.data.message);
+      fetchSubject();
+      handleHideAddModal();
+    }
   };
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-60 z-30 flex justify-center items-center">

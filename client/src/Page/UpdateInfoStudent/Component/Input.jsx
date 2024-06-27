@@ -12,6 +12,7 @@ export const Input = ({
   onChange,
   province_id,
   handleSelectedProvince,
+  disabledCode,
 }) => {
   const input_tailwind =
     "bg-white pl-2 py-0 w-full rounded-md flex-1 border outline-none border-slate-300 placeholder:opacity-60 placeholder:text-xs h-[35px]";
@@ -61,6 +62,7 @@ export const Input = ({
         </select>
       ) : (
         <input
+          disabled={disabledCode}
           name={name}
           type={type}
           id={id}

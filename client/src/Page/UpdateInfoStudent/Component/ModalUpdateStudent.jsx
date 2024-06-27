@@ -184,13 +184,13 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
   };
 
   const handleSubmit = async (id) => {
-    console.clear();
+    // console.clear();
     // console.log(form);
     // console.log(id);
 
     try {
       const result = await API_UPDATE_STUDENT(getToken(), id, form);
-      console.log(result);
+      // console.log(result);
       if (result.status === 200 && result.data.status === 200) {
         toast.success(result.data.message);
         fetchStudent();
@@ -303,6 +303,7 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
           <Input
             {...code_validation}
             value={form.code}
+            disabledCode={true}
             onChange={handleInputChange}
           />
 
@@ -469,7 +470,7 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
                 htmlFor="province"
                 className="font-semibold text-xs capitalize"
               >
-                Tỉnh/Thành phố <span className="text-red-500">*</span>
+                Tỉnh/Thành phố
               </label>
             </div>
 
@@ -509,7 +510,7 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
                 htmlFor="district"
                 className="font-semibold text-xs capitalize"
               >
-                Quận/Huyện <span className="text-red-500">*</span>
+                Quận/Huyện
               </label>
             </div>
             <select
@@ -546,7 +547,7 @@ const ModalUpdateStudent = ({ handleHideModal, fetchStudent, data }) => {
                 htmlFor="ward"
                 className="font-semibold text-xs capitalize"
               >
-                Xã/Phường/Thị trấn <span className="text-red-500">*</span>
+                Xã/Phường/Thị trấn
               </label>
             </div>
             <select

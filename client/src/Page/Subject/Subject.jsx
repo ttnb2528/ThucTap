@@ -51,7 +51,7 @@ const Subject = () => {
   const debounce = useDebounce(search, 500);
 
   const getData = async () => {
-    console.log(debounce);
+    // console.log(debounce);
     try {
       const result = await API_LIST_SUBJECT_CONDITION(getToken(), debounce);
       if (result.status === 200 && result.data.status === 200) {
@@ -331,7 +331,12 @@ const Subject = () => {
           </div>
         </div>
       </div>
-      {show && <ModalAddSubject handleHideAddModal={() => setShow(false)} />}
+      {show && (
+        <ModalAddSubject
+          handleHideAddModal={() => setShow(false)}
+          fetchSubject={fetchSubject}
+        />
+      )}
 
       {modalUpdate && (
         <ModalUpdateSubject
