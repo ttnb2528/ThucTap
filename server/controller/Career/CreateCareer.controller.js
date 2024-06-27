@@ -30,11 +30,17 @@ const createCareer = async (req, res) => {
 
 const validate = (data) => {
   const schema = Joi.object({
-    code: Joi.string().required().label("code"),
-    levelStraining: Joi.string().required().label("levelStraining"),
-    Circulars: Joi.string().required().label("Circulars"),
-    name: Joi.string().required().label("name"),
-  }).unknown(true);
+    code: Joi.string().required().label("Mã ngành"),
+    levelStraining: Joi.string().required().label("Trình độ đào tạo"),
+    Circulars: Joi.string().required().label("Thông tư"),
+    name: Joi.string().required().label("Tên ngành"),
+  })
+    .message({
+      "string.empty": `Không được để trống`,
+      "string.base": "{#label} phải là chuỗi",
+      "any.required": `Không được để trống`,
+    })
+    .unknown(true);
 
   return schema.validate(data);
 };

@@ -62,19 +62,26 @@ const createSchedule = async (req, res) => {
 
 const validateTeacher = (data) => {
   const schema = Joi.object({
-    fullName: Joi.string().required(),
-    career: Joi.string().required(),
-    subject: Joi.string().required(),
+    fullName: Joi.string().required().label("Tên giáo viên"),
+    career: Joi.string().required().label("Ngành học"),
+    subject: Joi.string().required().label("Môn học"),
     dayOfWeek: Joi.string()
       .valid("Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7")
-      .required(),
-    session: Joi.string().valid("Sáng", "Chiều").required(),
-    year: Joi.string().required(),
+      .required()
+      .label("Thứ"),
+    session: Joi.string().valid("Sáng", "Chiều").required().label("Buổi"),
+    year: Joi.string().required().label("Năm học"),
     period: Joi.string()
       .valid("Học kỳ 1", "Học kỳ 2", "Học kỳ 3", "Học kỳ 4")
-      .required(),
-    classPeriod: Joi.string().required(),
-    room: Joi.string().required(),
+      .required()
+      .label("Học kỳ"),
+    classPeriod: Joi.string().required().label("Tiết học"),
+    room: Joi.string().required().label("Phòng học"),
+  }).message({
+    "string.base": "{#label} phải là chuỗi",
+    "string.empty": "{#label} không được để trống",
+    "any.required": "{#label} không được để trống",
+    "string.valid": "{#label} không hợp lệ",
   });
 
   return schema.validate(data);
