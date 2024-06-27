@@ -16,8 +16,8 @@ const ModalAddClass = ({ handleHideAddModal, fetchClasses }) => {
   const [form, setForm] = useState({
     className: "",
     career: "",
-    year: "",
-    course: "",
+    // year: "",
+    // course: "",
   });
 
   const handleChange = (e) => {
@@ -55,18 +55,18 @@ const ModalAddClass = ({ handleHideAddModal, fetchClasses }) => {
     }
   };
 
-  const currentYear = new Date().getFullYear();
-  const years = [currentYear - 1, currentYear, currentYear + 1];
-  const courseYears = [
-    `${currentYear - 1}-${currentYear}`,
-    `${currentYear}-${currentYear + 1}`,
-    `${currentYear + 1}-${currentYear + 2}`,
-  ];
+  // const currentYear = new Date().getFullYear();
+  // const years = [currentYear - 1, currentYear, currentYear + 1];
+  // const courseYears = [
+  //   `${currentYear - 1}-${currentYear}`,
+  //   `${currentYear}-${currentYear + 1}`,
+  //   `${currentYear + 1}-${currentYear + 2}`,
+  // ];
 
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-60 z-30 flex justify-center items-center">
       <div
-        className="w-[50%] h-[50%] bg-white rounded-md relative overflow-y-scroll"
+        className="w-[40%] h-[40%] bg-white rounded-md relative overflow-y-scroll"
         style={{ scrollbarWidth: "none" }}
       >
         <div className="flex justify-between items-center my-3 text-2xl font-semibold">
@@ -105,7 +105,7 @@ const ModalAddClass = ({ handleHideAddModal, fetchClasses }) => {
             </select>
           </div>
 
-          <div className="grid">
+          {/* <div className="grid">
             <label className="font-semibold">Năm:</label>
             <select name="year" value={form.year} onChange={handleChange}>
               <option value="">Chọn năm</option>
@@ -127,7 +127,7 @@ const ModalAddClass = ({ handleHideAddModal, fetchClasses }) => {
                 </option>
               ))}
             </select>
-          </div>
+          </div> */}
         </div>
 
         <div className="flex justify-center items-center mt-5">

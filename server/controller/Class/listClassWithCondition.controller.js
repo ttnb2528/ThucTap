@@ -8,15 +8,15 @@ const listClassWithCondition = async (req, res) => {
 
     let filter = {};
 
-    if (course !== "all") {
-      filter.course = course;
-    }
+    // if (course !== "all") {
+    //   filter.course = course;
+    // }
 
     if (career !== "all") {
       filter.career = career;
     }
 
-    if (course === "all" && career === "all") {
+    if (career === "all") {
       const result = await Class.find().populate("career").populate("students");
       return res.json(jsonGenerate(StatusCode.OK, "Thành công", result));
     }

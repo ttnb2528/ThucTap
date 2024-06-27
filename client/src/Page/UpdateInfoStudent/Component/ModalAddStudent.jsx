@@ -186,13 +186,6 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
     }
   }, [form.career]);
 
-  // useEffect(() => {
-  //   setForm((prevForm) => ({
-  //     ...prevForm,
-  //     date: selectedDate,
-  //   }));
-  // }, [selectedDate]);
-
   useEffect(() => {
     fetchProvince();
   }, []);
@@ -407,7 +400,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
             />
 
             <InputDate
-              required={false}
+              required={true}
               label={"Ngày cấp"}
               selectedDate={selectedCccd_date}
               setSelectedDate={(date) => {

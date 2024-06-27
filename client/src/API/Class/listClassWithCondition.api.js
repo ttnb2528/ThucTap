@@ -7,7 +7,7 @@ export function API_LIST_CLASS_CONDITION(token, condition) {
     url: URL_CLASS_LIST_CONDITION,
     params: {
       career: condition.career,
-      course: condition.course,
+      // course: condition.course,
     },
     headers: {
       auth: token,

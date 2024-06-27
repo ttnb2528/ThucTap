@@ -40,7 +40,7 @@ const ClassCourse = () => {
   // search
   const [search, setSearch] = useState({
     career: "all",
-    course: "all",
+    // course: "all",
   });
 
   const debounce = useDebounce(search, 500);
@@ -55,9 +55,9 @@ const ClassCourse = () => {
         return {
           stt: index + 1,
           className: classItem?.className,
-          course: classItem?.course,
+          // course: classItem?.course,
           career: classItem?.career.name,
-          year: classItem?.year,
+          // year: classItem?.year,
           levelStraining: classItem?.career?.levelStraining,
           operation: (
             <div className="flex justify-between items-center ">
@@ -133,9 +133,9 @@ const ClassCourse = () => {
           return {
             stt: index + 1,
             className: classItem?.className,
-            course: classItem?.course,
+            // course: classItem?.course,
             career: classItem?.career.name,
-            year: classItem?.year,
+            // year: classItem?.year,
             levelStraining: classItem?.career?.levelStraining,
             operation: (
               <div className="flex justify-between items-center ">
@@ -187,6 +187,7 @@ const ClassCourse = () => {
 
     if (result.status === 200 && result.data.status !== 200) {
       toast.error(result.data.message);
+      setClassToDelete(null);
     }
   };
 
@@ -208,8 +209,6 @@ const ClassCourse = () => {
     className: "Tên lớp",
     career: "Tên ngành nghề",
     levelStraining: "Trình độ đào tạo",
-    year: "Năm",
-    course: "Khóa",
     operation: "Thao tác",
   };
 
@@ -218,14 +217,6 @@ const ClassCourse = () => {
     dataIndex: key,
     key: key,
   }));
-
-  const currentYear = new Date().getFullYear();
-
-  const courseYears = [
-    `${currentYear - 1}-${currentYear}`,
-    `${currentYear}-${currentYear + 1}`,
-    `${currentYear + 1}-${currentYear + 2}`,
-  ];
 
   return (
     <>
@@ -256,7 +247,7 @@ const ClassCourse = () => {
               </select>
             </div>
 
-            <div className="flex flex-col justify-center text-xs">
+            {/* <div className="flex flex-col justify-center text-xs">
               <label htmlFor="schoolYear">Khóa học</label>
               <select
                 name="schoolYear"
@@ -272,7 +263,8 @@ const ClassCourse = () => {
                   </option>
                 ))}
               </select>
-            </div>
+            </div> */}
+            <div></div>
             <div></div>
             <div></div>
             <div></div>

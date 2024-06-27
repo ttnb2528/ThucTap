@@ -45,7 +45,7 @@ const createInfoStudent = async (req, res) => {
       await classInfo.save();
 
       return res.json(
-        jsonGenerate(StatusCode.OK, "Student created successfully", newStudent)
+        jsonGenerate(StatusCode.OK, "Thêm sinh viên thành công", newStudent)
       );
     }
   } catch (error) {

@@ -8,7 +8,7 @@ const ModalViewInfoClass = ({ handleHideViewModal, data }) => {
   return (
     <div className="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-60 z-30 flex justify-center items-center">
       <div
-        className="w-[50%] h-[50%] bg-white rounded-md relative overflow-y-scroll"
+        className="w-[45%] h-[40%] bg-white rounded-md relative overflow-y-scroll"
         style={{ scrollbarWidth: "none" }}
       >
         <div className="flex justify-between items-center my-3 text-2xl font-semibold">
@@ -35,10 +35,10 @@ const ModalViewInfoClass = ({ handleHideViewModal, data }) => {
 
           <div className="flex items-center gap-3">
             <label className="font-semibold">Trình độ đào tạo:</label>
-            <div>{data?.levelStraining}</div>
+            <div>{data?.career?.levelStraining}</div>
           </div>
 
-          <div className="flex items-center gap-3">
+          {/* <div className="flex items-center gap-3">
             <label className="font-semibold">Năm:</label>
             <div>{data?.year}</div>
           </div>
@@ -46,7 +46,7 @@ const ModalViewInfoClass = ({ handleHideViewModal, data }) => {
           <div className="flex items-center gap-3">
             <label className="font-semibold">Khóa:</label>
             <div>{data?.course}</div>
-          </div>
+          </div> */}
 
           <div className="flex items-end gap-3">
             <label className="font-semibold">Số lượng sinh viên:</label>

@@ -22,7 +22,7 @@ const updateClass = async (req, res) => {
       );
     }
 
-    const { className, career } = req.body;
+    const { className } = req.body;
 
     const existingClass = await Class.findOne({
       className,
@@ -58,9 +58,9 @@ const updateClass = async (req, res) => {
 const validate = (data) => {
   const schema = Joi.object({
     className: Joi.string().required().label("Tên lớp"),
-    course: Joi.string().required().label("Khóa"),
+    // course: Joi.string().required().label("Khóa"),
     career: Joi.string().required().label("Tên ngành"),
-    year: Joi.number().required().label("Năm"),
+    // year: Joi.number().required().label("Năm"),
   })
     .messages({
       "string.empty": "{#label} không được để trống",
