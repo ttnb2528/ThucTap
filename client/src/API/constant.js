@@ -38,6 +38,7 @@ export const URL_SCHEDULE_GET = `${API}/${SCHEDULE}/getSchedule`;
 /*         CLASS          */
 export const URL_CLASS_CREATE = `${API}/${CLASS}/createClass`;
 export const URL_CLASS_LIST = `${API}/${CLASS}/listClasses`;
-export const URL_CLASS_LIST_CAREER = `${API}/${CLASS}/listClassWithCareer`;
 export const URL_CLASS_DELETE = `${API}/${CLASS}/deleteClass`;
 export const URL_CLASS_UPDATE = `${API}/${CLASS}/updateClass`;
+export const URL_CLASS_LIST_CONDITION = `${API}/${CLASS}/listClassWithCondition`;
+export const URL_CLASS_LIST_CAREER = `${API}/${CLASS}/listClassWithCareer`;
