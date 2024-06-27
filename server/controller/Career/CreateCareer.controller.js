@@ -35,10 +35,10 @@ const validate = (data) => {
     Circulars: Joi.string().required().label("Thông tư"),
     name: Joi.string().required().label("Tên ngành"),
   })
-    .message({
-      "string.empty": `Không được để trống`,
+    .messages({
+      "string.empty": "{#label} Không được để trống",
       "string.base": "{#label} phải là chuỗi",
-      "any.required": `Không được để trống`,
+      "any.required": "{#label} Không được để trống",
     })
     .unknown(true);
 

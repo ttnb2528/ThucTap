@@ -77,7 +77,7 @@ const validateTeacher = (data) => {
       .label("Học kỳ"),
     classPeriod: Joi.string().required().label("Tiết học"),
     room: Joi.string().required().label("Phòng học"),
-  }).message({
+  }).messages({
     "string.base": "{#label} phải là chuỗi",
     "string.empty": "{#label} không được để trống",
     "any.required": "{#label} không được để trống",
