@@ -54,6 +54,10 @@ const ModalUpdateSubject = ({ handleHideUpdateModal, data, fetchSubject }) => {
         fetchSubject();
         handleHideUpdateModal();
       }
+
+      if (result.status === 200 && result.data.status !== 200) {
+        toast.error(result.data.message);
+      }
     } catch (error) {
       toast.error("Cập nhật môn học thất bại");
       console.log(error);

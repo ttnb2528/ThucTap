@@ -14,15 +14,45 @@ const updateSubject = async (req, res) => {
 
   try {
     const { _id } = req.query;
-    const subject = await Subject.findByIdAndUpdate(_id, {
-      ...req.body,
-    });
 
-    if (!subject) {
+    const result = await Subject.findById(_id);
+
+    if (!result) {
       return res.json(
         jsonGenerate(StatusCode.MULTIPLECHOICE, "Không tìm thấy môn học")
       );
     }
+
+    const existingSubject = await Subject.findOne({
+      code: req.body.code,
+      _id: {
+        $ne: _id,
+      },
+    });
+
+    const existingSubjectName = await Subject.findOne({
+      name: req.body.name,
+      _id: {
+        $ne: _id,
+      },
+    });
+
+    if (existingSubject || existingSubjectName) {
+      return res.json(
+        jsonGenerate(
+          StatusCode.MULTIPLECHOICE,
+          "Mã hoặc tên môn học đã tồn tại trong hệ thống"
+        )
+      );
+    }
+
+    const subject = await Subject.findByIdAndUpdate(
+      _id,
+      {
+        ...req.body,
+      },
+      { new: true }
+    );
 
     return res.json(
       jsonGenerate(StatusCode.OK, "Cập nhật môn học thành công", subject)

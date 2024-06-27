@@ -14,6 +14,24 @@ const createCareer = async (req, res) => {
   }
 
   try {
+    const { code, name } = req.body;
+    const existingCareer = await Career.findOne({
+      code: code,
+    });
+
+    const existingCareerName = await Career.findOne({
+      name: name,
+    });
+
+    if (existingCareer || existingCareerName) {
+      return res.json(
+        jsonGenerate(
+          StatusCode.MULTIPLECHOICE,
+          "Mã hoặc tên ngành học đã tồn tại trong hệ thống"
+        )
+      );
+    }
+
     const result = await Career.create({
       ...req.body,
     });

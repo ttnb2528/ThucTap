@@ -26,7 +26,6 @@ const updateClass = async (req, res) => {
 
     const existingClass = await Class.findOne({
       className,
-      career,
       _id: {
         $ne: _id, // Thêm điều kiện này để loại bỏ lớp học hiện tại khỏi kiểm tra trùng lặp
       },

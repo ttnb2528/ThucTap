@@ -14,6 +14,24 @@ const createSubject = async (req, res) => {
   }
 
   try {
+    const { code, name } = req.body;
+    const existingSubject = await Subject.findOne({
+      code: code,
+    });
+
+    const existingSubjectName = await Subject.findOne({
+      name: name,
+    });
+
+    if (existingSubject || existingSubjectName) {
+      return res.json(
+        jsonGenerate(
+          StatusCode.MULTIPLECHOICE,
+          "Mã hoặc tên môn học đã tồn tại trong hệ thống"
+        )
+      );
+    }
+
     const result = await Subject.create({
       ...req.body,
     });

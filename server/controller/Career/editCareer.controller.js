@@ -8,18 +8,40 @@ const editCareer = async (req, res) => {
 
   if (error) {
     return res.json(
-      jsonGenerate(StatusCode.BAD_REQUEST, error.details[0].message)
+      jsonGenerate(StatusCode.MULTIPLECHOICE, error.details[0].message)
     );
   }
 
-  const _id = req.query._id;
-
   try {
+    const _id = req.query._id;
     const result = await Career.findById(_id);
 
     if (!result) {
       return res.json(
-        jsonGenerate(StatusCode.BAD_REQUEST, "Đã xảy ra lỗi", result)
+        jsonGenerate(StatusCode.MULTIPLECHOICE, "Không tìm thấy ngành", result)
+      );
+    }
+
+    const existingCareerName = await Career.findOne({
+      name: req.body.name,
+      _id: {
+        $ne: _id,
+      },
+    });
+
+    const existingCareerCode = await Career.findOne({
+      code: req.body.code,
+      _id: {
+        $ne: _id,
+      },
+    });
+
+    if (existingCareerName || existingCareerCode) {
+      return res.json(
+        jsonGenerate(
+          StatusCode.MULTIPLECHOICE,
+          "Mã hoặc tên ngành học đã tồn tại trong hệ thống"
+        )
       );
     }
 
