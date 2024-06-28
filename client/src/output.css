@@ -824,16 +824,16 @@ video {
   flex: 1 1 0%;
 }
 
+.basis-1\/6 {
+  flex-basis: 16.666667%;
+}
+
 .basis-10\/12 {
   flex-basis: 83.333333%;
 }
 
 .basis-2\/12 {
   flex-basis: 16.666667%;
-}
-
-.basis-2\/6 {
-  flex-basis: 33.333333%;
 }
 
 .basis-4\/12 {
