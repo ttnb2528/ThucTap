@@ -56,14 +56,14 @@ const Login = async (req, res) => {
         token: token,
       })
     );
-  } catch (error) {}
+  } catch (error) {}  
 };
 
 const validate = (data) => {
   const schema = Joi.object({
     email: Joi.string().email().required().label("Email"),
     password: Joi.string().required().label("Password"),
-  }).message({
+  }).messages({
     "string.base": "{#label} phải là chuỗi",
     "string.email": "{#label} không đúng định dạng email",
     "any.required": "{#label} không được để trống",

@@ -366,7 +366,7 @@ const ModalAddStudent = ({ handleHideAddModal, fetchStudent }) => {
           <div className="mt-3 grid md:grid-cols-4 gap-5 p-3">
             <Input
               {...code_validation}
-              value={nextStudentCode}
+              value={form.code}
               onChange={handleInputChange}
             />
 
